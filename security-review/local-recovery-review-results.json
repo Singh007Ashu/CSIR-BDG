@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-09T08:50:33.296Z",
+  "destination": "C:\\Users\\FOX-TROT\\Documents\\Website\\.tmp\\recovery-review-HGPeAu",
+  "sourceOpenedReadOnly": true,
+  "scanRequested": true,
+  "checks": [
+    "SQLite backup restored; integrity, foreign keys and every table row including credentials match",
+    "All storage files restored and SHA-256 reconciled",
+    "Original database and storage unchanged during rehearsal"
+  ],
+  "scans": [
+    {
+      "file": "source\\FICCI.zip",
+      "status": "scanner-completed-no-detection",
+      "ms": 4680
+    },
+    {
+      "file": "templates\\CSIR_ECF_Reconciliation_Value_Impact_Templates_Lab_BD_v1.xlsx",
+      "status": "scanner-completed-no-detection",
+      "ms": 214
+    },
+    {
+      "file": "templates\\CSIR_ECF_Reconciliation_Value_Impact_Templates_v1.xlsx",
+      "status": "scanner-completed-no-detection",
+      "ms": 140
+    },
+    {
+      "file": "templates\\CSIR_SOP_ECF_Reconciliation_Value_Impact_Framework_v1.docx",
+      "status": "scanner-completed-no-detection",
+      "ms": 94
+    },
+    {
+      "file": "uploads\\industry_need\\1\\fbd5a060-9c53-44ae-aefe-4fc3a1c2f326.xlsx",
+      "status": "scanner-completed-no-detection",
+      "ms": 142
+    },
+    {
+      "file": "uploads\\industry_need\\2\\bda9f2e7-d789-4769-b3e2-8a3816140ca7.xlsx",
+      "status": "scanner-completed-no-detection",
+      "ms": 109
+    },
+    {
+      "file": "uploads\\industry_need\\3\\6481fa99-212a-44c4-a266-0506284def86.xlsx",
+      "status": "scanner-completed-no-detection",
+      "ms": 126
+    },
+    {
+      "file": "uploads\\industry_need\\4\\f3e718ff-9437-4dd3-a075-eddc21b3b554.xlsx",
+      "status": "scanner-completed-no-detection",
+      "ms": 133
+    },
+    {
+      "file": "uploads\\industry_need\\5\\51894322-7045-4801-bcdb-0ee32f4c6ad1.xlsx",
+      "status": "scanner-completed-no-detection",
+      "ms": 138
+    },
+    {
+      "file": "uploads\\workflow_packet\\1\\86620078-c0ca-4ded-b3be-db3e6b260ce6.xlsx",
+      "status": "scanner-completed-no-detection",
+      "ms": 260
+    },
+    {
+      "file": "uploads\\workflow_packet\\2\\3c54f41b-4551-4d7e-adb5-dc0837126d43.docx",
+      "status": "scanner-completed-no-detection",
+      "ms": 180
+    }
+  ],
+  "tableCount": 55,
+  "rowCount": 3821,
+  "fileCount": 11,
+  "bytes": 257355039,
+  "scanner": "Microsoft Defender",
+  "signatureDate": "2026-11-08T23:33:42.000Z",
+  "status": "passed",
+  "scope": "Specified database/storage only; not application boot, external FICCI directories, production DR or all historic repositories. Scanner completion is not a zero-malware guarantee."
+}

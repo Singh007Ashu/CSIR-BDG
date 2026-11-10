@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-09T09:28:11.833Z",
+  "database": "Isolated synthetic SQLite; original data/logins not modified",
+  "passed": [
+    "Head/lab login and industry registration, logout and fresh login",
+    "Browser lab creates technology; FY/draft saved; Head notified; other lab isolated",
+    "Head notification deep-link opens read-only details and browser change request reaches lab",
+    "Lab corrects/resubmits; Head closes review/approves; industry catalog publishes; next lab edit re-enters review",
+    "Browser industry submits problem and Head receives intake notification",
+    "Head browser assigns industry case; assigned lab submits browser proposal; Head sees it",
+    "MONTHLY browser draft -> submit -> Head return -> lab resubmit -> approve; values persist, edits locked, notifications delivered",
+    "QUARTERLY browser draft -> submit -> Head return -> lab resubmit -> approve; values persist, edits locked, notifications delivered",
+    "Assigned lab browser progress update is persisted in Head research tracker and notified",
+    "Industry partnership intake -> Head assignment -> browser lab response -> Head output, other lab excluded",
+    "Named LAB_BD account can fill and submit its assigned laboratory report through browser",
+    "Head clarification -> lab reply -> Head notification; recipient can mark notification read"
+  ],
+  "failures": []
+}

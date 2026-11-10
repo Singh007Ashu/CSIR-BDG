@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-09T09:20:33.162Z",
+  "passed": [
+    "doc binary Office conversion and text extraction",
+    "xls binary Office conversion and text extraction",
+    "ppt binary Office conversion and text extraction",
+    "Malformed legacy inputs rejected",
+    "User pricing DOC extracted in sandbox; original SHA-256 unchanged",
+    "Missing legacy image configuration fails closed"
+  ],
+  "version": "LibreOffice 7.4.7.2 40(Build:2)",
+  "image": "csir-legacy-parser:review",
+  "scope": "Synthetic DOC/XLS/PPT plus existing pricing DOC; original files unchanged, encrypted/macro/embedded content not supported"
+}

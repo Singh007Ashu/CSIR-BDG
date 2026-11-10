@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-09T08:17:23.717Z",
+  "passed": [
+    "Normal DOCX accepted",
+    "Unsupported type rejected",
+    "Reject nested.zip",
+    "Reject word/embeddings/item.bin",
+    "Reject word/activeX/item.xml",
+    "Reject a.html",
+    "Reject a.svg",
+    "Reject a.lnk",
+    "Reject a:stream.txt",
+    "Reject word/x.xml",
+    "Reject word/_rels/document.xml.rels",
+    "Normal hyperlink retained",
+    "Inflated entry limit enforced",
+    "Worker valid JSON",
+    "Worker invalid JSON rejects safely",
+    "Worker stdout bounded",
+    "Worker stderr bounded",
+    "Worker timeout terminates",
+    "Worker missing executable rejects",
+    "Worker nonzero exit rejects"
+  ],
+  "failures": []
+}

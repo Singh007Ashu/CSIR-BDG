@@ -1,0 +1,6 @@
+{
+  "date": "2026-11-09T09:23:54.230Z",
+  "passed": 16,
+  "failed": 0,
+  "scope": "Stored navigation URL normalization and unsafe scheme/authority/control rejection"
+}

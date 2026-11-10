@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-09T09:22:25.197Z",
+  "passed": [
+    "121 protected API methods deny unauthenticated requests",
+    "missing/null/foreign/spoofed mutation Origin rejected",
+    "production session cookie flags",
+    "logout invalidates copied token",
+    "cross-lab technology read/write blocked",
+    "announcement replies isolated by lab without credential fields",
+    "invalid upload rejected without creating orphan workflow",
+    "real antivirus-scanned upload downloads for owner and is denied to other lab",
+    "workflow document owner access works and foreign-lab access is denied",
+    "password assistance does not disclose reset tokens or promise unsent email",
+    "activation requires verification evidence and omits credential hashes",
+    "100 query payload/role/endpoint combinations preserve schema and avoid diagnostic leakage",
+    "Stored notification link injection rejected at API boundary",
+    "reset token succeeds once and replay is rejected",
+    "password reset invalidates existing session",
+    "ninth login attempt throttled",
+    "backup/config/storage HTTP paths blocked",
+    "nonce CSP permits real login hydration without script violations",
+    "stored HTML-like technology name renders as text and does not execute in browser",
+    "Stored HTML payloads render as text in technology, query and notification surfaces",
+    "2000-record multi-endpoint load ramp passes with no errors",
+    "concurrent authentication burst cannot exceed identity budget",
+    "30-minute inactive session rejected"
+  ]
+}

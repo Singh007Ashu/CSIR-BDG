@@ -1,0 +1,60 @@
+CSIR BDG live testing update - 6 November 2026
+
+DEPLOYED AND VERIFIED
+All cumulative application fixes are running on the existing port-3012 testing
+service with the verified .next-uat production build. Public HEAD, laboratory
+and industry login pages returned HTTP 200 and contained the current build ID.
+https://katrina-modems-world-dictionaries.trycloudflare.com/governance-login
+https://katrina-modems-world-dictionaries.trycloudflare.com/lab-login
+https://katrina-modems-world-dictionaries.trycloudflare.com/login
+The desktop and Cloudflare tunnel must remain running. This is not permanent
+CSIR hosting. Users may need a fresh login because the session secret rotated;
+passwords did not change. Original FICCI document folder remains excluded from
+this testing deployment; this update did not restore its downloads.
+
+DATA PRESERVATION
+A consistent backup was taken before restart. All 54 live SQLite tables were
+compared before and after the update: zero changed tables. Original credential
+comparison also confirms 14 user and 39 lab records unchanged. No seeding or
+schema migration occurred. Existing upload directories were retained.
+
+NEW FIXES
+- Native lab accounts can reach financial-year import API; ownership remains
+  enforced server-side and caller-supplied foreign lab IDs are ignored.
+- Blank financial amounts are missing values, not silently zero. Actual zero
+  and Excel percentage values retain their meanings.
+- Annual data import generates a Head notification after successful commit.
+- Master TRL/CRL inputs require integer values 1-9; mixed text is rejected.
+- Master and annual XLSX parsing moved out of the web process to the bounded
+  worker. Limits: 30 sheets, 5,000 rows/sheet, 100 columns/sheet and 200,000 cells;
+  15 seconds and 128 MB V8 heap. Large workbooks must be split before import.
+- Lab login inputs have associated labels and autocomplete attributes; errors
+  are announced. Network/invalid-response errors no longer leave saving stuck.
+- Lab login rejects unsafe return paths including javascript URLs.
+- Previous upload rollback, version-race, storage and worker fixes included.
+
+VERIFICATION
+Import regression includes authenticated workbook preview/commit, Head notice,
+foreign-lab ID isolation, blank/zero/percentage values and mixed-text TRL.
+4,067 role assertions and 12 business UAT groups passed.
+22 security/document lifecycle checks passed on the final build.
+Mobile/desktop checks passed for three login portals: labels, document language,
+keyboard reachability and no horizontal overflow. Login network failure and
+malicious return path were verified in Chrome.
+100 authenticated read requests at concurrency 20 returned 200. See the recorded
+p95/max values in load-smoke-results.json; this is a small-data smoke test,
+not a production capacity benchmark or full accessibility certification.
+
+REMAINING LIMITATIONS
+Do not label every finding closed. Inline-style CSP migration, OS-level parser
+filesystem/network sandboxing, comprehensive contextual injection testing,
+full accessibility/load assessment and legacy parser coverage remain open.
+Actual MySQL migration/restore and CSIR proxy/antivirus require IT access.
+Node/SQLite tests do not certify D1/Workers transaction behaviour. Independent
+security and business approval are still required before production release.
+
+PACKAGE
+Source ZIP excludes .env, live databases, backups and private uploaded files.
+Keep existing data and credentials when applying it. Never run setup/seed as
+an update. See deployment/CSIR-IT-HANDOVER.txt. Earlier readiness files are
+historical; this file supersedes their statement that fixes were not deployed.

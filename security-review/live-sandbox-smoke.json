@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-09T08:29:57.516Z",
+  "base": "https://kits-advisors-prohibited-estimated.trycloudflare.com",
+  "build": "aSrFMxMKQ6JVZ90wkOPUu",
+  "checks": [
+    {
+      "route": "/governance-login",
+      "status": 200,
+      "currentBuild": true,
+      "csp": true
+    },
+    {
+      "route": "/lab-login",
+      "status": 200,
+      "currentBuild": true,
+      "csp": true
+    },
+    {
+      "route": "/login",
+      "status": 200,
+      "currentBuild": true,
+      "csp": true
+    }
+  ]
+}

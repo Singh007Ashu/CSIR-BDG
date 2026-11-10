@@ -1,0 +1,35 @@
+{
+  "checks": [
+    {
+      "route": "/governance-login",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "route": "/lab-login",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "route": "/login",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "route": "/governance-login",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "route": "/lab-login",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "route": "/login",
+      "width": 1440,
+      "passed": true
+    }
+  ],
+  "scope": "Login labels, language, keyboard reachability and horizontal layout; not full WCAG audit"
+}

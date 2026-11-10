@@ -1,0 +1,13 @@
+const fs=require('fs'),assert=require('assert/strict');
+(async()=>{const uri=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
+const original=fs.readFileSync('lib/parserRunner.js','utf8');
+const stub=uri('export async function runJsonProcess(){await new Promise(r=>setTimeout(r,80));return {ok:true}}');
+const {runDocumentParser}=await import(uri(original.replace('"./boundedProcess"',JSON.stringify(stub))));
+process.env.DOCUMENT_PARSER_MODE='process';const first=runDocumentParser({}),second=runDocumentParser({});await assert.rejects(()=>runDocumentParser({}),e=>e.code==='PARSER_BUSY');await Promise.all([first,second]);assert((await runDocumentParser({})).ok);process.env.DOCUMENT_PARSER_MODE='typo';await assert.rejects(()=>runDocumentParser({}),/Invalid/);delete process.env.DOCUMENT_PARSER_MODE;
+const {runJsonProcess}=await import(uri(fs.readFileSync('lib/boundedProcess.js','utf8')));
+await assert.rejects(()=>runJsonProcess(process.execPath,['-e','setInterval(()=>{},1000)'],{},{timeoutMs:100}),/timed out/);
+await assert.rejects(()=>runJsonProcess(process.execPath,['-e','process.stdout.write("x".repeat(20000))'],{},{maxOutputBytes:100}),/exceeds limit/);
+await assert.rejects(()=>runJsonProcess(process.execPath,['-e','process.stderr.write("x".repeat(70000))'],{}),/exceeds limit/);
+process.env.SESSION_SECRET='synthetic-hidden';assert.equal((await runJsonProcess(process.execPath,['-e','console.log(JSON.stringify({secret:process.env.SESSION_SECRET||null}))'],{})).secret,null);
+const passed=['Third simultaneous parser job rejected','Capacity released after completion','Unknown mode rejected instead of unsafe fallback','Actual child timeout enforced','Actual stdout bound enforced','Actual stderr bound enforced','Child environment excludes session secret'];fs.writeFileSync('security-review/parser-capacity-results.json',JSON.stringify({date:new Date().toISOString(),passed,scope:'Concurrency unit test uses a delayed parser stub; timeout/output/env tests use real Node children.'},null,2));console.log(passed);
+})().catch(e=>{console.error(e);process.exitCode=1});

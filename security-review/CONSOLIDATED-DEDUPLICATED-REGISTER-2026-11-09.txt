@@ -1,0 +1,266 @@
+CSIR BDG — CONSOLIDATED FINDING AND RELEASE-ACTION REGISTER
+Evidence cut-off: 9 November 2026
+
+COUNTING RULE — PLEASE READ BEFORE QUOTING THE TOTAL
+This is an exact count of the uniquely numbered issue/action GROUPS below,
+not a claim that 60 confirmed software bugs existed. Reports mix defects,
+security hardening, incomplete assessments and operational launch gates.
+Closely related corrections to the same control are one group. Repeated
+mentions in later cumulative reports are not new findings. Eight dependency
+advisories are contained in A14, not added again. The original 11 SEC areas
+are parent categories, not another 11 bugs. Test assertions, routes, screens,
+successful builds and unchanged data rows are not bugs.
+FIXED means the documented correction passed its recorded scoped tests.
+OPEN means not fully closed, including partially completed work. It does not
+mean a demonstrated exploit exists. No new tests or code changes were made
+for this reconciliation. Historical evidence is not a zero-bug certificate.
+
+EXACT RECONCILED COUNTS
+Application/developer/QA: 50 groups = 42 fixed + 8 open.
+CSIR IT-led deployment/operations: 9 groups = 0 fully verified closed + 9 open.
+Management/lab acceptance: 1 group = 0 closed + 1 open.
+Combined: 60 groups = 42 fixed + 18 open.
+Known dependency advisories within A14: previously 8; latest recorded audit 0.
+Do not describe the combined 60 as '60 confirmed bugs'.
+
+SOURCE KEY — all under security-review/ unless otherwise stated
+R1 REMEDIATION-STATUS.txt
+R2 BATCH-2-READINESS.txt
+R3 BATCH-3-READINESS.txt
+R4 BUSINESS-UAT-READINESS.txt
+R5 LOCAL-HARDENING-READINESS.txt
+R6 APPLICATION-FIXES-READINESS.txt
+R7 LIVE-UPDATE-READINESS.txt
+R8 SANDBOX-ACCESSIBILITY-UPDATE.txt
+R9 ACCESSIBILITY-SECURITY-REVIEW-2026-11-09.txt
+H  ../deployment/CSIR-IT-HANDOVER.txt
+The earlier generated final-report source (.tmp/build-final-remediation-report.py)
+was also reconciled; it repeats SEC-01 through SEC-11 and is not a new batch.
+Its mapping to the original preliminary Word report is used here. This ledger
+does not independently re-extract that original Word document or invent counts
+for old chat requests without a corresponding remediation record.
+
+APPLICATION FINDINGS — FIXED IN RECORDED SCOPE (42)
+A01 FIXED | Weak/fallback signing-secret configuration.
+    Removed fallback; reject missing/weak/placeholder secret at startup.
+    Sources R1,R2; evidence test-results.json.
+A02 FIXED | Role, tenant and assigned-lab access boundary defects.
+    Lab queries/documents isolated; LAB_BD/PI principals resolve assigned lab;
+    HQ/industry/admin privileges restricted, including Super Admin escalation.
+    Sources R1-R4; role-matrix-results.json, business-uat-results.json.
+A03 FIXED | Credential fields exposed through nested/admin/audit responses.
+    Hash/salt projections removed; audit writes and historical API output redacted.
+    Historical database rows were not rewritten. Sources R1-R3; role matrix.
+A04 FIXED | Reset assistance disclosed development tokens/claimed unsent mail.
+    No token response or false mail claim; official-channel admin request used.
+    Source R2; test-results.json. Production delivery policy is I07.
+A05 FIXED | Password reset replay and old-credential reuse.
+    Credential-bound atomic single-use reset; old sessions invalidated.
+    Source R2; test-results.json.
+A06 FIXED | Activation lacked recorded verification reference.
+    Activation requires an official reference and audit entry; this is NOT
+    automatic email ownership verification. Source R2; test-results.json.
+A07 FIXED | Unsafe mutation Origin/forwarded-host acceptance.
+    Exact origin policy; reject absent/null/foreign/spoofed origins as documented.
+    Sources R1,R2; injection-review-results.json.
+A08 FIXED | Unsafe production script CSP.
+    Nonce scripts; no script unsafe-inline/eval. Inline styles remain A43.
+    Sources R1,R2; test-results.json, live-sandbox-smoke.json.
+A09 FIXED | Login attempt budget/concurrent burst enforcement.
+    Database identity throttling made transactional and concurrency tested.
+    Sources R1,R3; injection-review-results.json. Edge policy remains I05.
+A10 FIXED | Session lifecycle/cookie protection gaps.
+    Secure/HttpOnly/SameSite, bounded/idle lifetime, current account checks,
+    logout revocation and password-change invalidation. Sources R1,R3; security tests.
+A11 FIXED | Unsupported/mislabelled/oversize upload content accepted.
+    Common 5 MB, signature, format, text and syntax validation; unknown types
+    rejected even on direct validator use. Sources R1,R5; local-hardening results.
+A12 FIXED | New uploads/imports/photos lacked malware scanning gate.
+    Scanner required, failure rejects processing; actual Defender clean/EICAR
+    tests passed. R3,R9; defender-test-results.json. Old files remain A49.
+A13 FIXED | Sensitive local storage/config URLs needed HTTP blocking.
+    Representative backup/storage/prisma/env/git paths blocked. R1; security tests.
+    Repository history and production ACL review are separate I08.
+A14 FIXED | Dependency advisory set (8 previously reported advisories).
+    Compatible updates/overrides; generation/build passed; recorded audit zero.
+    R2,R3,R9; dependency-audit.json. Audit is time-bound, not a perpetual guarantee.
+A15 FIXED | Malformed request/ORM errors could disclose internal details.
+    Consistent safe API error boundary for IDs, JSON and ORM validation.
+    R3; injection-review-results.json.
+A16 FIXED | Missing HEAD notifications for industry intake/annual import.
+    Research/partnership notification and audit; annual notice after commit.
+    R4,R7; business-uat-results.json, import-regression-results.json.
+A17 FIXED | Industry input validation/budget handling defects.
+    Whitespace-only descriptions rejected; numeric budget validated, zero kept.
+    R4; business-uat-results.json.
+A18 FIXED | Report form reopen/save race.
+    Reopening prevented while save is in flight. R4; business UAT evidence.
+A19 FIXED | UAT builds could replace hosted application build assets.
+    Separate test build directory. R4-R7; documented separate successful builds.
+A20 FIXED | Extraction worker failure handling could throw/hang.
+    JSON/spawn/stdin/nonzero failures handled; completion paths clean timers.
+    R5,R6; local-hardening-results.json, extraction-worker-results.json.
+A21 FIXED | Parser subprocess resource/environment exposure.
+    Bounded time/output/heap; no shell; runtime environment allowlist excludes
+    application secrets and NODE_OPTIONS. R5,R6,R7; worker regression evidence.
+A22 FIXED | Unsafe Office/archive expansion and active content.
+    Nested/embedded/active/external constructs rejected; actual inflated-byte
+    limits and XML entity rejection. R5; local-hardening-results.json.
+A23 FIXED | Invalid/batch uploads could leave partial files or records.
+    Validate before workflow creation; transaction/compensating file cleanup.
+    R2,R6; document-lifecycle-results.json.
+A24 FIXED | Stale/concurrent document replacement conflicted with history.
+    Version checks and transactional compare-and-swap; conflict returns 409.
+    R6; document-lifecycle-results.json.
+A25 FIXED | Storage path/cleanup escape risks.
+    Reject traversal, ADS/control paths and symlink/junction escapes; restrict
+    cleanup to generated filenames. R6; storage-boundary-results.json.
+A26 FIXED | Parsing had no tested filesystem/network container isolation.
+    Non-root, no network/mounts, read-only, resource/capability limits; missing
+    engine/image fails closed. Safe build context. R8,R9; container-sandbox results.
+    This is parser isolation only; host/daemon service boundary remains I03.
+A27 FIXED | Native lab account blocked from annual financial import.
+    Correct API access while enforcing own-lab ownership. R7; import regression.
+A28 FIXED | Financial import lost blank/zero/percentage distinctions.
+    Preserve missing versus actual zero and spreadsheet percentages.
+    R7; import-regression-results.json.
+A29 FIXED | TRL/CRL accepted malformed mixed-text values.
+    Require integer 1-9. R7; import-regression-results.json.
+A30 FIXED | Lab login stayed busy after network/invalid-response failure.
+    Announce error and restore retry. R7; UI integration evidence.
+A31 FIXED | Lab login accepted unsafe return URLs.
+    Reject script/protocol-relative/unsafe redirect paths. R7; UI integration.
+A32 FIXED | Form/control accessible names and labels missing.
+    Login, report, registration, SOP, intake, filters/upload and dynamic technology
+    fields/close controls labelled. R4,R7-R9; accessibility and modal audit JSON.
+A33 FIXED | Insufficient contrast in tested text/status/navigation states.
+    Corrected metadata, footer, navigation, badges and status text.
+    R8; accessibility-audit.json.
+A34 FIXED | Duplicate current-navigation accessibility indication.
+    Removed duplicate aria-current. R8; accessibility-audit.json.
+A35 FIXED | Missing visible-focus/reduced-motion support in tested UI.
+    Focus styling and reduced-motion handling added. R8,R9; UI/accessibility tests.
+A36 FIXED | Modal keyboard focus and close/restoration behaviour.
+    Initial focus, containment, Escape, restoration and inert background.
+    R9; keyboard-reflow-results.json, modal-accessibility-results.json.
+A37 FIXED | Closed mobile navigation remained keyboard reachable.
+    Inert closed menu; open focus management/expanded state/trigger restoration.
+    R9; keyboard-reflow-results.json.
+A38 FIXED | No keyboard skip-to-main mechanism.
+    Public/authenticated skip links target focusable main landmark.
+    R9; keyboard-reflow-results.json.
+A39 FIXED | Lab registration remained stuck after request failure.
+    Retain entries, announce errors and permit retry. R9; keyboard-reflow results.
+A40 FIXED | Narrow-screen registration/header/form overflow.
+    Hidden control dimensions, fieldsets and header corrected at tested 320px.
+    R9; keyboard-reflow-results.json and reviewed screenshots.
+A41 FIXED | Technology editor appeared behind desktop sidebar.
+    Modal layer raised above navigation. R9; reviewed before/after screenshots.
+A42 FIXED | Unbounded simultaneous parser jobs.
+    Two-job service cap; release on all outcomes; reject unknown modes;
+    retryable busy response. R9; parser-capacity-results.json.
+
+APPLICATION / DEVELOPER / QA — NOT FULLY CLOSED (8)
+A43 OPEN | Inline-style CSP migration.
+    Script policy fixed; inline styles still permitted. Developer must migrate
+    style usage and regression-test, or obtain explicit documented risk acceptance.
+    R1-R3,R5-R9,H. Not dependent on CSIR server access.
+A44 OPEN | Comprehensive SQL-injection assurance.
+    Representative payloads passed; complete contextual review/assessment absent.
+    Developer/security QA can progress locally; independent review also required.
+    R1,R3,R5-R9. No confirmed SQLi exploit is claimed by these reports.
+A45 OPEN | Comprehensive contextual stored/reflected XSS assurance.
+    Tested HTML rendering escaped; source-to-sink/payload coverage incomplete.
+    Developer/security QA; independent assessment. R1,R3,R5-R9.
+A46 OPEN | Full accessibility assessment.
+    Tested screens/modal/keyboard/reflow improved; spoken screen-reader output,
+    wider browser/zoom/error-state coverage and manual acceptance remain.
+    Developer/accessibility QA; R8,R9. Zero axe findings is not WCAG certification.
+A47 OPEN | Sustained load/resource-abuse/DoS assessment.
+    Small 100-request smoke and parser cap passed; sustained/distributed capacity
+    unknown. Local QA work remains; production ingress validation shared with IT.
+    R7-R9,H. Do not transfer all load testing responsibility to IT.
+A48 OPEN | Legacy Office parser coverage/compatibility.
+    Deep DOC/XLS/PPT coverage not certified; container mode may require conversion.
+    Developer to define supported formats, test conversions/rejections and document
+    user-facing limitations. R5-R9. Arbitrary-format support is not established.
+A49 OPEN | Existing uploaded-document safety reconciliation.
+    New uploads scanned; all old files not bulk-scanned/quarantined/reconciled.
+    Developer/operations with data-owner approval; local work possible.
+    R3,R5-R9,H. Never delete suspect originals without an agreed recovery process.
+A50 OPEN | Backup restoration exercise and data reconciliation.
+    Backup creation/preservation checks are not proof of restoration. Local SQLite
+    plus upload restore can be rehearsed; MySQL/server restore belongs with I01/I09.
+    Developer/operations, then IT. R2-R9,H.
+
+CSIR IT-LED / SHARED DEPLOYMENT GATES — OPEN (9)
+I01 OPEN | Actual MySQL rehearsal, application regression and reconciliation.
+    Tools/schema/preflight prepared; no server available. IT provides empty test
+    database; developer runs migration and functional/transaction tests jointly.
+    Source R3,H. Not 'IT fixes the application alone'.
+I02 OPEN | Permanent approved Node hosting, HTTPS/proxy and secret configuration.
+    This is not a Java WAR/JAR. IT provisions supported Node service alongside
+    Java, domain/TLS, forwarding trust, exact origins and protected secret delivery.
+    H,R9. Temporary desktop tunnel is not permanent hosting.
+I03 OPEN | Full service-account/host and parser-daemon privilege separation.
+    Parser container tested locally; production dedicated boundary, OS permissions,
+    daemon access and least-privilege service identity require IT validation. R8,R9,H.
+I04 OPEN | Production antivirus engine, updates and failure/quarantine operations.
+    Local Defender passed; actual CSIR ClamAV/approved engine not tested.
+    IT installs/monitors engine; developer jointly verifies integration. R3,R9,H.
+I05 OPEN | Edge/IP/distributed abuse controls and approved lockout policy.
+    Identity throttle/parser cap exist. IT validates gateway limits, forwarded-IP
+    trust, alerting and progressive-delay/lockout policy with developer. R1-R3,R9,H.
+I06 OPEN | Production monitoring, audit retention and incident response.
+    Approve retention/access, dashboards, alerts and operational ownership.
+    IT/security team; R1-R3,R9,H.
+I07 OPEN | Institutional identity verification and password-assistance delivery.
+    Manual activation evidence and safe reset are implemented. Management/IT must
+    approve identity process and official delivery/SMTP; developer integrates/tests
+    any chosen delivery service. R1-R4,R9,H.
+I08 OPEN | Repository/backup exposure, retention and production filesystem review.
+    HTTP path blocks do not verify private Git history, historic secrets/backups,
+    server ACLs or proxy exposure. IT/repository owner with developer support. R1,H.
+I09 OPEN | Production recovery/backup policy and security release assessment.
+    IT/security owns RPO/RTO, retention, production restore/DR exercise and independent
+    production penetration/security approval; developer resolves resulting findings.
+    Local assurance gaps remain A44/A45/A50 and are not counted again here.
+    R2-R9,H.
+
+BUSINESS ACCEPTANCE — OPEN (1; NOT A SOFTWARE BUG)
+M01 OPEN | HEAD BDG/lab/industry representative acceptance and launch sign-off.
+    Recorded 12 automated scenario groups passed on synthetic test data. Actual
+    role owners must accept workflows, data visibility and responsibilities.
+    Management/labs own acceptance; IT/security approval alone cannot replace it.
+    R4,R9,H.
+
+ORIGINAL SECURITY AREA CROSSWALK (NOT ADDITIONAL COUNTS)
+SEC-01 -> A01; production configuration I02.
+SEC-02 -> A02,A03,A27; full assurance A44,A45,I09,M01.
+SEC-03 -> A06; identity operations I07.
+SEC-04 -> A07; CSIR proxy configuration I02.
+SEC-05 -> A08 fixed script policy; A43 open style policy.
+SEC-06 -> A09; remaining operational controls I05,I06.
+SEC-07 -> A05,A10; policy/deployment acceptance I02,I07.
+SEC-08 -> A11,A12,A20-A26,A42; remaining A48,A49,I03,I04.
+SEC-09 -> A13,A25; remaining I08,I09.
+SEC-10 -> A44; representative checks do not close comprehensive assurance.
+SEC-11 -> A45; representative checks do not close comprehensive assurance.
+
+OTHER BOUNDARIES — NOT ADDED AS BUGS
+- FICCI original file directory is intentionally excluded from public testing.
+  This is a recorded data-scope restriction, not proof those files were deleted.
+- Node/SQLite tests do not certify Cloudflare Workers/D1 transaction semantics.
+  Workers certification is outside the stated CSIR Node/MySQL deployment route.
+- Next proxy convention cleanup and lower-resource build option are maintenance,
+  not additional confirmed defects. Docker engine recovery is not a code bug.
+- 4,067 role assertions, 12 UAT groups, 41 screens and 23 security groups are
+  coverage evidence, not thousands of separate bugs fixed.
+- Existing reports document unchanged 54 tables and 14 User/39 Lab credentials
+  during the latest deployment. This reconciliation does not mutate data/accounts.
+
+RELEASE VERDICT
+Controlled testing only. 42 scoped application finding groups have documented
+fix evidence. Eight application/QA groups still need closure, plus nine IT-led
+gates and one business acceptance gate. Do not report 'all bugs fixed', 'only IT
+work remains', 'zero vulnerabilities' or final CSIR production approval.

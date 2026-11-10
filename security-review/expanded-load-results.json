@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-09T09:22:24.426Z",
+  "syntheticTechnologies": 2000,
+  "stages": [
+    {
+      "concurrency": 4,
+      "requests": 458,
+      "durationMs": 30410
+    },
+    {
+      "concurrency": 12,
+      "requests": 676,
+      "durationMs": 30503
+    },
+    {
+      "concurrency": 24,
+      "requests": 822,
+      "durationMs": 31643
+    }
+  ],
+  "requests": 1956,
+  "p95Ms": 1392,
+  "maxMs": 2701,
+  "errors": [],
+  "scope": "90-second bounded multi-endpoint local load, synthetic data, not distributed production DDoS certification"
+}

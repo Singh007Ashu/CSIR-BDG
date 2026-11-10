@@ -1,0 +1,50 @@
+CSIR BDG - Security remediation batch 2 / 6 November 2026
+
+DECISION: Suitable for controlled testing, NOT yet approved for production launch.
+This is not an assertion that all report findings are closed or that no bugs remain.
+
+CHANGES IN THIS BATCH
+- Server startup checks strong session secret and explicit permitted origins.
+- Password assistance no longer exposes development reset tokens or falsely claims an email was sent. An administrator receives a request; identity must be verified through an official channel.
+- Reset tokens are bound to the current password credential and consumed by an atomic compare-and-swap. Reuse is rejected and prior sessions become invalid.
+- Admin activation requires an official verification reference, recorded in audit history. This is manual verification evidence, NOT automatic proof of email ownership.
+- Lab query announcement replies are isolated by responding lab; response projections omit credential fields. Industry/non-manager accounts cannot read these internal queries.
+- Workflow document access now respects workflow visibility; assigned lab officers cannot read another lab's generic entity documents.
+- Invalid intake files are rejected before workflow creation.
+- Removed credential fields from additional admin/change-request responses.
+- Updated compatible dependencies, including Next 16.4.5 and Sharp 0.35.5. Prisma clients regenerated; no database schema migration.
+
+VERIFIED
+- Production build successful (98 generated routes/pages reported by build).
+- 121 protected API method/route checks reject anonymous requests.
+- Missing/null/foreign/spoofed mutation Origin rejected.
+- Secure/HttpOnly/SameSite cookies; copied-token logout rejection.
+- Cross-lab technology GET/PATCH blocked.
+- Cross-lab announcement responses isolated; credential fields absent.
+- Invalid PDF intake rejected without orphan workflow.
+- Password assistance response does not expose a reset token.
+- Activation verification required; activation response omits hashes.
+- Valid reset succeeds once, replay rejected; old session invalidated.
+- Ninth failed login throttled; sensitive filesystem HTTP paths blocked.
+- Real Chrome login works under nonce CSP without script violations.
+- Unit checks cover secret policy, CSRF, upload size/signature, Office structure/macros, binary text and XML entities.
+See test-results.json and dependency-audit.json for machine-readable evidence.
+
+OPEN LAUNCH GATES (do not mark these resolved)
+1. Dependency audit still reports 8 advisories: 7 high, 1 moderate, 0 critical. Remaining dependency chains involve Prisma build/config tooling and OpenNext/Cloudflare build tooling. Audit includes dev dependencies. Major upgrades require separate compatibility and deployment testing; no force upgrade applied.
+2. Complete authenticated role/object matrix for all 127 inventoried API methods, including every industry and governing-body role. Anonymous testing is not a substitute for this.
+3. Full SQL-injection and contextual stored/reflected XSS penetration-test coverage is not completed. No vulnerability-free claim.
+4. Malware scanning/quarantine, parser sandboxing and all upload rollback/versioning cases remain pending. Content signature checks are not antivirus.
+5. Gateway/WAF/IP throttling, concurrent burst locking, alerting, idle-session timeout and audit retention need completion/agreed policy.
+6. CSP still permits inline styles. Middleware convention deprecation remains a maintenance task.
+7. Institutional identity verification, reset delivery/SMTP, backup restore drill, disaster recovery, load tests and accessibility/UAT sign-off need operational owners.
+8. Independent security assessment and CSIR IT approval required before public production launch.
+
+CSIR SERVER COMPATIBILITY
+Current app is Next.js/Node.js with Prisma/SQLite. It is NOT a Java WAR/JAR and cannot be dropped into Tomcat as-is. CSIR IT can provide a separate supported Node service/container behind its HTTPS reverse proxy, alongside existing Java systems. MySQL is not a drop-in replacement for this SQLite database: change Prisma provider/migrations, migrate and reconcile records, then retest all transactions, imports, date/number handling and backups on CSIR's actual MySQL version. Server specifications and approved architecture are not yet available, so production compatibility is unverified.
+
+TEST HOST
+Separate real-data staging database and storage retained; passwords not reset by this batch. Original installation is not modified. Original FICCI document directory deliberately not attached; its downloads may be unavailable on staging. Temporary Cloudflare link requires this desktop and tunnel to stay running. This is NOT permanent CSIR hosting. Only trusted authorized testers should receive the link.
+
+PACKAGE
+Source only. No live SQLite database, .env secrets, private uploads or credentials are included. Preserve existing deployment data separately. Read REMEDIATION-STATUS.txt as historical batch-1 status; this document supersedes the specific items implemented above, not the remaining launch gates.

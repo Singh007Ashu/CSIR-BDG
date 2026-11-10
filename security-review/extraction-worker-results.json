@@ -1,0 +1,11 @@
+{
+  "passed": [
+    "Isolated text extraction",
+    "Isolated XLSX extraction",
+    "Malformed workbook rejects",
+    "Worker does not inherit signing or database secrets"
+  ],
+  "limitations": [
+    "Process timeout and V8 heap cap are not an OS filesystem/network sandbox"
+  ]
+}

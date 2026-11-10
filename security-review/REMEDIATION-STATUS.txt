@@ -1,0 +1,26 @@
+CSIR BDG preliminary security report remediation
+Date 6 November 2026
+
+This package is a tested first remediation batch, NOT a security certification and NOT confirmation that all findings are closed. The report distinguishes confirmed code observations from pending coverage. The running installation has not been overwritten. Use a staging deployment first.
+
+SEC-01 Implemented: removed known fallback secret. Token signing fails closed for missing, short or placeholder secret. Configure a unique random SESSION_SECRET with at least 32 characters. Rotation invalidates sessions. Full server startup preflight remains to be added; build alone is not secret validation.
+SEC-02 Partial: inventoried 127 API method/route entries; all 121 protected methods rejected anonymous requests in a synthetic environment. Cross-lab technology GET/PATCH isolation tested. Nested lab projections no longer expose passwordHash/passwordSalt. Full role and ownership matrix across every resource is still pending, including assigned governing officers and industry roles.
+SEC-03 Pending: registration creates PENDING accounts, but institutional identity proof and administrator verification procedure require a complete review and agreed policy. No claim of verified email ownership.
+SEC-04 Implemented and tested: missing Origin with no Referer, null Origin, foreign Origin and forged forwarded-host mutations rejected. Exact APP_ORIGINS allowlist; valid same-origin Referer fallback. Removed broad TryCloudflare-origin exception. API automation must send an approved Origin; this is not an authorization mechanism.
+SEC-05 Partial: random per-request script nonce, no production script unsafe-inline/unsafe-eval, object-src none. Real browser login passed without script CSP violations. style-src unsafe-inline retained for current React styles; remaining style policy migration pending.
+SEC-06 Partial: database-backed per-identity attempt budget, ninth attempt returns 429 / Retry-After 900. Shared across application processes. Gateway/WAF/IP limits, concurrent burst locking, alerts, retention and progressive delay are still pending. Identity throttling may temporarily block legitimate login after targeted attempts.
+SEC-07 Partial: Secure production cookies, HttpOnly/SameSite=Lax, bounded token lifetime, account-status/role/assignment checks on server session lookup, password change invalidation and logout token revocation. Tested cookie flags, copied-token logout rejection and password-change invalidation. Idle timeout/renewal and reset-token single-use policy remain pending. Existing sessions require a fresh login.
+SEC-08 Partial: common upload storage checks byte signatures, UTF-8 text, Office ZIP structure, archive sizes/path names, macros/executable ZIP members, JSON/XML syntax restrictions; download MIME chosen from extension allowlist. Malware scanning, legacy Office deep parsing, decompression isolation and full multi-route upload lifecycle tests remain pending. No antivirus guarantee.
+SEC-09 Partial: middleware rejects /backups /storage /prisma /.env /.git URLs; representative requests return 404. Repository visibility/backup history retention and production filesystem/reverse-proxy exposure need an administrator review. Keep the GitHub repository PRIVATE.
+SEC-10 Pending: repository text scan found no raw SQL execution patterns in app/lib/python; this does not prove absence. Dynamic SQL injection suite and dependency/parser review pending.
+SEC-11 Pending: repository text scan found no dangerouslySetInnerHTML/innerHTML/eval/new Function matches in app/lib/python at scan time; contextual source-to-sink audit and XSS payload matrix pending.
+
+DEPLOYMENT REQUIREMENTS
+1. Back up production independently. Do not overwrite its .env or database with test files.
+2. Set SESSION_SECRET to a new strong random value, APP_ORIGINS to the exact HTTPS public host(s), comma separated. Set TRUST_PROXY only for a proxy you control that strips incoming forwarding headers.
+3. Production cookies are always Secure. Production requires HTTPS; localhost development may use npm run dev. A new temporary tunnel hostname requires APP_ORIGINS update and restart.
+4. Install dependencies, generate Prisma, build and retest on staging before replacing the live server. No database schema migration is introduced in this batch.
+5. Uploaded content and the real database are intentionally excluded from the source package.
+
+NEXT BATCH
+Complete role/object ownership cases for documents, workflow packets, reporting, annual imports, projects, queries, industry and administrative endpoints. Resolve reset delivery and token reuse, registration proof, SQL/XSS payload cases, dependency audit and operational controls. Do not mark these closed without evidence.

@@ -1,0 +1,8 @@
+{
+  "date": "2026-11-09T08:17:06.270Z",
+  "engine": "Microsoft Defender",
+  "healthAndSignatures": true,
+  "cleanFileAccepted": true,
+  "harmlessEicarRejected": true,
+  "scope": "This Windows staging host; CSIR Linux ClamAV engine must be tested separately."
+}

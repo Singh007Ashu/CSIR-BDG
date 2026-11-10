@@ -1,0 +1,52 @@
+CSIR BDG security batch 3 - 6 November 2026
+
+COMPLETED IN CODE AND TESTED
+1. Dependency audit: 0 known vulnerabilities, including dev dependencies.
+   Patched overrides deepmerge-ts 8.0.2, glob 14.0.4, minimatch 11.0.5.
+   Prisma generation and Node/Next production build pass with these versions.
+2. 4,067 role/API assertions pass across 15 named roles plus a lab account:
+   all inventoried GET methods, protected mutation malformed/missing-input
+   probes, admin boundaries, cross-lab visibility, industry isolation, selected
+   successful lab edits and each HQ/PI role's assigned workflow action.
+   These are 4,067 assertions, NOT 4,067 complete business workflows.
+3. Named LAB_BD/PI data principals are restricted to their assigned laboratory.
+   PI and HQ specialist mutations are limited to their authorized workflow areas.
+4. Admin lab overview no longer returns password hashes/salts. Audit values are
+   redacted on new writes and historical audit API serialization. Original audit
+   records are not rewritten. Admin cannot grant/reset Super Admin privileges.
+5. Consistent API error boundaries reject malformed IDs/JSON/ORM validation
+   inputs without exposing stack traces or SQL. Proxy convention updated.
+6. Transactional login throttling tested under 16 simultaneous requests;
+   30-minute idle expiration and existing logout/password invalidation tested.
+7. Uploads and Excel imports/photo parsing are gated by antivirus scanning.
+   Real Windows Defender health/signature check, clean acceptance and harmless
+   EICAR rejection passed. Real scanned upload/download plus cross-lab and
+   workflow-document isolation passed. Linux clamd protocol success/error
+   simulations pass; actual CSIR ClamAV engine remains to be deployed/tested.
+8. Stored HTML-like technology title rendered as visible text in Chrome and
+   did not execute. SQL-like search remained scoped. These are representative
+   payload tests, not a complete SQLi/XSS penetration test.
+9. Separate MySQL schema/client prepared. Schema validation and read-only
+   preflight pass for 54 tables / 3,761 snapshot rows, with 0 foreign-key or
+   target indexed-string issues. MySQL runtime client selection is available.
+   No SQLite schema/data/password migration was performed.
+
+EVIDENCE
+dependency-audit.json, role-matrix-results.json, test-results.json,
+scanner-test-results.json, defender-test-results.json,
+mysql-source-preflight.json. Consult deployment/CSIR-IT-HANDOVER.txt.
+
+HONEST LAUNCH VERDICT
+Application hardening is substantially improved and the tested scope passes.
+Final CSIR production readiness cannot be confirmed without the actual MySQL
+test database (user confirmed unavailable), CSIR infrastructure testing and UAT.
+Do not label all report findings closed or guarantee zero bugs. See the explicit
+remaining release gates in the handover. Build success and audit zero are not
+independent security certification. Old repository uploads were not bulk-scanned.
+
+PRESERVATION AND HOSTING
+Original C:/CSIR/BDG-V2-NEW database/storage were not modified. The hosted test
+instance continues using the existing independent snapshot and copied storage.
+Passwords are not reset. Original FICCI directory remains disconnected from
+public testing. Session-secret restart requires signing in again.
+Source ZIP excludes actual database, .env secrets and private uploads.

@@ -1,0 +1,57 @@
+CSIR BDG — tested update, 6 November 2026
+
+DEPLOYED TO CONTROLLED TESTING
+https://katrina-modems-world-dictionaries.trycloudflare.com
+Build directory: .next-final-webpack
+Document parsing mode: container (Docker Desktop Linux engine)
+No ZIP produced: user requested one final consolidated package only.
+
+IMPLEMENTED
+- Uploaded-document extraction and Excel import use an isolated container.
+- Non-root UID 65532; network disabled; read-only filesystem; no host mounts;
+  all capabilities dropped; no-new-privileges; 256 MB RAM; 64 PIDs; CPU limit;
+  bounded temporary filesystem, process timeout, bounded output and job cleanup.
+- Missing image/engine fails closed; legacy host Python file parsing is disabled
+  in container mode. Legacy files may need conversion to modern supported formats.
+- Image build context excludes database, secrets and uploaded documents.
+- Accessible names added for registration, SOP, query/intake fields, filters and
+  upload control; text contrast corrected; duplicate aria-current removed;
+  visible focus and reduced-motion support added. Existing layout/roles retained.
+- Added a lower-resource Webpack build option with the local Cloudflare shim.
+
+VERIFIED
+- Production build succeeds (98 generated pages).
+- 41 public/HEAD/lab/industry route screens: zero axe-core violations under
+  WCAG 2 A/AA, 2.1 AA and 2.2 AA rule tags in the tested states.
+- 12 end-to-end business workflow groups pass.
+- 4,067 role-access checks pass.
+- Security/import suite passes, including actual malware-scanned upload,
+  cross-lab denial, Origin rejection, cookie/session protection, reset replay,
+  throttling, stored HTML escaping, Excel zero/blank distinction and notification.
+- Actual container extraction, malformed workbook rejection, absent-image failure,
+  resource/isolation probes and cleanup pass.
+- Application and parser npm audits report zero published advisories.
+- All three public login pages return 200 with current build and CSP.
+- All 54 tables unchanged after deployment; 14 user and 39 lab credential records
+  preserved. No seeds, account resets or data migration performed.
+
+SCOPE / OPEN ITEMS — NOT A PRODUCTION CERTIFICATE
+Automated accessibility scans do not certify WCAG conformance. Manual screen-reader,
+keyboard/zoom assessment across all modal/error states remains required.
+This isolates document parsing, not the entire web service or Windows host.
+Docker daemon access is privileged; production should use a dedicated parser
+service/host and reviewed service identities (see deployment/parser-sandbox).
+Inline-style CSP migration, comprehensive contextual injection/penetration testing,
+high-load/DoS assessment, legacy parser coverage and independent security review
+are not claimed complete. Old uploaded files have not all been rescanned.
+CSIR MySQL migration/restore, reverse-proxy/TLS, monitoring, backup operations,
+identity/reset delivery policy and final business approval need IT participation.
+The temporary Cloudflare URL depends on this desktop, Docker and tunnel remaining
+running. This is controlled testing, not permanent CSIR hosting.
+
+EVIDENCE
+accessibility-audit.json; business-uat-results.json; role-matrix-results.json;
+import-regression-results.json; container-sandbox-results.json;
+dependency-audit.json; live-sandbox-smoke.json; live-update-preservation.json;
+credential-preservation.json.
+Earlier readiness files are historical; this note records the latest tested scope.

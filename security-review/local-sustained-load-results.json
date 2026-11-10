@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-09T08:51:36.302Z",
+  "requests": 1965,
+  "concurrencyStages": [
+    4,
+    8,
+    16
+  ],
+  "stageSeconds": 10,
+  "p95Ms": 98,
+  "maxMs": 175,
+  "errors": [],
+  "scope": "Isolated synthetic database, bounded 30-second local read load; NOT distributed DoS or production capacity certification"
+}

@@ -1,0 +1,11 @@
+{
+  "passed": [
+    "Normal storage roundtrip",
+    "New upload cleanup",
+    "Traversal and ADS rejection",
+    "Invalid destination rejection",
+    "Original file cleanup forbidden",
+    "Junction escape blocked"
+  ],
+  "scope": "Temporary synthetic filesystem; local administrator race resistance not certified"
+}

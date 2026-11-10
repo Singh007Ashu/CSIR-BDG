@@ -1,0 +1,52 @@
+CSIR BDG - Business workflow UAT - 6 November 2026
+
+RESULT: 12 end-to-end scenario groups PASS; no failures in final run.
+Evidence: business-uat-results.json and uat-screenshots/*.png.
+Tests use fresh synthetic SQLite data, actual authentication endpoints and
+Chrome browser interaction. Some setup/review checks use authenticated APIs.
+This is automated developer UAT, not management acceptance sign-off.
+
+VERIFIED WORKFLOWS
+1. Head/lab login and industry registration, logout and fresh login.
+2. Lab technology entry, financial year persistence, Head notification,
+   notification deep-link and read-only Head view.
+3. Head correction request, lab correction/resubmission, Head review,
+   approved industry visibility and subsequent lab edit.
+4. Industry sponsored-research intake, Head notification and lab assignment,
+   assigned lab proposal and progress updates visible to Head.
+5. Industry partnership intake, assignment, lab response and Head output.
+6. Monthly AND quarterly reporting: draft, submit, return with instructions,
+   correction, resubmit, approval, persisted values and approved edit lock.
+7. Named LAB_BD officer report submission for its assigned lab.
+8. Head clarification, lab reply, Head notification and mark-read persistence.
+9. Cross-lab negative access checks throughout relevant workflows.
+
+FIXES IN THIS UPDATE
+- Industry research and partnership intake now notify Head/admin and audit.
+- Reject whitespace-only industry descriptions; validate research budget and
+  preserve a legitimate zero budget.
+- Named lab officers resolve their assigned lab identity for entry screens,
+  proposals and partnership responses; PI remains read-only in these forms.
+- Prevent reopening report forms while a save is in flight.
+- Explicit accessible report field and research-status labels.
+- Separate test-build directory prevents UAT builds replacing hosted assets.
+
+REGRESSION
+4,067 role/API assertions pass (not 4,067 business workflows).
+Authentication, origin, upload scan, isolation, reset, logout, throttling,
+browser CSP and representative stored-XSS integration checks pass.
+Production build passes. Original 14 user and 39 lab credential records match.
+No original database rows, credentials or uploaded files were changed by UAT.
+
+REMAINING RELEASE GATES
+Actual CSIR MySQL migration rehearsal is NOT done: server access unavailable.
+CSIR reverse proxy, mail delivery, backup/restore and production antivirus
+configuration require infrastructure validation. Management/lab acceptance
+sign-off and an independent security review remain necessary. These tests do
+not certify every possible workflow or promise a bug-free production launch.
+
+SOURCE ARCHIVE
+Contains frontend/backend and test evidence; deliberately excludes passwords,
+.env, real SQLite databases and private uploaded files. Retain the existing
+database and upload directory when applying this code update. Do not seed or
+replace the real database. See deployment/CSIR-IT-HANDOVER.txt.

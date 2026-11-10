@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-09T09:16:43.514Z",
+  "files": 193,
+  "matches": [
+    {
+      "file": "app\\components\\AuthBar.js",
+      "line": 8,
+      "kind": "navigation"
+    },
+    {
+      "file": "app\\lab-login\\page.js",
+      "line": 28,
+      "kind": "navigation"
+    },
+    {
+      "file": "app\\notifications\\page.js",
+      "line": 15,
+      "kind": "navigation"
+    }
+  ],
+  "scope": "Pattern inventory only; ORM use, URL normalization, encoding, access control and parser inputs still require contextual tests"
+}

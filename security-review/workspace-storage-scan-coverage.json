@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-09T08:54:12.832Z",
+  "files": [
+    {
+      "file": "storage\\source\\FICCI.zip",
+      "covered": true
+    },
+    {
+      "file": "storage\\templates\\CSIR_ECF_Reconciliation_Value_Impact_Templates_Lab_BD_v1.xlsx",
+      "covered": true
+    },
+    {
+      "file": "storage\\templates\\CSIR_ECF_Reconciliation_Value_Impact_Templates_v1.xlsx",
+      "covered": true
+    },
+    {
+      "file": "storage\\templates\\CSIR_SOP_ECF_Reconciliation_Value_Impact_Framework_v1.docx",
+      "covered": true
+    },
+    {
+      "file": "storage\\uploads\\workflow_packet\\1\\86620078-c0ca-4ded-b3be-db3e6b260ce6.xlsx",
+      "covered": true
+    },
+    {
+      "file": "storage\\uploads\\workflow_packet\\2\\3c54f41b-4551-4d7e-adb5-dc0837126d43.docx",
+      "covered": true
+    }
+  ]
+}

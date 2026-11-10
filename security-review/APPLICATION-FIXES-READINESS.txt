@@ -1,0 +1,54 @@
+CSIR BDG application fixes - 6 November 2026
+
+NEWLY CORRECTED
+1. Document upload batches no longer retain partial database/file results when
+   a later file fails validation. New uploads are compensated on failure and
+   records are created in a single SQLite transaction.
+2. Stale document versions return 409 instead of producing conflicting history.
+   A compare-and-swap inside the replacement transaction ensures concurrent
+   replacement has one winner. Failed replacement files are compensated.
+3. Storage rejects traversal, alternate-stream/control-character paths and
+   unsafe destinations. Canonical path checks reject symlink/junction escapes
+   during reads and writes. Cleanup is restricted to generated upload names.
+4. Local document analysis runs in a separate Node process with a 15-second
+   deadline, 128 MB V8 heap cap and bounded stdout/stderr. Parser failures do
+   not execute JSON parsing callbacks outside error handling in the web server.
+5. Parser subprocesses no longer inherit application secrets, database URLs,
+   API keys or NODE_OPTIONS. Only a small runtime environment allowlist passes.
+6. Previous archive/worker hardening remains included in this cumulative ZIP.
+
+FINAL TEST EVIDENCE
+- Production build passed using isolated .next-uat directory.
+- 4,067 role/access assertions pass: role-matrix-results.json.
+- 12 business workflow groups pass: business-uat-results.json.
+- 22 security/document lifecycle checks pass: document-lifecycle-results.json.
+  Includes real antivirus-scanned upload, mixed-batch rollback, stale replacement
+  and two simultaneous replacements yielding exactly one success and one 409.
+- 20 archive/worker checks pass: local-hardening-results.json.
+- 4 extraction/environment checks: extraction-worker-results.json.
+- 6 storage boundary checks: storage-boundary-results.json.
+- Packaged standalone parser successfully ran a synthetic text extraction.
+- Original 14 user and 39 lab credential records match; no schema migration,
+  reseeding, password reset or real-data mutation was performed.
+
+SCOPE AND REMAINING WORK
+These are tested concrete fixes, not a declaration that every possible bug is
+closed. Transaction guarantees above were tested on Node/SQLite, not D1 or
+MySQL. Actual CSIR MySQL, proxy, restore and antivirus validation still require
+CSIR infrastructure. D1 callback transactions are not equivalent to SQLite
+transactions and Workers deployment is not certified.
+Parser separation is resource containment, NOT a full OS filesystem/network
+sandbox. Legacy Office deep parsing, all Excel-import parsing paths, complete
+contextual SQLi/XSS testing, load/accessibility coverage and inline-style CSP
+migration remain unclosed developer/QA scope. Filesystem checks are not a
+defence against a privileged local administrator racing directory changes.
+Offline scanning of all existing uploads and operational policies also remain.
+
+DEPLOYMENT
+This source ZIP supersedes prior source batches; real database, passwords,
+.env and private uploads are excluded. Keep existing data directories and
+credentials. Do NOT run setup or seed commands as an upgrade.
+Install dependencies, build and restart only after preserving the current
+environment. Ensure scripts/document-extract-worker.cjs and its dependencies
+are included; the Next standalone build was checked for this worker.
+The currently running public test service was not restarted by this batch.

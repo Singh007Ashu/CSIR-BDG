@@ -1,0 +1,127 @@
+CSIR BDG — LOCAL APPLICATION REMEDIATION UPDATE
+9 November 2026; candidate build .next-local-closure
+
+SUMMARY
+Of the eight application/QA groups A43-A50, three now have completed LOCAL
+scope evidence (A43, A49, A50). Five remain partially addressed, not fully closed.
+Do not report all eight complete. This note supersedes their earlier local
+status only; CSIR deployment/independent acceptance gates remain open.
+No live server restart, tunnel change, password reset, seeding or real-data
+migration was performed. The tested candidate is NOT yet applied to the live
+testing process. No ZIP created.
+
+A43 — LOCAL IMPLEMENTATION AND REGRESSION COMPLETE
+Migrated inline styles in 12 UI files to nonce-authorized style rules through
+CspElement and a server-provided nonce context. Restricted style serialization
+rejects CSS delimiters/URL expressions and unknown properties. Production CSP
+no longer permits unsafe-inline styles; style-src-attr is none. Development
+retains its explicitly separate stylesheet policy.
+Browser verifies authorized rules render, dynamic sector chart has dimensions
+and color, and unauthorized stylesheet/style attributes are actually blocked.
+Build, workflows, accessibility and keyboard tests pass with this policy.
+Evidence: csp-style-unit-results.json, csp-browser-results.json,
+closure-keyboard-results.json, accessibility-audit.json.
+
+A44 — LOCAL SQLi REVIEW/REGRESSION EXTENDED; COMPREHENSIVE ASSESSMENT OPEN
+193 app/lib/python source files inventoried. No raw Prisma SQL execution
+patterns found. Representative malicious search strings, malformed IDs/JSON,
+ownership isolation and unchanged row-count checks pass. Pattern absence is
+not a source-to-sink proof or comprehensive penetration test.
+Evidence: source-security-inventory.json, local-closure-integration-results.json.
+
+A45 — CONCRETE NAVIGATION FIX; COMPREHENSIVE XSS ASSESSMENT OPEN
+Found Notifications page passing a stored link directly into router.push.
+Added shared same-origin path normalization to page and notification toast.
+Reject script/data/external/protocol-relative URLs, backslashes, control bytes,
+encoded authority/control escapes and malformed encoding. Sixteen tests pass.
+Stored HTML escaping/browser security tests pass; strict style CSP adds a
+further boundary. Complete contextual/reflected/stored coverage still requires
+review beyond these sampled cases. No claimed exploit against real accounts.
+Evidence: navigation-security-results.json, local-closure-integration-results.json.
+
+A46 — AUTOMATED AND KEYBOARD/REFLOW REGRESSION COMPLETE; FULL MANUAL OPEN
+12 role/business workflow groups pass. 41 route/role screens have zero automated
+axe violations; open technology dialog also has zero. Keyboard tests cover
+skip link, modal focus/Tab/Escape/restoration, hidden mobile navigation, 320px
+reflow, registration failure/retry and text spacing. Modal screenshot inspected.
+Fixed duplicated Close accessible names found during the first workflow run:
+icon now says 'Close technology details'. Final rerun passes.
+Screen-reader spoken output, all browser/zoom combinations and every error/dialog
+state have not been manually certified. No NVDA/JAWS/VoiceOver sign-off claimed.
+Evidence: business-uat-results.json, accessibility-audit.json,
+modal-accessibility-results.json, closure-keyboard-results.json.
+
+A47 — BOUNDED LOCAL LOAD PASS; BROADER LOAD/DOS ASSESSMENT OPEN
+1,965 authenticated requests over three 10-second stages at concurrency 4/8/16:
+zero errors, p95 98 ms, maximum 175 ms in this run. Synthetic small database only.
+Parser capacity, actual timeout/output/environment limits and actual Docker
+resource/network/user-isolation checks pass. This is not distributed DoS testing,
+a long soak, a large-data benchmark or a production capacity/SLA guarantee.
+Evidence: local-sustained-load-results.json, parser-capacity-results.json,
+closure-container-results.json.
+
+A48 — MISLEADING LEGACY ANALYSIS FIXED; EXTRACTION SUPPORT STILL OPEN
+DOC/XLS/PPT now explicitly require conversion to DOCX/XLSX/PPTX before local
+analysis. Previously DOC/PPT could yield empty metadata and XLS was passed to
+an XLSX parser. Both service boundary and worker reject unsupported legacy input.
+Original documents are not rewritten; repository storage is not removed.
+Four rejection/supported-text tests pass. Full legacy extraction/conversion is
+NOT implemented or certified; conversion tooling and representative corpus tests
+remain developer work, not something that merely requires a CSIR server.
+New parser image built/tested separately: csir-document-parser:local-closure.
+The deployed csir-document-parser:review tag was not overwritten.
+Evidence: analysis-format-results.json, closure-container-results.json.
+
+A49 — AVAILABLE LOCAL REPOSITORY SCAN COMPLETE
+Defender scanned restored COPIES with DisableRemediation:
+  testing storage: 11 files / 257,355,039 bytes;
+  workspace FICCI: 229 files / 283,118,661 bytes.
+240 file instances completed with no detection reported. All six workspace
+storage files are SHA-256-identical to covered testing-storage files.
+No original was quarantined/deleted/changed. Other undiscovered historic backups,
+remote repositories and CSIR production storage are not covered. Scanner result
+is not a zero-day guarantee or proof of unlimited archive recursion coverage.
+First attempts failed in scanner health querying; successful retry validated
+Defender service/signature freshness. Protection was never bypassed.
+Evidence: local-recovery-review-results.json, ficci-recovery-review-results.json,
+workspace-storage-scan-coverage.json. Reports retain per-file scan outcomes.
+
+A50 — LOCAL SQLITE/FILES RESTORE REHEARSAL COMPLETE
+Read-only source opened using SQLite backup API; created independent backup and
+restored database. Integrity and foreign-key checks pass. All 55 SQLite tables
+(54 application tables plus SQLite internal table), 3,821 rows and credential
+fields reconcile exactly. Uploaded/FICCI file copies reconcile by SHA-256.
+Source table/file comparison after the operation confirms unchanged originals.
+This proves local backup/restore reconciliation, not a full real-user restored
+application acceptance run, MySQL restoration, production RPO/RTO or DR sign-off.
+Recovery copies remain private under ignored .tmp/recovery-review-* directories.
+Do not publish these copies: they contain actual data and existing credentials.
+Evidence: local-recovery-review-results.json, ficci-recovery-review-results.json.
+
+BUILD / PRESERVATION / LIMITS
+Production build succeeded after a sandbox mkdir EPERM was retried with approved
+execution. Local integration: 25 recorded groups pass. Latest complete business
+UAT: 12 groups pass, failure list empty. No full 4,067-role-matrix rerun is claimed
+in this batch; historical results remain separate evidence.
+Source scanner output is a review aid, not a comprehensive audit certificate.
+One test-harness insertion/quoting error was corrected; successful final results
+are recorded. Neither failed harness attempt changed production data.
+Additional .next-* build directories are now gitignored to avoid committing
+generated candidate bundles. No repository history/publication audit was done.
+
+REPRODUCIBLE LOCAL CHECKS
+node scripts/test-safe-navigation.cjs
+node scripts/test-csp-style.cjs
+node scripts/test-analysis-formats.cjs
+node scripts/source-security-inventory.cjs
+node scripts/local-recovery-review.cjs DATABASE STORAGE restore-and-scan LABEL
+The recovery command creates NEW private copies; it never restores over source.
+Existing .tmp test launchers used: local-closure-integration.cjs,
+a11y-workflows.cjs, closure-keyboard-csp.cjs, closure-container.cjs.
+Their database fixtures are synthetic and isolated from original accounts.
+
+VERDICT
+Improved and tested candidate for controlled review, NOT final production approval.
+Remaining developer/QA work is real: comprehensive SQLi/XSS, full manual
+accessibility, broader load/resource-abuse validation and legacy format coverage.
+Independent review and CSIR infrastructure testing remain additional gates.

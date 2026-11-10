@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-09T09:29:37.849Z",
+  "comparedTables": 55,
+  "changedTables": [],
+  "credentials": {
+    "User": {
+      "count": 14,
+      "unchanged": true
+    },
+    "Lab": {
+      "count": 39,
+      "unchanged": true
+    }
+  },
+  "scope": "Read-only comparison of existing testing database to pre-work backup; no credential values written"
+}

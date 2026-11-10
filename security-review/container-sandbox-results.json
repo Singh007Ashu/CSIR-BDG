@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-09T08:24:23.965Z",
+  "passed": [
+    "Text extraction through application container runner",
+    "XLSX extraction",
+    "Malformed workbook rejected",
+    "Missing image fails closed without host fallback",
+    "Non-root, read-only root, loopback-only networking, zero capabilities, no-new-privileges, memory/PID caps",
+    "No leftover application job containers"
+  ],
+  "probe": {
+    "uid": 65532,
+    "readonly": true,
+    "interfaces": [
+      "lo"
+    ],
+    "status": [
+      "CapEff:\t0000000000000000",
+      "NoNewPrivs:\t1"
+    ],
+    "memory": "268435456",
+    "pids": "64",
+    "secret": null
+  }
+}

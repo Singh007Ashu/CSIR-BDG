@@ -1,0 +1,891 @@
+[
+  {
+    "route": "/api/admin/categories",
+    "method": "POST",
+    "source": "app\\api\\admin\\categories\\route.js",
+    "guard": "requireRole|requireRole",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/admin/imports",
+    "method": "POST",
+    "source": "app\\api\\admin\\imports\\route.js",
+    "guard": "requireRole|requireRole",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/admin/labs/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\admin\\labs\\[id]\\route.js",
+    "guard": "requireRole|requireRole",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/admin/notifications",
+    "method": "POST",
+    "source": "app\\api\\admin\\notifications\\route.js",
+    "guard": "requireRole|requireRole",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/admin/overview",
+    "method": "GET",
+    "source": "app\\api\\admin\\overview\\route.js",
+    "guard": "requireRole|requireRole",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/admin/users/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\admin\\users\\[id]\\route.js",
+    "guard": "requireRole|requireRole",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/auth/login",
+    "method": "POST",
+    "source": "app\\api\\auth\\login\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/auth/logout",
+    "method": "POST",
+    "source": "app\\api\\auth\\logout\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/auth/me",
+    "method": "GET",
+    "source": "app\\api\\auth\\me\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/auth/register",
+    "method": "POST",
+    "source": "app\\api\\auth\\register\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/change-requests",
+    "method": "GET",
+    "source": "app\\api\\change-requests\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/change-requests",
+    "method": "POST",
+    "source": "app\\api\\change-requests\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/change-requests/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\change-requests\\[id]\\route.js",
+    "guard": "requireRole|requireRole",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/co-development",
+    "method": "GET",
+    "source": "app\\api\\co-development\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/co-development",
+    "method": "POST",
+    "source": "app\\api\\co-development\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/co-development/[id]/commercialization",
+    "method": "PUT",
+    "source": "app\\api\\co-development\\[id]\\commercialization\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/co-development/[id]/deliverables",
+    "method": "POST",
+    "source": "app\\api\\co-development\\[id]\\deliverables\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/co-development/[id]/deliverables",
+    "method": "PATCH",
+    "source": "app\\api\\co-development\\[id]\\deliverables\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/co-development/[id]",
+    "method": "GET",
+    "source": "app\\api\\co-development\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/co-development/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\co-development\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/co-development/[id]",
+    "method": "DELETE",
+    "source": "app\\api\\co-development\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/commercial-engagements",
+    "method": "GET",
+    "source": "app\\api\\commercial-engagements\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/commercial-engagements",
+    "method": "POST",
+    "source": "app\\api\\commercial-engagements\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/commercial-engagements/[id]",
+    "method": "GET",
+    "source": "app\\api\\commercial-engagements\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/commercial-engagements/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\commercial-engagements\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/commercial-engagements/[id]",
+    "method": "DELETE",
+    "source": "app\\api\\commercial-engagements\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/documents",
+    "method": "GET",
+    "source": "app\\api\\documents\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/documents",
+    "method": "POST",
+    "source": "app\\api\\documents\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/documents/[id]/download",
+    "method": "GET",
+    "source": "app\\api\\documents\\[id]\\download\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/documents/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\documents\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/documents/[id]",
+    "method": "DELETE",
+    "source": "app\\api\\documents\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/evidence",
+    "method": "GET",
+    "source": "app\\api\\evidence\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/evidence",
+    "method": "POST",
+    "source": "app\\api\\evidence\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/excel/export",
+    "method": "GET",
+    "source": "app\\api\\excel\\export\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/excel/import",
+    "method": "POST",
+    "source": "app\\api\\excel\\import\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/excel/template",
+    "method": "GET",
+    "source": "app\\api\\excel\\template\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/head-bdg/requests",
+    "method": "GET",
+    "source": "app\\api\\head-bdg\\requests\\route.js",
+    "guard": "requireRole|requireRole",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/industry-catalog",
+    "method": "GET",
+    "source": "app\\api\\industry-catalog\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/industry-matching",
+    "method": "GET",
+    "source": "app\\api\\industry-matching\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/industry-matching",
+    "method": "POST",
+    "source": "app\\api\\industry-matching\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/intake",
+    "method": "GET",
+    "source": "app\\api\\intake\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/intake",
+    "method": "POST",
+    "source": "app\\api\\intake\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/intake/[id]",
+    "method": "GET",
+    "source": "app\\api\\intake\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/intake/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\intake\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/lab-auth/change-password",
+    "method": "POST",
+    "source": "app\\api\\lab-auth\\change-password\\route.js",
+    "guard": "requireLab|requireLab",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/lab-auth/forgot-password",
+    "method": "POST",
+    "source": "app\\api\\lab-auth\\forgot-password\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/lab-auth/login",
+    "method": "POST",
+    "source": "app\\api\\lab-auth\\login\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/lab-auth/logout",
+    "method": "POST",
+    "source": "app\\api\\lab-auth\\logout\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/lab-auth/me",
+    "method": "GET",
+    "source": "app\\api\\lab-auth\\me\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/lab-auth/register",
+    "method": "POST",
+    "source": "app\\api\\lab-auth\\register\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/lab-auth/reset-password",
+    "method": "POST",
+    "source": "app\\api\\lab-auth\\reset-password\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/lab-profiles",
+    "method": "GET",
+    "source": "app\\api\\lab-profiles\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/labs",
+    "method": "GET",
+    "source": "app\\api\\labs\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/labs",
+    "method": "POST",
+    "source": "app\\api\\labs\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/monitoring",
+    "method": "GET",
+    "source": "app\\api\\monitoring\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/mous/alerts",
+    "method": "POST",
+    "source": "app\\api\\mous\\alerts\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/mous",
+    "method": "GET",
+    "source": "app\\api\\mous\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/mous",
+    "method": "POST",
+    "source": "app\\api\\mous\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/mous/[id]",
+    "method": "GET",
+    "source": "app\\api\\mous\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/mous/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\mous\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/mous/[id]",
+    "method": "DELETE",
+    "source": "app\\api\\mous\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/notifications",
+    "method": "GET",
+    "source": "app\\api\\notifications\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/notifications",
+    "method": "PATCH",
+    "source": "app\\api\\notifications\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/organizations",
+    "method": "GET",
+    "source": "app\\api\\organizations\\route.js",
+    "guard": "requireUser|requireUser|requireUser",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/organizations",
+    "method": "POST",
+    "source": "app\\api\\organizations\\route.js",
+    "guard": "requireUser|requireUser|requireUser",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/parameters",
+    "method": "GET",
+    "source": "app\\api\\parameters\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/parameters",
+    "method": "POST",
+    "source": "app\\api\\parameters\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/parameters/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\parameters\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/partnerships",
+    "method": "GET",
+    "source": "app\\api\\partnerships\\route.js",
+    "guard": "requireUser|requireAnyAuth|requireAnyAuth|requireUser",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/partnerships",
+    "method": "POST",
+    "source": "app\\api\\partnerships\\route.js",
+    "guard": "requireUser|requireAnyAuth|requireAnyAuth|requireUser",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/partnerships/[id]/lab-response",
+    "method": "POST",
+    "source": "app\\api\\partnerships\\[id]\\lab-response\\route.js",
+    "guard": "requireLab|requireLab",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/partnerships/[id]",
+    "method": "GET",
+    "source": "app\\api\\partnerships\\[id]\\route.js",
+    "guard": "requireRole|requireAnyAuth|requireAnyAuth|requireRole",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/partnerships/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\partnerships\\[id]\\route.js",
+    "guard": "requireRole|requireAnyAuth|requireAnyAuth|requireRole",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/problem-statements",
+    "method": "GET",
+    "source": "app\\api\\problem-statements\\route.js",
+    "guard": "requireUser|requireAnyAuth|requireAnyAuth|requireUser",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/problem-statements",
+    "method": "POST",
+    "source": "app\\api\\problem-statements\\route.js",
+    "guard": "requireUser|requireAnyAuth|requireAnyAuth|requireUser",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/problem-statements/[id]",
+    "method": "GET",
+    "source": "app\\api\\problem-statements\\[id]\\route.js",
+    "guard": "requireRole|requireAnyAuth|requireAnyAuth|requireRole",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/problem-statements/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\problem-statements\\[id]\\route.js",
+    "guard": "requireRole|requireAnyAuth|requireAnyAuth|requireRole",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/problem-statements/[id]/tracking",
+    "method": "GET",
+    "source": "app\\api\\problem-statements\\[id]\\tracking\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/problem-statements/[id]/tracking",
+    "method": "POST",
+    "source": "app\\api\\problem-statements\\[id]\\tracking\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/profile",
+    "method": "GET",
+    "source": "app\\api\\profile\\route.js",
+    "guard": "requireUser|requireUser",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/profile",
+    "method": "PATCH",
+    "source": "app\\api\\profile\\route.js",
+    "guard": "requireUser|requireUser",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/projects",
+    "method": "GET",
+    "source": "app\\api\\projects\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/projects",
+    "method": "POST",
+    "source": "app\\api\\projects\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/projects/[id]",
+    "method": "GET",
+    "source": "app\\api\\projects\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/projects/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\projects\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/projects/[id]/technologies",
+    "method": "GET",
+    "source": "app\\api\\projects\\[id]\\technologies\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/projects/[id]/technologies",
+    "method": "POST",
+    "source": "app\\api\\projects\\[id]\\technologies\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/projects/[id]/technologies",
+    "method": "DELETE",
+    "source": "app\\api\\projects\\[id]\\technologies\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/proposals",
+    "method": "POST",
+    "source": "app\\api\\proposals\\route.js",
+    "guard": "requireLab|requireLab",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/queries",
+    "method": "GET",
+    "source": "app\\api\\queries\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/queries",
+    "method": "POST",
+    "source": "app\\api\\queries\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/queries/[id]/responses",
+    "method": "POST",
+    "source": "app\\api\\queries\\[id]\\responses\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/queries/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\queries\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/raci/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\raci\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/references",
+    "method": "GET",
+    "source": "app\\api\\references\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/references",
+    "method": "POST",
+    "source": "app\\api\\references\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/reports",
+    "method": "GET",
+    "source": "app\\api\\reports\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/reports",
+    "method": "POST",
+    "source": "app\\api\\reports\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/reports/[id]/submission",
+    "method": "PATCH",
+    "source": "app\\api\\reports\\[id]\\submission\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/search",
+    "method": "GET",
+    "source": "app\\api\\search\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/sop",
+    "method": "GET",
+    "source": "app\\api\\sop\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/sop/stages/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\sop\\stages\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/sop-data",
+    "method": "GET",
+    "source": "app\\api\\sop-data\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/sop-data",
+    "method": "POST",
+    "source": "app\\api\\sop-data\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/sop-records",
+    "method": "GET",
+    "source": "app\\api\\sop-records\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/sop-records",
+    "method": "POST",
+    "source": "app\\api\\sop-records\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/tech-requests",
+    "method": "GET",
+    "source": "app\\api\\tech-requests\\route.js",
+    "guard": "requireUser|requireUser",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/tech-requests",
+    "method": "POST",
+    "source": "app\\api\\tech-requests\\route.js",
+    "guard": "requireUser|requireUser",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/tech-requests/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\tech-requests\\[id]\\route.js",
+    "guard": "requireRole|requireRole",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technologies/export",
+    "method": "GET",
+    "source": "app\\api\\technologies\\export\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technologies",
+    "method": "GET",
+    "source": "app\\api\\technologies\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technologies",
+    "method": "POST",
+    "source": "app\\api\\technologies\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technologies/year-data/import",
+    "method": "POST",
+    "source": "app\\api\\technologies\\year-data\\import\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technologies/year-data",
+    "method": "GET",
+    "source": "app\\api\\technologies\\year-data\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technologies/year-data",
+    "method": "POST",
+    "source": "app\\api\\technologies\\year-data\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technologies/year-data",
+    "method": "DELETE",
+    "source": "app\\api\\technologies\\year-data\\route.js",
+    "guard": "delegated/public — inspect",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technologies/[id]",
+    "method": "GET",
+    "source": "app\\api\\technologies\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technologies/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\technologies\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technologies/[id]",
+    "method": "DELETE",
+    "source": "app\\api\\technologies\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technology-revisions",
+    "method": "GET",
+    "source": "app\\api\\technology-revisions\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technology-revisions",
+    "method": "POST",
+    "source": "app\\api\\technology-revisions\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technology-revisions/[id]",
+    "method": "PATCH",
+    "source": "app\\api\\technology-revisions\\[id]\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technology-year-data/import",
+    "method": "POST",
+    "source": "app\\api\\technology-year-data\\import\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technology-year-data",
+    "method": "GET",
+    "source": "app\\api\\technology-year-data\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technology-year-data",
+    "method": "POST",
+    "source": "app\\api\\technology-year-data\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/technology-year-data",
+    "method": "DELETE",
+    "source": "app\\api\\technology-year-data\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth|requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  },
+  {
+    "route": "/api/workspace-overview",
+    "method": "GET",
+    "source": "app\\api\\workspace-overview\\route.js",
+    "guard": "requireAnyAuth|requireAnyAuth",
+    "ownershipStatus": "PENDING role/object matrix"
+  }
+]

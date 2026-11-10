@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-09T08:28:40.713Z",
+  "database": "Isolated synthetic SQLite; original data/logins not modified",
+  "passed": [
+    "Head/lab login and industry registration, logout and fresh login",
+    "Keyboard skip link moves focus to main content",
+    "Technology modal has name, initial focus, forward/reverse focus containment, Escape and trigger restoration",
+    "Mobile navigation: closed links inert, keyboard opening, containment, Escape, expanded state and restored focus",
+    "Head/lab/industry landing screens reflow at 320 CSS pixels",
+    "Failed registration announces error, retains entries, re-enables retry without creating account",
+    "Registration text-spacing and narrow reflow retain form controls"
+  ],
+  "failures": []
+}

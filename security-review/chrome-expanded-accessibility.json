@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-09T09:18:40.711Z",
+  "checks": [
+    {
+      "role": "HEAD",
+      "route": "/head-admin",
+      "forcedColors": true,
+      "reducedMotion": true,
+      "reflow320": true,
+      "skipLink": true,
+      "duplicateIds": 0,
+      "axeViolations": 0
+    },
+    {
+      "role": "LAB",
+      "route": "/master-technologies",
+      "forcedColors": true,
+      "reducedMotion": true,
+      "reflow320": true,
+      "skipLink": true,
+      "duplicateIds": 0,
+      "axeViolations": 0
+    },
+    {
+      "role": "INDUSTRY",
+      "route": "/industry",
+      "forcedColors": true,
+      "reducedMotion": true,
+      "reflow320": true,
+      "skipLink": true,
+      "duplicateIds": 0,
+      "axeViolations": 0
+    },
+    {
+      "role": "LAB",
+      "requiredFieldFocus": true,
+      "escape": true
+    }
+  ],
+  "scope": "Browser accessibility tree, high contrast/reduced motion, keyboard, reflow and validation; not NVDA/JAWS spoken-output certification"
+}

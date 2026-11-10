@@ -1,0 +1,508 @@
+{
+  "date": "2026-11-09T09:28:11.295Z",
+  "engine": "axe-core 4.14.0",
+  "audits": [
+    {
+      "role": "PUBLIC",
+      "route": "/governance-login",
+      "url": "http://localhost:3014/governance-login",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 10
+        }
+      ]
+    },
+    {
+      "role": "PUBLIC",
+      "route": "/lab-login",
+      "url": "http://localhost:3014/lab-login",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 8
+        }
+      ]
+    },
+    {
+      "role": "PUBLIC",
+      "route": "/login",
+      "url": "http://localhost:3014/login",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "role": "PUBLIC",
+      "route": "/register-lab",
+      "url": "http://localhost:3014/register-lab",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "role": "PUBLIC",
+      "route": "/lab-forgot-password",
+      "url": "http://localhost:3014/lab-forgot-password",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "role": "HEAD",
+      "route": "/workspace",
+      "url": "http://localhost:3014/workspace",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 31
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/head-admin",
+      "url": "http://localhost:3014/head-admin",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 19
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/master-technologies",
+      "url": "http://localhost:3014/master-technologies",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/lab-monitoring",
+      "url": "http://localhost:3014/lab-monitoring",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/lab-profiles",
+      "url": "http://localhost:3014/lab-profiles",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/projects",
+      "url": "http://localhost:3014/projects",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/module2",
+      "url": "http://localhost:3014/module2",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/module3",
+      "url": "http://localhost:3014/module3",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/co-development",
+      "url": "http://localhost:3014/co-development",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/mou-repository",
+      "url": "http://localhost:3014/mou-repository",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/commercial-engagements",
+      "url": "http://localhost:3014/commercial-engagements",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 17
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/sop-data-entry",
+      "url": "http://localhost:3014/sop-data-entry",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 21
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/monthly-reporting",
+      "url": "http://localhost:3014/monthly-reporting",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/quarterly-reporting",
+      "url": "http://localhost:3014/quarterly-reporting",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/queries",
+      "url": "http://localhost:3014/queries",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/notifications",
+      "url": "http://localhost:3014/notifications",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/industry-matchmaking",
+      "url": "http://localhost:3014/industry-matchmaking",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 16
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/ai-intake",
+      "url": "http://localhost:3014/ai-intake",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 16
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/workflow-tracker",
+      "url": "http://localhost:3014/workflow-tracker",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/raci-access",
+      "url": "http://localhost:3014/raci-access",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15
+        },
+        {
+          "id": "th-has-data-cells",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/sop-roadmap",
+      "url": "http://localhost:3014/sop-roadmap",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 24
+        }
+      ]
+    },
+    {
+      "role": "HEAD",
+      "route": "/excel-templates",
+      "url": "http://localhost:3014/excel-templates",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 16
+        }
+      ]
+    },
+    {
+      "role": "LAB",
+      "route": "/lab-dashboard",
+      "url": "http://localhost:3014/lab-dashboard",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "role": "LAB",
+      "route": "/master-technologies",
+      "url": "http://localhost:3014/master-technologies",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 7
+        }
+      ]
+    },
+    {
+      "role": "LAB",
+      "route": "/projects",
+      "url": "http://localhost:3014/projects",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 7
+        }
+      ]
+    },
+    {
+      "role": "LAB",
+      "route": "/module2",
+      "url": "http://localhost:3014/module2",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 7
+        }
+      ]
+    },
+    {
+      "role": "LAB",
+      "route": "/module3",
+      "url": "http://localhost:3014/module3",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 7
+        }
+      ]
+    },
+    {
+      "role": "LAB",
+      "route": "/monthly-reporting",
+      "url": "http://localhost:3014/monthly-reporting",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6
+        }
+      ]
+    },
+    {
+      "role": "LAB",
+      "route": "/quarterly-reporting",
+      "url": "http://localhost:3014/quarterly-reporting",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6
+        }
+      ]
+    },
+    {
+      "role": "LAB",
+      "route": "/queries",
+      "url": "http://localhost:3014/queries",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6
+        }
+      ]
+    },
+    {
+      "role": "LAB",
+      "route": "/lab-profiles",
+      "url": "http://localhost:3014/lab-profiles",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 7
+        }
+      ]
+    },
+    {
+      "role": "LAB",
+      "route": "/sop-data-entry",
+      "url": "http://localhost:3014/sop-data-entry",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 13
+        }
+      ]
+    },
+    {
+      "role": "INDUSTRY",
+      "route": "/industry",
+      "url": "http://localhost:3014/industry",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "role": "INDUSTRY",
+      "route": "/module2",
+      "url": "http://localhost:3014/module2",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "role": "INDUSTRY",
+      "route": "/module3",
+      "url": "http://localhost:3014/module3",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "role": "INDUSTRY",
+      "route": "/notifications",
+      "url": "http://localhost:3014/notifications",
+      "violations": [],
+      "incomplete": []
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "requests": 100,
+  "concurrency": 20,
+  "failures": 0,
+  "p95Ms": 216,
+  "maxMs": 227,
+  "scope": "Synthetic small dataset read-only API smoke; not capacity certification"
+}

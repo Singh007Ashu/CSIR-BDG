@@ -1,0 +1,10 @@
+{
+  "date": "2026-11-09T09:16:42.029Z",
+  "passed": [
+    "doc fails explicitly rather than claiming content analysis",
+    "xls fails explicitly rather than claiming content analysis",
+    "ppt fails explicitly rather than claiming content analysis",
+    "Supported text still extracts"
+  ],
+  "scope": "Explicit legacy rejection, not certified legacy conversion/extraction"
+}

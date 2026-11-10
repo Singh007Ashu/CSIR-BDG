@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-09T08:56:34.207Z",
+  "authorized": true,
+  "width": "320px",
+  "violations": [
+    "style-src-elem",
+    "style-src-attr"
+  ]
+}

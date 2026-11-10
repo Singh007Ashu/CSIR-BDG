@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-09T09:16:42.844Z",
+  "passed": [
+    "Third simultaneous parser job rejected",
+    "Capacity released after completion",
+    "Unknown mode rejected instead of unsafe fallback",
+    "Actual child timeout enforced",
+    "Actual stdout bound enforced",
+    "Actual stderr bound enforced",
+    "Child environment excludes session secret"
+  ],
+  "scope": "Concurrency unit test uses a delayed parser stub; timeout/output/env tests use real Node children."
+}

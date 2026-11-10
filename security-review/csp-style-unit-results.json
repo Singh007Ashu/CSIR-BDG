@@ -1,0 +1,6 @@
+{
+  "date": "2026-11-09T09:23:54.345Z",
+  "passed": 11,
+  "failures": [],
+  "scope": "Style serialization and production CSP unit checks; browser required"
+}

@@ -1,0 +1,101 @@
+CSIR BDG — accessibility and local security review
+9 November 2026
+
+STATUS
+Updated controlled-testing build is live at:
+https://kits-advisors-prohibited-estimated.trycloudflare.com
+Deployment build: .next-review-nov09-final
+This is not a production security certificate or a complete WCAG conformance claim.
+
+BUGS FIXED
+1. Technology dialogs lacked consistent focus containment, Escape close and focus
+   restoration. Added a shared compatibility adapter for existing modal forms,
+   dialog naming, initial focus and inert background content.
+2. Mobile navigation could leave off-screen links keyboard-accessible. Closed
+   mobile navigation is now inert; open navigation contains focus, has an expanded
+   state and returns focus to its trigger when closed.
+3. Long navigation had no skip link. Public and authenticated pages now provide
+   a keyboard-visible link to a focusable main-content landmark.
+4. Lab registration could remain stuck on a failed request. Network/invalid-JSON
+   failures now announce an error, retain entries and re-enable retry.
+5. At 320 CSS pixels, hidden service checkbox inputs caused horizontal overflow.
+   Constrained the hidden controls, added a visible checked-control focus outline,
+   and adjusted narrow header/form layout and fieldset minimum sizing.
+6. Desktop technology editor was partly hidden behind the sidebar. Raised the
+   modal backdrop above navigation; manually reviewed the corrected screenshot.
+7. Technology editor dynamic fields lacked explicit accessible names. Added names
+   and a descriptive close control; open-dialog axe check reports no violations.
+8. Simultaneous parser requests could launch unbounded jobs. Added a two-job
+   per-Node-service cap, capacity release on every completion/failure and rejection
+   of unknown parser modes. API boundary supports a retryable busy response.
+
+TESTED SCOPE AND EVIDENCE
+- Keyboard interaction tests: skip-link activation, modal forward/reverse Tab
+  containment, Escape and focus restoration; mobile menu opening/closing and
+  hidden-link isolation; registration network failure/retry.
+- 320 CSS-pixel reflow checks for HEAD, lab and industry landing pages; registration
+  text-spacing check. These are viewport/reflow checks, not a claim that every
+  browser/OS 200% and 400% zoom combination was manually tested.
+- Screenshots manually inspected: mobile navigation, HEAD narrow layout,
+  technology editor (before and after layer correction), registration text spacing.
+  Keyboard actions were driven through browser automation, not a human assistive-
+  technology user study. NVDA/JAWS/VoiceOver spoken output was not tested.
+- 41 route/role screen states: zero automated axe WCAG A/AA rule violations.
+  Separate open-technology-dialog axe scan: zero violations on deployment build.
+- 12 end-to-end business workflow groups pass; 4,067 role-access assertions pass.
+- 23 security/injection regression groups pass on deployment build, including
+  121 protected methods, foreign Origin rejection, cookie flags, logout/replay,
+  cross-lab isolation, malformed identifiers/JSON, SQL/HTML/path-like search text,
+  stored HTML escaping, signature tampering and concurrent login throttling.
+- 20 archive/worker hardening checks and six storage-boundary checks pass.
+- Parser capacity unit checks plus actual child timeout/output/environment tests
+  pass. Actual Docker text/XLSX extraction, missing-image rejection, malformed
+  workbook rejection, isolation/resource probes and job cleanup pass.
+- Container-backed annual/master workbook import regression passes, including
+  blank versus zero, percentages, lab scoping and HEAD notifications.
+- Actual Defender clean-file and harmless EICAR checks pass. A cold-start upload
+  check initially failed closed; repeated actual-scanner integration passed once
+  Defender responded. Scanner protection was not disabled for the successful run.
+- Application npm audit: zero published advisories at time of this review.
+
+HOST RECOVERY
+Docker initially failed startup with an inaccessible dockerInference runtime
+socket. No factory reset, runtime-file deletion or OS security change was made
+by this work. The engine subsequently became available. Its parser image was
+missing; rebuilt it from the pinned Dockerfile and reran actual sandbox tests.
+
+DATA AND DEPLOYMENT
+Public hosting of the existing real-data testing copy at a new temporary
+trycloudflare.com destination was explicitly approved by the user.
+Backed up existing testing database before deployment. Compared all 54 tables:
+no rows changed. All 14 User and 39 Lab stored credential records remain the same.
+No seed, password reset or database migration was performed.
+All three public login pages return HTTP 200 with the current build and CSP.
+Live scanner and container mode remain enabled; Docker/scanner failure rejects
+processing rather than silently falling back to an unsafe mode.
+The tunnel depends on this desktop, server, Docker and internet remaining running.
+Original FICCI file storage remains excluded from this public testing copy.
+No intermediate ZIP created, per user request.
+
+REMAINING / NOT CLAIMED COMPLETE
+- Manual screen-reader and wider keyboard/zoom testing across every dialog,
+  validation state and assistive-technology/browser combination.
+- Independent penetration assessment, sustained/distributed load and DoS testing,
+  inline-style CSP migration and full legacy parser coverage. Per-process parser
+  capacity is not a substitute for production ingress/distributed rate limiting.
+- Full-host OS/service-account isolation: current container isolates parsing only.
+  Production Docker access must use a dedicated, reviewed parser service boundary.
+- Bulk rescanning of all old uploaded documents, backup restoration exercises,
+  CSIR MySQL migration validation, reverse proxy/TLS and monitoring/identity policy.
+These points require additional work/review; do not label every possible security
+or accessibility issue closed on the basis of these scoped tests.
+
+RESULT FILES
+keyboard-reflow-results.json; modal-accessibility-results.json;
+accessibility-audit.json; business-uat-results.json; role-matrix-results.json;
+injection-review-results.json; local-hardening-results.json;
+storage-boundary-results.json; parser-capacity-results.json;
+container-sandbox-results.json; import-regression-results.json;
+defender-test-results.json; dependency-audit.json;
+live-sandbox-smoke.json; live-update-preservation.json;
+credential-preservation.json.

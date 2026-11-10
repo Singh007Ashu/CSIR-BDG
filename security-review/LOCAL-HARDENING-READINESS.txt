@@ -1,0 +1,46 @@
+CSIR BDG local security hardening update - 6 November 2026
+
+CHANGES
+1. Python worker JSON parsing is caught and rejected safely instead of throwing
+   from an asynchronous close handler. Every completion/error path clears the
+   timer. Stdin errors, spawn failures and nonzero exits are handled.
+2. Worker stdout is capped at 2 MB, stderr at 64 KB, with timeout termination.
+   No shell is used. Existing matching fallback behaviour is preserved.
+3. Upload validator rejects unknown types even when invoked directly.
+4. Archives reject nested archives, active content, embedded Office objects,
+   unsafe filenames and external Office resource relationships. Ordinary
+   hyperlinks remain allowed. Office XML DTD/entity declarations are rejected.
+5. Actual inflated entry bytes are checked before downstream parsing: 10 MB
+   per entry, 50 MB total, in addition to the existing archive metadata limits
+   and 5 MB compressed upload limit.
+
+COMPATIBILITY
+New files containing the rejected archive/Office constructs must be converted
+to plain supported documents before upload. Existing files are not rewritten,
+deleted or bulk-scanned. Legacy DOC/XLS/PPT deep parsing is not certified.
+Worker limits are resource guards, not an OS-level parser sandbox.
+
+TESTS ON THIS BUILD
+20 new hardening checks pass (local-hardening-results.json).
+Existing upload and policy unit checks pass.
+4,067 role/API assertions pass; 19 security integration checks pass.
+12 browser/API business UAT scenario groups pass with no failures.
+Next production build passes using isolated .next-uat output.
+Original data and credentials are not modified; tests use synthetic databases.
+
+STILL OPEN
+This is an additional tested remediation batch, not closure of every locally
+addressable concern. Full contextual SQLi/XSS assessment, broader upload
+rollback/versioning cases, legacy parser isolation, full accessibility/load
+testing and inline-style CSP migration remain beyond the verified scope.
+Production identity procedures, alerting/retention and reset delivery need
+approved operational policy. Actual CSIR MySQL migration/restore and server
+proxy/antivirus validation require infrastructure access. No production
+certification or zero-bug claim is made.
+
+INSTALLATION
+Source-only ZIP includes frontend/backend and regression scripts/evidence.
+Retain the existing .env, database and uploads. Do not run setup/seed commands.
+Review deployment/CSIR-IT-HANDOVER.txt. Run npm ci and npm run build with the
+approved environment, then restart the testing service. These updates have
+not automatically replaced the currently running public testing build.
