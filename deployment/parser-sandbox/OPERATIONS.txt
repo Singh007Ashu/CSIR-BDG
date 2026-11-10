@@ -1,0 +1,27 @@
+CSIR document parser sandbox
+
+Build from repository root:
+docker build -f deployment/parser-sandbox/Dockerfile -t csir-document-parser:review .
+
+Application environment:
+DOCUMENT_PARSER_MODE=container
+DOCUMENT_PARSER_IMAGE=csir-document-parser:review
+DOCKER_BIN=<absolute Docker CLI path, if not on PATH>
+
+The application sends document bytes over stdin. No host directories are mounted.
+Each job runs non-root with no network, read-only root, dropped capabilities,
+no-new-privileges, a bounded writable /tmp, memory/CPU/PID limits and a timeout.
+Missing Docker/image or a failed parser rejects the job; no host-parser fallback.
+Legacy formats requiring Python file parsing must be converted to supported modern
+formats when container mode is enabled. This is not OCR for every scanned format.
+
+IMPORTANT: Docker daemon access is privileged. On CSIR infrastructure, use a
+dedicated parser worker host/service and authenticated job interface, not a Docker
+socket mounted into an internet-facing web container. This local testing arrangement
+isolates document parsing, not the entire web application or Windows host.
+Keep the daemon and base image patched. Rebuild/retest after dependency updates.
+The Dockerfile-specific ignore list excludes databases, secrets and user uploads.
+
+Production still requires CSIR IT deployment review, TLS/reverse proxy, least-
+privileged service identities, backup restore testing, host controls, MySQL test
+migration, independent security assessment and manual accessibility assessment.

@@ -1,0 +1,1270 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator d1Client {
+  provider     = "prisma-client"
+  output       = "../node_modules/@csir/d1-client"
+  runtime      = "cloudflare"
+  moduleFormat = "esm"
+  engineType   = "client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id          Int              @id @default(autoincrement())
+  key         String           @unique
+  name        String
+  description String?
+  users       User[]
+  permissions RolePermission[]
+  createdAt   DateTime         @default(now())
+}
+
+model Permission {
+  id          Int              @id @default(autoincrement())
+  key         String           @unique
+  name        String
+  description String?
+  roles       RolePermission[]
+}
+
+model RolePermission {
+  roleId       Int
+  permissionId Int
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@index([permissionId])
+}
+
+model User {
+  id                            Int                         @id @default(autoincrement())
+  name                          String
+  email                         String                      @unique
+  designation                   String?
+  profilePhoto                  String?
+  passwordHash                  String
+  passwordSalt                  String?
+  role                          String                      @default("APPLICANT")
+  roleId                        Int?
+  roleDefinition                Role?                       @relation(fields: [roleId], references: [id])
+  accountStatus                 String                      @default("ACTIVE")
+  organizationId                Int?
+  organization                  Organization?               @relation(fields: [organizationId], references: [id])
+  assignedLabId                 Int?
+  assignedLab                   Lab?                        @relation("AssignedLabUsers", fields: [assignedLabId], references: [id])
+  decidedTechnologyRequests     TechnologyRequest[]         @relation("TechRequestDecidedBy")
+  decidedProblemStatements      ProblemStatement[]          @relation("ProblemDecidedBy")
+  decidedPartnerships           Partnership[]               @relation("PartnershipDecidedBy")
+  decidedChangeRequests         ChangeRequest[]             @relation("ChangeRequestDecidedBy")
+  approvalActions               ApprovalHistory[]
+  uploadedDocuments             Document[]
+  notifications                 Notification[]
+  auditLogs                     AuditLog[]
+  loginHistory                  LoginHistory[]
+  datasetImports                DatasetImport[]
+  createdProjects               CoDevelopmentProject[]
+  createdMous                   Mou[]
+  approvedTechnologies          Technology[]                @relation("TechnologyApprovedBy")
+  createdGovernanceProjects     Project[]                   @relation("ProjectCreatedBy")
+  responsibleGovernanceProjects Project[]                   @relation("ProjectResponsibleOfficer")
+  createdQueries                Query[]                     @relation("QueryCreatedBy")
+  queryResponses                QueryResponse[]
+  createdNotes                  Note[]
+  reviewedReportSubmissions     ReportSubmission[]          @relation("ReportReviewedBy")
+  uploadedEvidence              Evidence[]
+  requestedDocumentAnalyses     DocumentAnalysis[]          @relation("AnalysisRequestedBy")
+  submittedWorkflowPackets      WorkflowPacket[]            @relation("WorkflowSubmittedBy")
+  assignedWorkflowSteps         WorkflowStep[]              @relation("WorkflowStepAssignee")
+  workflowEvents                WorkflowEvent[]             @relation("WorkflowEventActor")
+  requestedTechnologyRevisions  TechnologyRevisionRequest[] @relation("RevisionRequestedBy")
+  createdCommercialEngagements  CommercialEngagement[]      @relation("CommercialEngagementCreatedBy")
+  decidedCommercialEngagements  CommercialEngagement[]      @relation("CommercialEngagementDecidedBy")
+  createdAt                     DateTime                    @default(now())
+  updatedAt                     DateTime                    @updatedAt
+
+  @@index([role])
+  @@index([accountStatus])
+  @@index([assignedLabId])
+}
+
+model Lab {
+  id                         Int                         @id @default(autoincrement())
+  name                       String                      @unique
+  code                       String?                     @unique
+  location                   String?
+  expertise                  String?
+  labId                      String?                     @unique
+  piName                     String?
+  authorizedPerson           String?
+  designation                String?
+  officialEmail              String?                     @unique
+  mobileNumber               String?
+  passwordHash               String?
+  passwordSalt               String?
+  primaryRole                String                      @default("LAB_COORDINATOR")
+  accountStatus              String                      @default("UNREGISTERED")
+  registeredAt               DateTime?
+  approvedAt                 DateTime?
+  lastLoginAt                DateTime?
+  technologies               Technology[]
+  problemStatements          ProblemStatement[]
+  partnerships               Partnership[]
+  changeRequests             ChangeRequest[]
+  documents                  Document[]
+  notifications              Notification[]
+  auditLogs                  AuditLog[]
+  loginHistory               LoginHistory[]
+  assignedUsers              User[]                      @relation("AssignedLabUsers")
+  projects                   CoDevelopmentProject[]
+  mous                       Mou[]
+  createdAt                  DateTime                    @default(now())
+  reportSubmissions          ReportSubmission[]
+  targetQueries              Query[]
+  queryResponses             QueryResponse[]
+  notes                      Note[]
+  evidence                   Evidence[]
+  sopDataRecords             SopDataRecord[]
+  workflowPackets            WorkflowPacket[]
+  technologyRevisionRequests TechnologyRevisionRequest[]
+  commercialEngagements      CommercialEngagement[]
+  updatedAt                  DateTime                    @updatedAt
+
+  @@index([accountStatus])
+  @@index([name])
+}
+
+model DatasetCategory {
+  id           Int             @id @default(autoincrement())
+  name         String          @unique
+  slug         String          @unique
+  description  String?
+  active       Boolean         @default(true)
+  technologies Technology[]
+  imports      DatasetImport[]
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+model DatasetImport {
+  id              Int             @id @default(autoincrement())
+  categoryId      Int
+  category        DatasetCategory @relation(fields: [categoryId], references: [id])
+  fileName        String
+  format          String
+  recordsTotal    Int             @default(0)
+  recordsImported Int             @default(0)
+  recordsFailed   Int             @default(0)
+  status          String          @default("PENDING")
+  errorLog        String?
+  importedById    Int?
+  importedBy      User?           @relation(fields: [importedById], references: [id])
+  createdAt       DateTime        @default(now())
+  completedAt     DateTime?
+
+  @@index([categoryId, createdAt])
+  @@index([status])
+}
+
+model Technology {
+  id                       Int                         @id @default(autoincrement())
+  name                     String
+  labId                    Int
+  lab                      Lab                         @relation(fields: [labId], references: [id])
+  datasetCategoryId        Int?
+  datasetCategory          DatasetCategory?            @relation(fields: [datasetCategoryId], references: [id])
+  sourceKey                String?                     @unique
+  briefDescription         String
+  piName                   String?
+  advantages               String?
+  applications             String?
+  keyFeatures              String?
+  classification           String                      @default("NON_IP")
+  ipStatus                 String                      @default("NON_IP")
+  trl                      Int?
+  crl                      Int?
+  sector                   String?
+  industryMap              String?
+  applicationMap           String?
+  servicesOffered          String?
+  sourceUrl                String?
+  status                   String                      @default("IDENTIFIED")
+  recordScope              String                      @default("MASTER")
+  recordFinancialYear      Int?
+  theme                    String?
+  subSector                String?
+  technologyType           String?
+  commercialisationStage   String?
+  partnerClient            String?
+  responsibleBdOfficer     String?
+  remarks                  String?
+  ecfInformation           String?
+  businessValueInformation String?
+  impactInformation        String?
+  evidenceReference        String?
+  approvalStatus           String                      @default("APPROVED")
+  sopCompletion            Int                         @default(0)
+  sopLegacyExempt          Boolean                     @default(false)
+  submittedAt              DateTime?
+  approvedAt               DateTime?
+  approvedById             Int?
+  approvedBy               User?                       @relation("TechnologyApprovedBy", fields: [approvedById], references: [id])
+  requests                 TechnologyRequest[]
+  documents                Document[]
+  changeRequests           ChangeRequest[]
+  projectLinks             ProjectTechnology[]
+  parameterValues          TechnologyParameterValue[]
+  sopStatuses              TechnologySOPStatus[]
+  queries                  Query[]
+  evidence                 Evidence[]
+  sopDataRecords           SopDataRecord[]
+  workflowPackets          WorkflowPacket[]
+  revisionRequests         TechnologyRevisionRequest[]
+  financialYearData        TechnologyFinancialYear[]
+  commercialEngagements    CommercialEngagement[]
+  createdAt                DateTime                    @default(now())
+  updatedAt                DateTime                    @updatedAt
+
+  @@index([labId, name])
+  @@index([datasetCategoryId, status])
+  @@index([sector])
+  @@index([piName])
+  @@index([recordScope, approvalStatus])
+  @@index([theme])
+  @@index([commercialisationStage])
+  @@index([recordFinancialYear])
+}
+
+model TechnologyFinancialYear {
+  id                             Int        @id @default(autoincrement())
+  technologyId                   Int
+  technology                     Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+  financialYear                  Int
+  recordType                     String
+  royaltyAmountLakhs             Float?
+  royaltyRatePercent             Float?
+  commercialProductionValueLakhs Float?
+  sector                         String?
+  sourceFileName                 String?
+  notes                          String?
+  createdAt                      DateTime   @default(now())
+  updatedAt                      DateTime   @updatedAt
+
+  @@unique([technologyId, financialYear, recordType])
+  @@index([financialYear, recordType])
+  @@index([technologyId, financialYear])
+}
+
+model ChangeRequest {
+  id           Int               @id @default(autoincrement())
+  labId        Int
+  lab          Lab               @relation(fields: [labId], references: [id])
+  technologyId Int?
+  technology   Technology?       @relation(fields: [technologyId], references: [id])
+  entityType   String
+  entityId     Int?
+  changeType   String
+  proposedData String
+  currentData  String?
+  reason       String?
+  status       String            @default("PENDING")
+  headRemarks  String?
+  decidedById  Int?
+  decidedBy    User?             @relation("ChangeRequestDecidedBy", fields: [decidedById], references: [id])
+  decidedAt    DateTime?
+  history      ApprovalHistory[]
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([labId, status])
+  @@index([technologyId])
+  @@index([status, createdAt])
+}
+
+model ApprovalHistory {
+  id               Int           @id @default(autoincrement())
+  changeRequestId  Int
+  changeRequest    ChangeRequest @relation(fields: [changeRequestId], references: [id], onDelete: Cascade)
+  action           String
+  comments         String?
+  proposedSnapshot String?
+  actedByUserId    Int
+  actedByUser      User          @relation(fields: [actedByUserId], references: [id])
+  createdAt        DateTime      @default(now())
+
+  @@index([changeRequestId, createdAt])
+}
+
+model Document {
+  id                     Int                   @id @default(autoincrement())
+  entityType             String
+  entityId               Int
+  technologyId           Int?
+  technology             Technology?           @relation(fields: [technologyId], references: [id])
+  coDevelopmentProjectId Int?
+  coDevelopmentProject   CoDevelopmentProject? @relation(fields: [coDevelopmentProjectId], references: [id])
+  mouId                  Int?
+  mou                    Mou?                  @relation(fields: [mouId], references: [id])
+  governanceProjectId    Int?
+  governanceProject      Project?              @relation(fields: [governanceProjectId], references: [id])
+  commercialEngagementId Int?
+  commercialEngagement   CommercialEngagement? @relation(fields: [commercialEngagementId], references: [id])
+  sourceKey              String?               @unique
+  fileName               String
+  fileType               String
+  mimeType               String?
+  filePath               String
+  fileSize               Int?
+  versionGroup           String
+  version                Int                   @default(1)
+  isCurrent              Boolean               @default(true)
+  description            String?
+  supersedesId           Int?
+  supersedes             Document?             @relation("DocumentVersions", fields: [supersedesId], references: [id])
+  replacements           Document[]            @relation("DocumentVersions")
+  uploadedByLabId        Int?
+  uploadedByLab          Lab?                  @relation(fields: [uploadedByLabId], references: [id])
+  uploadedByUserId       Int?
+  uploadedByUser         User?                 @relation(fields: [uploadedByUserId], references: [id])
+  analyses               DocumentAnalysis[]
+  workflowLinks          WorkflowDocument[]
+  deletedAt              DateTime?
+  createdAt              DateTime              @default(now())
+
+  @@index([entityType, entityId, isCurrent])
+  @@index([technologyId])
+  @@index([coDevelopmentProjectId])
+  @@index([mouId])
+  @@index([governanceProjectId])
+  @@index([versionGroup, version])
+  @@index([uploadedByLabId])
+}
+
+model Notification {
+  id              Int       @id @default(autoincrement())
+  recipientType   String
+  recipientLabId  Int?
+  recipientLab    Lab?      @relation(fields: [recipientLabId], references: [id])
+  recipientUserId Int?
+  recipientUser   User?     @relation(fields: [recipientUserId], references: [id])
+  type            String
+  title           String
+  message         String
+  link            String?
+  read            Boolean   @default(false)
+  readAt          DateTime?
+  createdAt       DateTime  @default(now())
+
+  @@index([recipientLabId, read, createdAt])
+  @@index([recipientUserId, read, createdAt])
+}
+
+model AuditLog {
+  id          Int      @id @default(autoincrement())
+  actorType   String
+  actorLabId  Int?
+  actorLab    Lab?     @relation(fields: [actorLabId], references: [id])
+  actorUserId Int?
+  actorUser   User?    @relation(fields: [actorUserId], references: [id])
+  action      String
+  entityType  String?
+  entityId    Int?
+  details     String?
+  oldValue    String?
+  newValue    String?
+  recordLabel String?
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+
+  @@index([actorLabId, createdAt])
+  @@index([actorUserId, createdAt])
+  @@index([entityType, entityId])
+  @@index([action, createdAt])
+}
+
+model LoginHistory {
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id])
+  labId     Int?
+  lab       Lab?     @relation(fields: [labId], references: [id])
+  success   Boolean
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([labId, createdAt])
+  @@index([success, createdAt])
+}
+
+model Organization {
+  id                 Int                 @id @default(autoincrement())
+  name               String
+  type               String
+  contactName        String?
+  contactEmail       String?
+  contactPhone       String?
+  users              User[]
+  technologyRequests TechnologyRequest[]
+  problemStatements  ProblemStatement[]
+  partnerships       Partnership[]
+  createdAt          DateTime            @default(now())
+}
+
+model TechnologyRequest {
+  id             Int          @id @default(autoincrement())
+  technologyId   Int
+  technology     Technology   @relation(fields: [technologyId], references: [id])
+  organizationId Int
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  requestType    String
+  notes          String?
+  status         String       @default("SUBMITTED")
+  impactNotes    String?
+  headStatus     String       @default("PENDING")
+  headRemarks    String?
+  decidedById    Int?
+  decidedBy      User?        @relation("TechRequestDecidedBy", fields: [decidedById], references: [id])
+  decidedAt      DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([technologyId, status])
+  @@index([organizationId, createdAt])
+  @@index([headStatus, createdAt])
+}
+
+model ProblemStatement {
+  id                  Int          @id @default(autoincrement())
+  organizationId      Int
+  organization        Organization @relation(fields: [organizationId], references: [id])
+  description         String
+  currentStatus       String?
+  painPoints          String?
+  budget              Float?
+  timeline            String?
+  expectedOutcome     String?
+  domain              String?
+  labId               Int?
+  lab                 Lab?         @relation(fields: [labId], references: [id])
+  status              String       @default("SUBMITTED")
+  nonEngagementReason String?
+  headStatus          String       @default("PENDING")
+  headRemarks         String?
+  decidedById         Int?
+  decidedBy           User?        @relation("ProblemDecidedBy", fields: [decidedById], references: [id])
+  decidedAt           DateTime?
+  proposal            Proposal?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+
+  @@index([organizationId, createdAt])
+  @@index([labId, status])
+  @@index([headStatus, createdAt])
+}
+
+model Proposal {
+  id                 Int              @id @default(autoincrement())
+  problemStatementId Int              @unique
+  problemStatement   ProblemStatement @relation(fields: [problemStatementId], references: [id])
+  scopeOfWork        String
+  milestones         String?
+  deliverables       String?
+  estimatedCost      Float?
+  timeline           String?
+  approved           Boolean          @default(false)
+  createdAt          DateTime         @default(now())
+}
+
+model Partnership {
+  id                  Int          @id @default(autoincrement())
+  organizationId      Int
+  organization        Organization @relation(fields: [organizationId], references: [id])
+  labId               Int?
+  lab                 Lab?         @relation(fields: [labId], references: [id])
+  challengeStatement  String?
+  expectedOutcome     String?
+  commercialPotential String?
+  technologyGap       String?
+  matchedApproach     String?
+  status              String       @default("CONSULTATION")
+  mouSigned           Boolean      @default(false)
+  royaltyNotes        String?
+  headStatus          String       @default("PENDING")
+  headRemarks         String?
+  decidedById         Int?
+  decidedBy           User?        @relation("PartnershipDecidedBy", fields: [decidedById], references: [id])
+  decidedAt           DateTime?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+
+  @@index([organizationId, createdAt])
+  @@index([labId, status])
+  @@index([headStatus, createdAt])
+}
+
+model Company {
+  id                 Int                    @id @default(autoincrement())
+  name               String                 @unique
+  registrationNumber String?
+  contactName        String?
+  contactEmail       String?
+  contactPhone       String?
+  address            String?
+  projects           CoDevelopmentProject[]
+  mous               Mou[]
+  createdAt          DateTime               @default(now())
+  updatedAt          DateTime               @updatedAt
+
+  @@index([name])
+}
+
+model CoDevelopmentProject {
+  id                   Int                      @id @default(autoincrement())
+  projectId            String                   @unique
+  title                String
+  technologyArea       String?
+  labId                Int
+  lab                  Lab                      @relation(fields: [labId], references: [id])
+  piName               String
+  coPiName             String?
+  companyId            Int
+  company              Company                  @relation(fields: [companyId], references: [id])
+  duration             String?
+  startDate            DateTime?
+  endDate              DateTime?
+  objectives           String?
+  scopeOfWork          String?
+  deliverablesSummary  String?
+  milestones           String?
+  totalProjectCost     Float?
+  csirContribution     Float?
+  industryContribution Float?
+  fundingAgency        String?
+  paymentStatus        String?
+  status               String                   @default("DRAFT")
+  createdByUserId      Int?
+  createdByUser        User?                    @relation(fields: [createdByUserId], references: [id])
+  commercialization    CommercializationDetail?
+  deliverables         ProjectDeliverable[]
+  mous                 Mou[]
+  documents            Document[]
+  createdAt            DateTime                 @default(now())
+  updatedAt            DateTime                 @updatedAt
+
+  @@index([labId, status])
+  @@index([companyId])
+  @@index([technologyArea])
+  @@index([startDate, endDate])
+}
+
+model CommercializationDetail {
+  id                 Int                  @id @default(autoincrement())
+  projectId          Int                  @unique
+  project            CoDevelopmentProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  royaltyApplicable  Boolean              @default(false)
+  royaltyDetails     String?
+  licensing          Boolean              @default(false)
+  technologyTransfer Boolean              @default(false)
+  patentFiled        Boolean              @default(false)
+  patentGranted      Boolean              @default(false)
+  startupCreated     Boolean              @default(false)
+  equity             String?
+  revenueSharing     String?
+  commercialPartner  String?
+  marketStatus       String?
+  stage              String?
+  trl                Int?
+  revenueGenerated   Float?
+  updatedAt          DateTime             @updatedAt
+
+  @@index([stage])
+  @@index([patentFiled, patentGranted])
+}
+
+model CommercialEngagement {
+  id                              Int                @id @default(autoincrement())
+  referenceNo                     String             @unique
+  engagementType                  String
+  status                          String             @default("DRAFT")
+  labId                           Int
+  lab                             Lab                @relation(fields: [labId], references: [id])
+  technologyId                    Int
+  technology                      Technology         @relation(fields: [technologyId], references: [id])
+  proposerName                    String
+  designationDepartment           String
+  teamMembers                     String?
+  knowledgeProductType            String?
+  title                           String
+  clientName                      String?
+  clientAddress                   String?
+  serviceDetails                  String?
+  phasesWorkPackages              String?
+  timeline                        String?
+  deliverables                    String?
+  clientBenefits                  String?
+  inventors                       String?
+  patentApplied                   Boolean?
+  patentDetails                   String?
+  preLicensingEvaluated           Boolean?
+  preLicensingDetails             String?
+  trl                             Int?
+  biologicalResources             Boolean?
+  biologicalDetails               String?
+  possibleTransfers               Int?
+  annualClientBenefit             Float?
+  similarMarketPrice              Float?
+  territory                       String?
+  clientNature                    String?
+  clientNatureDetails             String?
+  licenseNature                   String?
+  feeProposed                     Float?
+  licensingPeriodYears            Float?
+  demonstrationDurationValue      Int?
+  demonstrationDurationUnit       String?
+  documentSubmissionDurationValue Int?
+  documentSubmissionDurationUnit  String?
+  trainingDurationValue           Int?
+  trainingDurationUnit            String?
+  otherInformation                String?
+  assumedProjectCost              Float?
+  temporaryStaffCost              Float?
+  capitalCost                     Float?
+  consumablesCost                 Float?
+  servicesUtilitiesCost           Float?
+  equipmentUsageCost              Float?
+  externalPaymentsCost            Float?
+  taDaCost                        Float?
+  contingenciesCost               Float?
+  otherOutOfPocketCost            Float?
+  overheadRate                    Float              @default(0)
+  directExpenditureTotal          Float?
+  laboratoryShareRate             Float?
+  laboratoryShareAmount           Float?
+  projectFeeRate                  Float?
+  projectFeeAmount                Float?
+  gstRate                         Float              @default(18)
+  totalProjectCostExcludingTax    Float?
+  gstAmount                       Float?
+  totalCharges                    Float?
+  headRemarks                     String?
+  submittedAt                     DateTime?
+  approvedAt                      DateTime?
+  decidedAt                       DateTime?
+  createdByUserId                 Int?
+  createdByUser                   User?              @relation("CommercialEngagementCreatedBy", fields: [createdByUserId], references: [id])
+  decidedById                     Int?
+  decidedBy                       User?              @relation("CommercialEngagementDecidedBy", fields: [decidedById], references: [id])
+  manDays                         CommercialManDay[]
+  documents                       Document[]
+  createdAt                       DateTime           @default(now())
+  updatedAt                       DateTime           @updatedAt
+
+  @@index([labId, status, updatedAt])
+  @@index([technologyId, engagementType])
+  @@index([engagementType, status])
+}
+
+model CommercialManDay {
+  id             Int                  @id @default(autoincrement())
+  engagementId   Int
+  engagement     CommercialEngagement @relation(fields: [engagementId], references: [id], onDelete: Cascade)
+  personnelGroup String
+  numberOfDays   Int
+  numberOfPeople Int
+  ratePerDay     Float
+  amount         Float
+  displayOrder   Int                  @default(0)
+
+  @@index([engagementId, displayOrder])
+}
+
+model ProjectDeliverable {
+  id          Int                  @id @default(autoincrement())
+  projectId   Int
+  project     CoDevelopmentProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  type        String
+  title       String
+  description String?
+  dueDate     DateTime?
+  status      String               @default("PLANNED")
+  completedAt DateTime?
+  createdAt   DateTime             @default(now())
+
+  @@index([projectId, status])
+  @@index([type])
+}
+
+model Mou {
+  id                  Int                   @id @default(autoincrement())
+  mouNumber           String?               @unique
+  title               String
+  projectId           Int?
+  project             CoDevelopmentProject? @relation(fields: [projectId], references: [id])
+  companyId           Int
+  company             Company               @relation(fields: [companyId], references: [id])
+  labId               Int
+  lab                 Lab                   @relation(fields: [labId], references: [id])
+  piName              String?
+  signedDate          DateTime?
+  expiryDate          DateTime?
+  status              String                @default("DRAFT")
+  renewalReminderDays Int                   @default(60)
+  notes               String?
+  createdByUserId     Int?
+  createdByUser       User?                 @relation(fields: [createdByUserId], references: [id])
+  documents           Document[]
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+
+  @@index([companyId, status])
+  @@index([labId, status])
+  @@index([projectId])
+  @@index([expiryDate, status])
+}
+
+model Project {
+  id                   Int                   @id @default(autoincrement())
+  name                 String                @unique
+  slug                 String                @unique
+  description          String?
+  projectType          String
+  startDate            DateTime?
+  endDate              DateTime?
+  responsibleOfficerId Int?
+  responsibleOfficer   User?                 @relation("ProjectResponsibleOfficer", fields: [responsibleOfficerId], references: [id])
+  status               String                @default("ACTIVE")
+  notes                String?
+  folderPath           String?
+  isSystem             Boolean               @default(false)
+  assignedLabIdsJson   String?
+  createdById          Int?
+  createdBy            User?                 @relation("ProjectCreatedBy", fields: [createdById], references: [id])
+  technologies         ProjectTechnology[]
+  parameters           TechnologyParameter[]
+  reports              Report[]
+  queries              Query[]
+  evidence             Evidence[]
+  documents            Document[]
+  sopDataRecords       SopDataRecord[]
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+
+  @@index([status, name])
+  @@index([projectType])
+}
+
+model IndustryNeedCase {
+  id               Int      @id @default(autoincrement())
+  referenceNo      String   @unique
+  title            String
+  description      String?
+  fileName         String
+  fileType         String
+  mimeType         String?
+  filePath         String
+  fileSize         Int
+  status           String   @default("ANALYSED")
+  analysisJson     String?
+  uploadedByUserId Int?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([status])
+}
+
+model ProjectTechnology {
+  id                Int                        @id @default(autoincrement())
+  projectId         Int
+  project           Project                    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  technologyId      Int
+  technology        Technology                 @relation(fields: [technologyId], references: [id])
+  relationshipType  String                     @default("LINKED_MASTER")
+  projectStatus     String                     @default("ACTIVE")
+  projectStage      String?
+  projectData       String?
+  reportingRequired Boolean                    @default(true)
+  linkedAt          DateTime                   @default(now())
+  linkedById        Int?
+  parameterValues   TechnologyParameterValue[]
+  sopDataRecords    SopDataRecord[]
+
+  @@unique([projectId, technologyId])
+  @@index([technologyId])
+  @@index([projectId, projectStatus])
+}
+
+model ReferenceList {
+  id          Int               @id @default(autoincrement())
+  key         String            @unique
+  label       String
+  description String?
+  active      Boolean           @default(true)
+  options     ReferenceOption[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
+
+model ReferenceOption {
+  id           Int           @id @default(autoincrement())
+  listId       Int
+  list         ReferenceList @relation(fields: [listId], references: [id], onDelete: Cascade)
+  value        String
+  label        String
+  displayOrder Int           @default(0)
+  active       Boolean       @default(true)
+  validFrom    DateTime      @default(now())
+  validTo      DateTime?
+
+  @@unique([listId, value])
+  @@index([listId, active, displayOrder])
+}
+
+model Sop {
+  id          Int        @id @default(autoincrement())
+  code        String     @unique
+  title       String
+  version     String
+  description String?
+  active      Boolean    @default(true)
+  stages      SopStage[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model SopStage {
+  id                 Int                   @id @default(autoincrement())
+  sopId              Int
+  sop                Sop                   @relation(fields: [sopId], references: [id], onDelete: Cascade)
+  code               String                @unique
+  stageNumber        Int
+  name               String
+  objective          String?
+  mandatoryForNew    Boolean               @default(true)
+  responsibleUnit    String?
+  accountableUnit    String?
+  consultedUnits     String?
+  informedUnits      String?
+  parameters         TechnologyParameter[]
+  technologyStatuses TechnologySOPStatus[]
+  queries            Query[]
+  workflowPackets    WorkflowPacket[]
+
+  @@unique([sopId, stageNumber])
+  @@index([sopId, mandatoryForNew])
+}
+
+model TechnologyParameter {
+  id               Int                        @id @default(autoincrement())
+  key              String
+  label            String
+  description      String?
+  fieldType        String
+  unit             String?
+  mandatory        Boolean                    @default(false)
+  active           Boolean                    @default(true)
+  projectId        Int?
+  project          Project?                   @relation(fields: [projectId], references: [id])
+  sopStageId       Int?
+  sopStage         SopStage?                  @relation(fields: [sopStageId], references: [id])
+  referenceListKey String?
+  displayOrder     Int                        @default(0)
+  version          Int                        @default(1)
+  options          ParameterOption[]
+  values           TechnologyParameterValue[]
+  createdAt        DateTime                   @default(now())
+  updatedAt        DateTime                   @updatedAt
+
+  @@unique([key, projectId, version])
+  @@index([projectId, active, displayOrder])
+  @@index([sopStageId])
+}
+
+model ParameterOption {
+  id           Int                 @id @default(autoincrement())
+  parameterId  Int
+  parameter    TechnologyParameter @relation(fields: [parameterId], references: [id], onDelete: Cascade)
+  value        String
+  label        String
+  displayOrder Int                 @default(0)
+  active       Boolean             @default(true)
+
+  @@unique([parameterId, value])
+}
+
+model TechnologyParameterValue {
+  id                  Int                 @id @default(autoincrement())
+  technologyId        Int
+  technology          Technology          @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+  parameterId         Int
+  parameter           TechnologyParameter @relation(fields: [parameterId], references: [id])
+  projectTechnologyId Int?
+  projectTechnology   ProjectTechnology?  @relation(fields: [projectTechnologyId], references: [id], onDelete: Cascade)
+  scopeKey            String              @default("MASTER")
+  value               String?
+  valueJson           String?
+  version             Int                 @default(1)
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+
+  @@unique([technologyId, parameterId, scopeKey])
+  @@index([projectTechnologyId])
+}
+
+model TechnologySOPStatus {
+  id                Int        @id @default(autoincrement())
+  technologyId      Int
+  technology        Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+  sopStageId        Int
+  sopStage          SopStage   @relation(fields: [sopStageId], references: [id])
+  status            String     @default("NOT_STARTED")
+  completionPercent Int        @default(0)
+  missingItems      String?
+  validatedAt       DateTime?
+  validatedById     Int?
+  updatedAt         DateTime   @updatedAt
+
+  @@unique([technologyId, sopStageId])
+  @@index([status, updatedAt])
+}
+
+model Report {
+  id              Int                @id @default(autoincrement())
+  reportType      String
+  title           String
+  periodLabel     String
+  periodStart     DateTime
+  periodEnd       DateTime
+  dueDate         DateTime
+  projectId       Int?
+  project         Project?           @relation(fields: [projectId], references: [id])
+  status          String             @default("OPEN")
+  responsibleUnit String
+  accountableUnit String
+  consultedUnits  String?
+  informedUnits   String?
+  submissions     ReportSubmission[]
+  queries         Query[]
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  @@unique([reportType, periodLabel, projectId])
+  @@index([reportType, dueDate, status])
+}
+
+model ReportSubmission {
+  id            Int       @id @default(autoincrement())
+  reportId      Int
+  report        Report    @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  labId         Int
+  lab           Lab       @relation(fields: [labId], references: [id])
+  status        String    @default("PENDING")
+  dataJson      String?
+  submittedAt   DateTime?
+  reviewedAt    DateTime?
+  reviewedById  Int?
+  reviewedBy    User?     @relation("ReportReviewedBy", fields: [reviewedById], references: [id])
+  reviewRemarks String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([reportId, labId])
+  @@index([labId, status])
+}
+
+model Query {
+  id           Int             @id @default(autoincrement())
+  queryType    String
+  title        String
+  description  String
+  priority     String          @default("MEDIUM")
+  status       String          @default("OPEN")
+  targetLabId  Int?
+  targetLab    Lab?            @relation(fields: [targetLabId], references: [id])
+  projectId    Int?
+  project      Project?        @relation(fields: [projectId], references: [id])
+  technologyId Int?
+  technology   Technology?     @relation(fields: [technologyId], references: [id])
+  reportId     Int?
+  report       Report?         @relation(fields: [reportId], references: [id])
+  sopStageId   Int?
+  sopStage     SopStage?       @relation(fields: [sopStageId], references: [id])
+  createdById  Int
+  createdBy    User            @relation("QueryCreatedBy", fields: [createdById], references: [id])
+  dueAt        DateTime?
+  resolvedAt   DateTime?
+  responses    QueryResponse[]
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  @@index([targetLabId, status, createdAt])
+  @@index([queryType, status])
+}
+
+model QueryResponse {
+  id                Int      @id @default(autoincrement())
+  queryId           Int
+  query             Query    @relation(fields: [queryId], references: [id], onDelete: Cascade)
+  response          String
+  respondedByUserId Int?
+  respondedByUser   User?    @relation(fields: [respondedByUserId], references: [id])
+  respondedByLabId  Int?
+  respondedByLab    Lab?     @relation(fields: [respondedByLabId], references: [id])
+  evidenceRef       String?
+  createdAt         DateTime @default(now())
+
+  @@index([queryId, createdAt])
+}
+
+model Note {
+  id          Int      @id @default(autoincrement())
+  noteType    String
+  title       String
+  body        String
+  targetLabId Int?
+  targetLab   Lab?     @relation(fields: [targetLabId], references: [id])
+  entityType  String?
+  entityId    Int?
+  createdById Int
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([targetLabId, active, createdAt])
+}
+
+model Evidence {
+  id                  Int         @id @default(autoincrement())
+  evidenceType        String
+  title               String
+  description         String?
+  entityType          String
+  entityId            Int
+  technologyId        Int?
+  technology          Technology? @relation(fields: [technologyId], references: [id])
+  projectId           Int?
+  project             Project?    @relation(fields: [projectId], references: [id])
+  labId               Int?
+  lab                 Lab?        @relation(fields: [labId], references: [id])
+  fileName            String?
+  filePath            String?
+  certifiedBy         String?
+  certificationStatus String      @default("PENDING")
+  uploadedById        Int?
+  uploadedBy          User?       @relation(fields: [uploadedById], references: [id])
+  createdAt           DateTime    @default(now())
+
+  @@index([entityType, entityId])
+  @@index([technologyId])
+  @@index([projectId])
+}
+
+model RaciAssignment {
+  id              Int     @id @default(autoincrement())
+  activityKey     String  @unique
+  activity        String
+  responsibleUnit String
+  accountableUnit String
+  consultedUnits  String?
+  informedUnits   String?
+  source          String  @default("SOP_V1")
+  active          Boolean @default(true)
+  displayOrder    Int     @default(0)
+}
+
+model ExcelTemplate {
+  id            Int      @id @default(autoincrement())
+  name          String
+  version       String
+  fileName      String
+  filePath      String
+  active        Boolean  @default(true)
+  effectiveFrom DateTime @default(now())
+  notes         String?
+  createdAt     DateTime @default(now())
+
+  @@unique([name, version])
+  @@index([active, effectiveFrom])
+}
+
+model SopDataRecord {
+  id                  Int                @id @default(autoincrement())
+  recordType          String
+  labId               Int
+  lab                 Lab                @relation(fields: [labId], references: [id])
+  technologyId        Int?
+  technology          Technology?        @relation(fields: [technologyId], references: [id])
+  projectId           Int?
+  project             Project?           @relation(fields: [projectId], references: [id])
+  projectTechnologyId Int?
+  projectTechnology   ProjectTechnology? @relation(fields: [projectTechnologyId], references: [id])
+  periodLabel         String?
+  dataJson            String
+  status              String             @default("DRAFT")
+  createdByType       String
+  createdById         Int?
+  sourceRecordId      Int?
+  revision            Int                @default(1)
+  submittedAt         DateTime?
+  histories           SopRecordHistory[]
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+
+  @@index([recordType, labId, status])
+  @@index([projectId, technologyId])
+}
+
+model SopRecordHistory {
+  id              Int           @id @default(autoincrement())
+  sopDataRecordId Int
+  sopDataRecord   SopDataRecord @relation(fields: [sopDataRecordId], references: [id], onDelete: Cascade)
+  action          String
+  previousData    String?
+  revisedData     String
+  reason          String?
+  actorType       String
+  actorUserId     Int?
+  actorLabId      Int?
+  createdAt       DateTime      @default(now())
+
+  @@index([sopDataRecordId, createdAt])
+}
+
+model DocumentAnalysis {
+  id                Int       @id @default(autoincrement())
+  documentId        Int
+  document          Document  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  status            String    @default("PENDING")
+  provider          String    @default("LOCAL_RULES")
+  model             String?
+  detectedType      String?
+  summary           String?
+  localExtractJson  String?
+  resultJson        String?
+  confidence        Float?
+  error             String?
+  requestedByUserId Int?
+  requestedByUser   User?     @relation("AnalysisRequestedBy", fields: [requestedByUserId], references: [id])
+  startedAt         DateTime?
+  completedAt       DateTime?
+  createdAt         DateTime  @default(now())
+
+  @@index([documentId, createdAt])
+  @@index([status, createdAt])
+}
+
+model WorkflowPacket {
+  id                Int                @id @default(autoincrement())
+  referenceNo       String             @unique
+  title             String
+  packetType        String
+  status            String             @default("ANALYZING")
+  priority          String             @default("NORMAL")
+  currentUnit       String?
+  labId             Int
+  lab               Lab                @relation(fields: [labId], references: [id])
+  technologyId      Int?
+  technology        Technology?        @relation(fields: [technologyId], references: [id])
+  sopStageId        Int?
+  sopStage          SopStage?          @relation(fields: [sopStageId], references: [id])
+  submittedByType   String
+  submittedByUserId Int?
+  submittedByUser   User?              @relation("WorkflowSubmittedBy", fields: [submittedByUserId], references: [id])
+  submittedByLabId  Int?
+  aiSummary         String?
+  analysisJson      String?
+  routeReason       String?
+  dueAt             DateTime?
+  completedAt       DateTime?
+  documents         WorkflowDocument[]
+  steps             WorkflowStep[]
+  events            WorkflowEvent[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  @@index([labId, status, createdAt])
+  @@index([currentUnit, status, updatedAt])
+  @@index([technologyId])
+}
+
+model WorkflowDocument {
+  packetId   Int
+  packet     WorkflowPacket @relation(fields: [packetId], references: [id], onDelete: Cascade)
+  documentId Int
+  document   Document       @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@id([packetId, documentId])
+  @@index([documentId])
+}
+
+model WorkflowStep {
+  id             Int            @id @default(autoincrement())
+  packetId       Int
+  packet         WorkflowPacket @relation(fields: [packetId], references: [id], onDelete: Cascade)
+  sequence       Int
+  unitRole       String
+  raciType       String         @default("RESPONSIBLE")
+  status         String         @default("QUEUED")
+  instructions   String?
+  assignedUserId Int?
+  assignedUser   User?          @relation("WorkflowStepAssignee", fields: [assignedUserId], references: [id])
+  receivedAt     DateTime?
+  completedAt    DateTime?
+  decision       String?
+  comments       String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@unique([packetId, sequence])
+  @@index([unitRole, status, updatedAt])
+}
+
+model WorkflowEvent {
+  id           Int            @id @default(autoincrement())
+  packetId     Int
+  packet       WorkflowPacket @relation(fields: [packetId], references: [id], onDelete: Cascade)
+  action       String
+  fromUnit     String?
+  toUnit       String?
+  comments     String?
+  actorType    String
+  actorUserId  Int?
+  actorUser    User?          @relation("WorkflowEventActor", fields: [actorUserId], references: [id])
+  actorLabId   Int?
+  metadataJson String?
+  createdAt    DateTime       @default(now())
+
+  @@index([packetId, createdAt])
+}
+
+model TechnologyRevisionRequest {
+  id                  Int        @id @default(autoincrement())
+  technologyId        Int
+  technology          Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+  labId               Int
+  lab                 Lab        @relation(fields: [labId], references: [id])
+  requestedById       Int
+  requestedBy         User       @relation("RevisionRequestedBy", fields: [requestedById], references: [id])
+  instructions        String
+  requestedFieldsJson String?
+  status              String     @default("OPEN")
+  labResponse         String?
+  dueAt               DateTime?
+  submittedAt         DateTime?
+  closedAt            DateTime?
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+
+  @@index([labId, status, createdAt])
+  @@index([technologyId, status])
+}

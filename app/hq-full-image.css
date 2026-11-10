@@ -1,0 +1,24 @@
+/* Landscape HQ photograph shared by the three unchanged login routes. */
+.public-layout > main.hq-login-background {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: calc(100svh - 120px);
+  padding: 32px clamp(20px, 4vw, 64px);
+  background: linear-gradient(90deg, rgba(7,24,39,.06), rgba(7,24,39,.22)), url('/csir-headquarters-landscape.png') center center / cover no-repeat;
+}
+.public-layout > main.hq-login-background::before { content: none; }
+.hq-login-background .hq-governance-page,
+.hq-login-background .hq-lab-panel { width: 100%; max-width: 520px; min-width: 0; margin: 0; }
+.hq-login-background .hq-governance-page > section { padding: 28px; background: rgba(255,255,255,.95); }
+.hq-login-background .hq-governance-page > p { color: #fff; text-shadow: 0 1px 4px #102c42; }
+.hq-login-background .v2-login-page { width: 100%; max-width: 620px !important; min-width: 0; margin: 0; }
+.hq-login-background .v2-login-intro,
+.hq-login-background .v2-industry-login { grid-template-columns: 1fr; gap: 16px; }
+.hq-login-background .v2-login-flow { display: none; }
+.hq-login-background .v2-portal-choices { grid-template-columns: 1fr; }
+.hq-login-background .v2-industry-login > div:first-child { padding: 0; }
+@media(max-width:850px) {
+  .public-layout > main.hq-login-background { justify-content: center; padding: 160px 16px 30px; background-position: 46% top; }
+  .hq-login-background .hq-governance-page > section { padding: 24px; }
+}

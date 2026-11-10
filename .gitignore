@@ -1,0 +1,17 @@
+node_modules/
+.next/
+.next-*/
+prisma/dev.db
+prisma/dev.db-journal
+*.log
+.env
+.env.local
+.dev.vars
+.wrangler/
+.open-next/
+prisma/d1/seed.sql
+ficci-source.bin
+storage/source/
+.tmp/
+prisma/generated/
+prisma/d1/initial-credentials.json

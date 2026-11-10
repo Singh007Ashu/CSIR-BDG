@@ -1,0 +1,1265 @@
+generator client {
+ provider = "prisma-client-js"
+ output = "../../node_modules/@csir/mysql-client"
+}
+
+
+
+datasource db {
+  provider = "mysql"
+  url      = env("MYSQL_DATABASE_URL")
+}
+
+model Role {
+  id          Int              @id @default(autoincrement())
+  key         String           @unique @db.VarChar(191)
+  name        String @db.LongText
+  description String? @db.LongText
+  users       User[]
+  permissions RolePermission[]
+  createdAt   DateTime         @default(now())
+}
+
+model Permission {
+  id          Int              @id @default(autoincrement())
+  key         String           @unique @db.VarChar(191)
+  name        String @db.LongText
+  description String? @db.LongText
+  roles       RolePermission[]
+}
+
+model RolePermission {
+  roleId       Int
+  permissionId Int
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@index([permissionId])
+}
+
+model User {
+  id                            Int                         @id @default(autoincrement())
+  name                          String @db.LongText
+  email                         String                      @unique @db.VarChar(191)
+  designation                   String? @db.LongText
+  profilePhoto                  String? @db.LongText
+  passwordHash                  String @db.LongText
+  passwordSalt                  String? @db.LongText
+  role                          String                      @default("APPLICANT") @db.LongText
+  roleId                        Int?
+  roleDefinition                Role?                       @relation(fields: [roleId], references: [id])
+  accountStatus                 String                      @default("ACTIVE") @db.LongText
+  organizationId                Int?
+  organization                  Organization?               @relation(fields: [organizationId], references: [id])
+  assignedLabId                 Int?
+  assignedLab                   Lab?                        @relation("AssignedLabUsers", fields: [assignedLabId], references: [id])
+  decidedTechnologyRequests     TechnologyRequest[]         @relation("TechRequestDecidedBy")
+  decidedProblemStatements      ProblemStatement[]          @relation("ProblemDecidedBy")
+  decidedPartnerships           Partnership[]               @relation("PartnershipDecidedBy")
+  decidedChangeRequests         ChangeRequest[]             @relation("ChangeRequestDecidedBy")
+  approvalActions               ApprovalHistory[]
+  uploadedDocuments             Document[]
+  notifications                 Notification[]
+  auditLogs                     AuditLog[]
+  loginHistory                  LoginHistory[]
+  datasetImports                DatasetImport[]
+  createdProjects               CoDevelopmentProject[]
+  createdMous                   Mou[]
+  approvedTechnologies          Technology[]                @relation("TechnologyApprovedBy")
+  createdGovernanceProjects     Project[]                   @relation("ProjectCreatedBy")
+  responsibleGovernanceProjects Project[]                   @relation("ProjectResponsibleOfficer")
+  createdQueries                Query[]                     @relation("QueryCreatedBy")
+  queryResponses                QueryResponse[]
+  createdNotes                  Note[]
+  reviewedReportSubmissions     ReportSubmission[]          @relation("ReportReviewedBy")
+  uploadedEvidence              Evidence[]
+  requestedDocumentAnalyses     DocumentAnalysis[]          @relation("AnalysisRequestedBy")
+  submittedWorkflowPackets      WorkflowPacket[]            @relation("WorkflowSubmittedBy")
+  assignedWorkflowSteps         WorkflowStep[]              @relation("WorkflowStepAssignee")
+  workflowEvents                WorkflowEvent[]             @relation("WorkflowEventActor")
+  requestedTechnologyRevisions  TechnologyRevisionRequest[] @relation("RevisionRequestedBy")
+  createdCommercialEngagements  CommercialEngagement[]      @relation("CommercialEngagementCreatedBy")
+  decidedCommercialEngagements  CommercialEngagement[]      @relation("CommercialEngagementDecidedBy")
+  createdAt                     DateTime                    @default(now())
+  updatedAt                     DateTime                    @updatedAt
+
+  @@index([role(length: 191)])
+  @@index([accountStatus(length: 191)])
+  @@index([assignedLabId])
+}
+
+model Lab {
+  id                         Int                         @id @default(autoincrement())
+  name                       String                      @unique @db.VarChar(191)
+  code                       String?                     @unique @db.VarChar(191)
+  location                   String? @db.LongText
+  expertise                  String? @db.LongText
+  labId                      String?                     @unique @db.VarChar(191)
+  piName                     String? @db.LongText
+  authorizedPerson           String? @db.LongText
+  designation                String? @db.LongText
+  officialEmail              String?                     @unique @db.VarChar(191)
+  mobileNumber               String? @db.LongText
+  passwordHash               String? @db.LongText
+  passwordSalt               String? @db.LongText
+  primaryRole                String                      @default("LAB_COORDINATOR") @db.LongText
+  accountStatus              String                      @default("UNREGISTERED") @db.LongText
+  registeredAt               DateTime?
+  approvedAt                 DateTime?
+  lastLoginAt                DateTime?
+  technologies               Technology[]
+  problemStatements          ProblemStatement[]
+  partnerships               Partnership[]
+  changeRequests             ChangeRequest[]
+  documents                  Document[]
+  notifications              Notification[]
+  auditLogs                  AuditLog[]
+  loginHistory               LoginHistory[]
+  assignedUsers              User[]                      @relation("AssignedLabUsers")
+  projects                   CoDevelopmentProject[]
+  mous                       Mou[]
+  createdAt                  DateTime                    @default(now())
+  reportSubmissions          ReportSubmission[]
+  targetQueries              Query[]
+  queryResponses             QueryResponse[]
+  notes                      Note[]
+  evidence                   Evidence[]
+  sopDataRecords             SopDataRecord[]
+  workflowPackets            WorkflowPacket[]
+  technologyRevisionRequests TechnologyRevisionRequest[]
+  commercialEngagements      CommercialEngagement[]
+  updatedAt                  DateTime                    @updatedAt
+
+  @@index([accountStatus(length: 191)])
+  @@index([name])
+}
+
+model DatasetCategory {
+  id           Int             @id @default(autoincrement())
+  name         String          @unique @db.VarChar(191)
+  slug         String          @unique @db.VarChar(191)
+  description  String? @db.LongText
+  active       Boolean         @default(true)
+  technologies Technology[]
+  imports      DatasetImport[]
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+model DatasetImport {
+  id              Int             @id @default(autoincrement())
+  categoryId      Int
+  category        DatasetCategory @relation(fields: [categoryId], references: [id])
+  fileName        String @db.LongText
+  format          String @db.LongText
+  recordsTotal    Int             @default(0)
+  recordsImported Int             @default(0)
+  recordsFailed   Int             @default(0)
+  status          String          @default("PENDING") @db.LongText
+  errorLog        String? @db.LongText
+  importedById    Int?
+  importedBy      User?           @relation(fields: [importedById], references: [id])
+  createdAt       DateTime        @default(now())
+  completedAt     DateTime?
+
+  @@index([categoryId,  createdAt])
+  @@index([status(length: 191)])
+}
+
+model Technology {
+  id                       Int                         @id @default(autoincrement())
+  name                     String @db.LongText
+  labId                    Int
+  lab                      Lab                         @relation(fields: [labId], references: [id])
+  datasetCategoryId        Int?
+  datasetCategory          DatasetCategory?            @relation(fields: [datasetCategoryId], references: [id])
+  sourceKey                String?                     @unique @db.VarChar(191)
+  briefDescription         String @db.LongText
+  piName                   String? @db.LongText
+  advantages               String? @db.LongText
+  applications             String? @db.LongText
+  keyFeatures              String? @db.LongText
+  classification           String                      @default("NON_IP") @db.LongText
+  ipStatus                 String                      @default("NON_IP") @db.LongText
+  trl                      Int?
+  crl                      Int?
+  sector                   String? @db.LongText
+  industryMap              String? @db.LongText
+  applicationMap           String? @db.LongText
+  servicesOffered          String? @db.LongText
+  sourceUrl                String? @db.LongText
+  status                   String                      @default("IDENTIFIED") @db.LongText
+  recordScope              String                      @default("MASTER") @db.LongText
+  recordFinancialYear      Int?
+  theme                    String? @db.LongText
+  subSector                String? @db.LongText
+  technologyType           String? @db.LongText
+  commercialisationStage   String? @db.LongText
+  partnerClient            String? @db.LongText
+  responsibleBdOfficer     String? @db.LongText
+  remarks                  String? @db.LongText
+  ecfInformation           String? @db.LongText
+  businessValueInformation String? @db.LongText
+  impactInformation        String? @db.LongText
+  evidenceReference        String? @db.LongText
+  approvalStatus           String                      @default("APPROVED") @db.LongText
+  sopCompletion            Int                         @default(0)
+  sopLegacyExempt          Boolean                     @default(false)
+  submittedAt              DateTime?
+  approvedAt               DateTime?
+  approvedById             Int?
+  approvedBy               User?                       @relation("TechnologyApprovedBy", fields: [approvedById], references: [id])
+  requests                 TechnologyRequest[]
+  documents                Document[]
+  changeRequests           ChangeRequest[]
+  projectLinks             ProjectTechnology[]
+  parameterValues          TechnologyParameterValue[]
+  sopStatuses              TechnologySOPStatus[]
+  queries                  Query[]
+  evidence                 Evidence[]
+  sopDataRecords           SopDataRecord[]
+  workflowPackets          WorkflowPacket[]
+  revisionRequests         TechnologyRevisionRequest[]
+  financialYearData        TechnologyFinancialYear[]
+  commercialEngagements    CommercialEngagement[]
+  createdAt                DateTime                    @default(now())
+  updatedAt                DateTime                    @updatedAt
+
+  @@index([labId, name(length: 191)])
+  @@index([datasetCategoryId, status(length: 191)])
+  @@index([sector(length: 191)])
+  @@index([piName(length: 191)])
+  @@index([recordScope(length: 191), approvalStatus(length: 191)])
+  @@index([theme(length: 191)])
+  @@index([commercialisationStage(length: 191)])
+  @@index([recordFinancialYear])
+}
+
+model TechnologyFinancialYear {
+  id                             Int        @id @default(autoincrement())
+  technologyId                   Int
+  technology                     Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+  financialYear                  Int
+  recordType                     String @db.VarChar(191)
+  royaltyAmountLakhs             Float?
+  royaltyRatePercent             Float?
+  commercialProductionValueLakhs Float?
+  sector                         String? @db.LongText
+  sourceFileName                 String? @db.LongText
+  notes                          String? @db.LongText
+  createdAt                      DateTime   @default(now())
+  updatedAt                      DateTime   @updatedAt
+
+  @@unique([technologyId, financialYear, recordType])
+  @@index([financialYear,  recordType])
+  @@index([technologyId,  financialYear])
+}
+
+model ChangeRequest {
+  id           Int               @id @default(autoincrement())
+  labId        Int
+  lab          Lab               @relation(fields: [labId], references: [id])
+  technologyId Int?
+  technology   Technology?       @relation(fields: [technologyId], references: [id])
+  entityType   String @db.LongText
+  entityId     Int?
+  changeType   String @db.LongText
+  proposedData String @db.LongText
+  currentData  String? @db.LongText
+  reason       String? @db.LongText
+  status       String            @default("PENDING") @db.LongText
+  headRemarks  String? @db.LongText
+  decidedById  Int?
+  decidedBy    User?             @relation("ChangeRequestDecidedBy", fields: [decidedById], references: [id])
+  decidedAt    DateTime?
+  history      ApprovalHistory[]
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([labId, status(length: 191)])
+  @@index([technologyId])
+  @@index([status(length: 191),  createdAt])
+}
+
+model ApprovalHistory {
+  id               Int           @id @default(autoincrement())
+  changeRequestId  Int
+  changeRequest    ChangeRequest @relation(fields: [changeRequestId], references: [id], onDelete: Cascade)
+  action           String @db.LongText
+  comments         String? @db.LongText
+  proposedSnapshot String? @db.LongText
+  actedByUserId    Int
+  actedByUser      User          @relation(fields: [actedByUserId], references: [id])
+  createdAt        DateTime      @default(now())
+
+  @@index([changeRequestId,  createdAt])
+}
+
+model Document {
+  id                     Int                   @id @default(autoincrement())
+  entityType             String @db.LongText
+  entityId               Int
+  technologyId           Int?
+  technology             Technology?           @relation(fields: [technologyId], references: [id])
+  coDevelopmentProjectId Int?
+  coDevelopmentProject   CoDevelopmentProject? @relation(fields: [coDevelopmentProjectId], references: [id])
+  mouId                  Int?
+  mou                    Mou?                  @relation(fields: [mouId], references: [id])
+  governanceProjectId    Int?
+  governanceProject      Project?              @relation(fields: [governanceProjectId], references: [id])
+  commercialEngagementId Int?
+  commercialEngagement   CommercialEngagement? @relation(fields: [commercialEngagementId], references: [id])
+  sourceKey              String?               @unique @db.VarChar(191)
+  fileName               String @db.LongText
+  fileType               String @db.LongText
+  mimeType               String? @db.LongText
+  filePath               String @db.LongText
+  fileSize               Int?
+  versionGroup           String @db.LongText
+  version                Int                   @default(1)
+  isCurrent              Boolean               @default(true)
+  description            String? @db.LongText
+  supersedesId           Int?
+  supersedes             Document?             @relation("DocumentVersions", fields: [supersedesId], references: [id])
+  replacements           Document[]            @relation("DocumentVersions")
+  uploadedByLabId        Int?
+  uploadedByLab          Lab?                  @relation(fields: [uploadedByLabId], references: [id])
+  uploadedByUserId       Int?
+  uploadedByUser         User?                 @relation(fields: [uploadedByUserId], references: [id])
+  analyses               DocumentAnalysis[]
+  workflowLinks          WorkflowDocument[]
+  deletedAt              DateTime?
+  createdAt              DateTime              @default(now())
+
+  @@index([entityType(length: 191),  entityId,  isCurrent])
+  @@index([technologyId])
+  @@index([coDevelopmentProjectId])
+  @@index([mouId])
+  @@index([governanceProjectId])
+  @@index([versionGroup(length: 191),  version])
+  @@index([uploadedByLabId])
+}
+
+model Notification {
+  id              Int       @id @default(autoincrement())
+  recipientType   String @db.LongText
+  recipientLabId  Int?
+  recipientLab    Lab?      @relation(fields: [recipientLabId], references: [id])
+  recipientUserId Int?
+  recipientUser   User?     @relation(fields: [recipientUserId], references: [id])
+  type            String @db.LongText
+  title           String @db.LongText
+  message         String @db.LongText
+  link            String? @db.LongText
+  read            Boolean   @default(false)
+  readAt          DateTime?
+  createdAt       DateTime  @default(now())
+
+  @@index([recipientLabId,  read,  createdAt])
+  @@index([recipientUserId,  read,  createdAt])
+}
+
+model AuditLog {
+  id          Int      @id @default(autoincrement())
+  actorType   String @db.LongText
+  actorLabId  Int?
+  actorLab    Lab?     @relation(fields: [actorLabId], references: [id])
+  actorUserId Int?
+  actorUser   User?    @relation(fields: [actorUserId], references: [id])
+  action      String @db.LongText
+  entityType  String? @db.LongText
+  entityId    Int?
+  details     String? @db.LongText
+  oldValue    String? @db.LongText
+  newValue    String? @db.LongText
+  recordLabel String? @db.LongText
+  ipAddress   String? @db.LongText
+  userAgent   String? @db.LongText
+  createdAt   DateTime @default(now())
+
+  @@index([actorLabId,  createdAt])
+  @@index([actorUserId,  createdAt])
+  @@index([entityType(length: 191),  entityId])
+  @@index([action(length: 191),  createdAt])
+}
+
+model LoginHistory {
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id])
+  labId     Int?
+  lab       Lab?     @relation(fields: [labId], references: [id])
+  success   Boolean
+  ipAddress String? @db.LongText
+  userAgent String? @db.LongText
+  createdAt DateTime @default(now())
+
+  @@index([userId,  createdAt])
+  @@index([labId,  createdAt])
+  @@index([success,  createdAt])
+}
+
+model Organization {
+  id                 Int                 @id @default(autoincrement())
+  name               String @db.LongText
+  type               String @db.LongText
+  contactName        String? @db.LongText
+  contactEmail       String? @db.LongText
+  contactPhone       String? @db.LongText
+  users              User[]
+  technologyRequests TechnologyRequest[]
+  problemStatements  ProblemStatement[]
+  partnerships       Partnership[]
+  createdAt          DateTime            @default(now())
+}
+
+model TechnologyRequest {
+  id             Int          @id @default(autoincrement())
+  technologyId   Int
+  technology     Technology   @relation(fields: [technologyId], references: [id])
+  organizationId Int
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  requestType    String @db.LongText
+  notes          String? @db.LongText
+  status         String       @default("SUBMITTED") @db.LongText
+  impactNotes    String? @db.LongText
+  headStatus     String       @default("PENDING") @db.LongText
+  headRemarks    String? @db.LongText
+  decidedById    Int?
+  decidedBy      User?        @relation("TechRequestDecidedBy", fields: [decidedById], references: [id])
+  decidedAt      DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([technologyId, status(length: 191)])
+  @@index([organizationId,  createdAt])
+  @@index([headStatus(length: 191),  createdAt])
+}
+
+model ProblemStatement {
+  id                  Int          @id @default(autoincrement())
+  organizationId      Int
+  organization        Organization @relation(fields: [organizationId], references: [id])
+  description         String @db.LongText
+  currentStatus       String? @db.LongText
+  painPoints          String? @db.LongText
+  budget              Float?
+  timeline            String? @db.LongText
+  expectedOutcome     String? @db.LongText
+  domain              String? @db.LongText
+  labId               Int?
+  lab                 Lab?         @relation(fields: [labId], references: [id])
+  status              String       @default("SUBMITTED") @db.LongText
+  nonEngagementReason String? @db.LongText
+  headStatus          String       @default("PENDING") @db.LongText
+  headRemarks         String? @db.LongText
+  decidedById         Int?
+  decidedBy           User?        @relation("ProblemDecidedBy", fields: [decidedById], references: [id])
+  decidedAt           DateTime?
+  proposal            Proposal?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+
+  @@index([organizationId,  createdAt])
+  @@index([labId, status(length: 191)])
+  @@index([headStatus(length: 191),  createdAt])
+}
+
+model Proposal {
+  id                 Int              @id @default(autoincrement())
+  problemStatementId Int              @unique
+  problemStatement   ProblemStatement @relation(fields: [problemStatementId], references: [id])
+  scopeOfWork        String @db.LongText
+  milestones         String? @db.LongText
+  deliverables       String? @db.LongText
+  estimatedCost      Float?
+  timeline           String? @db.LongText
+  approved           Boolean          @default(false)
+  createdAt          DateTime         @default(now())
+}
+
+model Partnership {
+  id                  Int          @id @default(autoincrement())
+  organizationId      Int
+  organization        Organization @relation(fields: [organizationId], references: [id])
+  labId               Int?
+  lab                 Lab?         @relation(fields: [labId], references: [id])
+  challengeStatement  String? @db.LongText
+  expectedOutcome     String? @db.LongText
+  commercialPotential String? @db.LongText
+  technologyGap       String? @db.LongText
+  matchedApproach     String? @db.LongText
+  status              String       @default("CONSULTATION") @db.LongText
+  mouSigned           Boolean      @default(false)
+  royaltyNotes        String? @db.LongText
+  headStatus          String       @default("PENDING") @db.LongText
+  headRemarks         String? @db.LongText
+  decidedById         Int?
+  decidedBy           User?        @relation("PartnershipDecidedBy", fields: [decidedById], references: [id])
+  decidedAt           DateTime?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+
+  @@index([organizationId,  createdAt])
+  @@index([labId, status(length: 191)])
+  @@index([headStatus(length: 191),  createdAt])
+}
+
+model Company {
+  id                 Int                    @id @default(autoincrement())
+  name               String                 @unique @db.VarChar(191)
+  registrationNumber String? @db.LongText
+  contactName        String? @db.LongText
+  contactEmail       String? @db.LongText
+  contactPhone       String? @db.LongText
+  address            String? @db.LongText
+  projects           CoDevelopmentProject[]
+  mous               Mou[]
+  createdAt          DateTime               @default(now())
+  updatedAt          DateTime               @updatedAt
+
+  @@index([name])
+}
+
+model CoDevelopmentProject {
+  id                   Int                      @id @default(autoincrement())
+  projectId            String                   @unique @db.VarChar(191)
+  title                String @db.LongText
+  technologyArea       String? @db.LongText
+  labId                Int
+  lab                  Lab                      @relation(fields: [labId], references: [id])
+  piName               String @db.LongText
+  coPiName             String? @db.LongText
+  companyId            Int
+  company              Company                  @relation(fields: [companyId], references: [id])
+  duration             String? @db.LongText
+  startDate            DateTime?
+  endDate              DateTime?
+  objectives           String? @db.LongText
+  scopeOfWork          String? @db.LongText
+  deliverablesSummary  String? @db.LongText
+  milestones           String? @db.LongText
+  totalProjectCost     Float?
+  csirContribution     Float?
+  industryContribution Float?
+  fundingAgency        String? @db.LongText
+  paymentStatus        String? @db.LongText
+  status               String                   @default("DRAFT") @db.LongText
+  createdByUserId      Int?
+  createdByUser        User?                    @relation(fields: [createdByUserId], references: [id])
+  commercialization    CommercializationDetail?
+  deliverables         ProjectDeliverable[]
+  mous                 Mou[]
+  documents            Document[]
+  createdAt            DateTime                 @default(now())
+  updatedAt            DateTime                 @updatedAt
+
+  @@index([labId, status(length: 191)])
+  @@index([companyId])
+  @@index([technologyArea(length: 191)])
+  @@index([startDate,  endDate])
+}
+
+model CommercializationDetail {
+  id                 Int                  @id @default(autoincrement())
+  projectId          Int                  @unique
+  project            CoDevelopmentProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  royaltyApplicable  Boolean              @default(false)
+  royaltyDetails     String? @db.LongText
+  licensing          Boolean              @default(false)
+  technologyTransfer Boolean              @default(false)
+  patentFiled        Boolean              @default(false)
+  patentGranted      Boolean              @default(false)
+  startupCreated     Boolean              @default(false)
+  equity             String? @db.LongText
+  revenueSharing     String? @db.LongText
+  commercialPartner  String? @db.LongText
+  marketStatus       String? @db.LongText
+  stage              String? @db.LongText
+  trl                Int?
+  revenueGenerated   Float?
+  updatedAt          DateTime             @updatedAt
+
+  @@index([stage(length: 191)])
+  @@index([patentFiled,  patentGranted])
+}
+
+model CommercialEngagement {
+  id                              Int                @id @default(autoincrement())
+  referenceNo                     String             @unique @db.VarChar(191)
+  engagementType                  String @db.LongText
+  status                          String             @default("DRAFT") @db.LongText
+  labId                           Int
+  lab                             Lab                @relation(fields: [labId], references: [id])
+  technologyId                    Int
+  technology                      Technology         @relation(fields: [technologyId], references: [id])
+  proposerName                    String @db.LongText
+  designationDepartment           String @db.LongText
+  teamMembers                     String? @db.LongText
+  knowledgeProductType            String? @db.LongText
+  title                           String @db.LongText
+  clientName                      String? @db.LongText
+  clientAddress                   String? @db.LongText
+  serviceDetails                  String? @db.LongText
+  phasesWorkPackages              String? @db.LongText
+  timeline                        String? @db.LongText
+  deliverables                    String? @db.LongText
+  clientBenefits                  String? @db.LongText
+  inventors                       String? @db.LongText
+  patentApplied                   Boolean?
+  patentDetails                   String? @db.LongText
+  preLicensingEvaluated           Boolean?
+  preLicensingDetails             String? @db.LongText
+  trl                             Int?
+  biologicalResources             Boolean?
+  biologicalDetails               String? @db.LongText
+  possibleTransfers               Int?
+  annualClientBenefit             Float?
+  similarMarketPrice              Float?
+  territory                       String? @db.LongText
+  clientNature                    String? @db.LongText
+  clientNatureDetails             String? @db.LongText
+  licenseNature                   String? @db.LongText
+  feeProposed                     Float?
+  licensingPeriodYears            Float?
+  demonstrationDurationValue      Int?
+  demonstrationDurationUnit       String? @db.LongText
+  documentSubmissionDurationValue Int?
+  documentSubmissionDurationUnit  String? @db.LongText
+  trainingDurationValue           Int?
+  trainingDurationUnit            String? @db.LongText
+  otherInformation                String? @db.LongText
+  assumedProjectCost              Float?
+  temporaryStaffCost              Float?
+  capitalCost                     Float?
+  consumablesCost                 Float?
+  servicesUtilitiesCost           Float?
+  equipmentUsageCost              Float?
+  externalPaymentsCost            Float?
+  taDaCost                        Float?
+  contingenciesCost               Float?
+  otherOutOfPocketCost            Float?
+  overheadRate                    Float              @default(0)
+  directExpenditureTotal          Float?
+  laboratoryShareRate             Float?
+  laboratoryShareAmount           Float?
+  projectFeeRate                  Float?
+  projectFeeAmount                Float?
+  gstRate                         Float              @default(18)
+  totalProjectCostExcludingTax    Float?
+  gstAmount                       Float?
+  totalCharges                    Float?
+  headRemarks                     String? @db.LongText
+  submittedAt                     DateTime?
+  approvedAt                      DateTime?
+  decidedAt                       DateTime?
+  createdByUserId                 Int?
+  createdByUser                   User?              @relation("CommercialEngagementCreatedBy", fields: [createdByUserId], references: [id])
+  decidedById                     Int?
+  decidedBy                       User?              @relation("CommercialEngagementDecidedBy", fields: [decidedById], references: [id])
+  manDays                         CommercialManDay[]
+  documents                       Document[]
+  createdAt                       DateTime           @default(now())
+  updatedAt                       DateTime           @updatedAt
+
+  @@index([labId, status(length: 191),  updatedAt])
+  @@index([technologyId, engagementType(length: 191)])
+  @@index([engagementType(length: 191), status(length: 191)])
+}
+
+model CommercialManDay {
+  id             Int                  @id @default(autoincrement())
+  engagementId   Int
+  engagement     CommercialEngagement @relation(fields: [engagementId], references: [id], onDelete: Cascade)
+  personnelGroup String @db.LongText
+  numberOfDays   Int
+  numberOfPeople Int
+  ratePerDay     Float
+  amount         Float
+  displayOrder   Int                  @default(0)
+
+  @@index([engagementId,  displayOrder])
+}
+
+model ProjectDeliverable {
+  id          Int                  @id @default(autoincrement())
+  projectId   Int
+  project     CoDevelopmentProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  type        String @db.LongText
+  title       String @db.LongText
+  description String? @db.LongText
+  dueDate     DateTime?
+  status      String               @default("PLANNED") @db.LongText
+  completedAt DateTime?
+  createdAt   DateTime             @default(now())
+
+  @@index([projectId, status(length: 191)])
+  @@index([type(length: 191)])
+}
+
+model Mou {
+  id                  Int                   @id @default(autoincrement())
+  mouNumber           String?               @unique @db.VarChar(191)
+  title               String @db.LongText
+  projectId           Int?
+  project             CoDevelopmentProject? @relation(fields: [projectId], references: [id])
+  companyId           Int
+  company             Company               @relation(fields: [companyId], references: [id])
+  labId               Int
+  lab                 Lab                   @relation(fields: [labId], references: [id])
+  piName              String? @db.LongText
+  signedDate          DateTime?
+  expiryDate          DateTime?
+  status              String                @default("DRAFT") @db.LongText
+  renewalReminderDays Int                   @default(60)
+  notes               String? @db.LongText
+  createdByUserId     Int?
+  createdByUser       User?                 @relation(fields: [createdByUserId], references: [id])
+  documents           Document[]
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+
+  @@index([companyId, status(length: 191)])
+  @@index([labId, status(length: 191)])
+  @@index([projectId])
+  @@index([expiryDate, status(length: 191)])
+}
+
+model Project {
+  id                   Int                   @id @default(autoincrement())
+  name                 String                @unique @db.VarChar(191)
+  slug                 String                @unique @db.VarChar(191)
+  description          String? @db.LongText
+  projectType          String @db.LongText
+  startDate            DateTime?
+  endDate              DateTime?
+  responsibleOfficerId Int?
+  responsibleOfficer   User?                 @relation("ProjectResponsibleOfficer", fields: [responsibleOfficerId], references: [id])
+  status               String                @default("ACTIVE") @db.LongText
+  notes                String? @db.LongText
+  folderPath           String? @db.LongText
+  isSystem             Boolean               @default(false)
+  assignedLabIdsJson   String? @db.LongText
+  createdById          Int?
+  createdBy            User?                 @relation("ProjectCreatedBy", fields: [createdById], references: [id])
+  technologies         ProjectTechnology[]
+  parameters           TechnologyParameter[]
+  reports              Report[]
+  queries              Query[]
+  evidence             Evidence[]
+  documents            Document[]
+  sopDataRecords       SopDataRecord[]
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+
+  @@index([status(length: 191),  name])
+  @@index([projectType(length: 191)])
+}
+
+model IndustryNeedCase {
+  id               Int      @id @default(autoincrement())
+  referenceNo      String   @unique @db.VarChar(191)
+  title            String @db.LongText
+  description      String? @db.LongText
+  fileName         String @db.LongText
+  fileType         String @db.LongText
+  mimeType         String? @db.LongText
+  filePath         String @db.LongText
+  fileSize         Int
+  status           String   @default("ANALYSED") @db.LongText
+  analysisJson     String? @db.LongText
+  uploadedByUserId Int?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([status(length: 191)])
+}
+
+model ProjectTechnology {
+  id                Int                        @id @default(autoincrement())
+  projectId         Int
+  project           Project                    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  technologyId      Int
+  technology        Technology                 @relation(fields: [technologyId], references: [id])
+  relationshipType  String                     @default("LINKED_MASTER") @db.LongText
+  projectStatus     String                     @default("ACTIVE") @db.LongText
+  projectStage      String? @db.LongText
+  projectData       String? @db.LongText
+  reportingRequired Boolean                    @default(true)
+  linkedAt          DateTime                   @default(now())
+  linkedById        Int?
+  parameterValues   TechnologyParameterValue[]
+  sopDataRecords    SopDataRecord[]
+
+  @@unique([projectId, technologyId])
+  @@index([technologyId])
+  @@index([projectId, projectStatus(length: 191)])
+}
+
+model ReferenceList {
+  id          Int               @id @default(autoincrement())
+  key         String            @unique @db.VarChar(191)
+  label       String @db.LongText
+  description String? @db.LongText
+  active      Boolean           @default(true)
+  options     ReferenceOption[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
+
+model ReferenceOption {
+  id           Int           @id @default(autoincrement())
+  listId       Int
+  list         ReferenceList @relation(fields: [listId], references: [id], onDelete: Cascade)
+  value        String @db.VarChar(191)
+  label        String @db.LongText
+  displayOrder Int           @default(0)
+  active       Boolean       @default(true)
+  validFrom    DateTime      @default(now())
+  validTo      DateTime?
+
+  @@unique([listId, value])
+  @@index([listId,  active,  displayOrder])
+}
+
+model Sop {
+  id          Int        @id @default(autoincrement())
+  code        String     @unique @db.VarChar(191)
+  title       String @db.LongText
+  version     String @db.LongText
+  description String? @db.LongText
+  active      Boolean    @default(true)
+  stages      SopStage[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model SopStage {
+  id                 Int                   @id @default(autoincrement())
+  sopId              Int
+  sop                Sop                   @relation(fields: [sopId], references: [id], onDelete: Cascade)
+  code               String                @unique @db.VarChar(191)
+  stageNumber        Int
+  name               String @db.LongText
+  objective          String? @db.LongText
+  mandatoryForNew    Boolean               @default(true)
+  responsibleUnit    String? @db.LongText
+  accountableUnit    String? @db.LongText
+  consultedUnits     String? @db.LongText
+  informedUnits      String? @db.LongText
+  parameters         TechnologyParameter[]
+  technologyStatuses TechnologySOPStatus[]
+  queries            Query[]
+  workflowPackets    WorkflowPacket[]
+
+  @@unique([sopId, stageNumber])
+  @@index([sopId,  mandatoryForNew])
+}
+
+model TechnologyParameter {
+  id               Int                        @id @default(autoincrement())
+  key              String @db.VarChar(191)
+  label            String @db.LongText
+  description      String? @db.LongText
+  fieldType        String @db.LongText
+  unit             String? @db.LongText
+  mandatory        Boolean                    @default(false)
+  active           Boolean                    @default(true)
+  projectId        Int?
+  project          Project?                   @relation(fields: [projectId], references: [id])
+  sopStageId       Int?
+  sopStage         SopStage?                  @relation(fields: [sopStageId], references: [id])
+  referenceListKey String? @db.LongText
+  displayOrder     Int                        @default(0)
+  version          Int                        @default(1)
+  options          ParameterOption[]
+  values           TechnologyParameterValue[]
+  createdAt        DateTime                   @default(now())
+  updatedAt        DateTime                   @updatedAt
+
+  @@unique([key, projectId, version])
+  @@index([projectId,  active,  displayOrder])
+  @@index([sopStageId])
+}
+
+model ParameterOption {
+  id           Int                 @id @default(autoincrement())
+  parameterId  Int
+  parameter    TechnologyParameter @relation(fields: [parameterId], references: [id], onDelete: Cascade)
+  value        String @db.VarChar(191)
+  label        String @db.LongText
+  displayOrder Int                 @default(0)
+  active       Boolean             @default(true)
+
+  @@unique([parameterId, value])
+}
+
+model TechnologyParameterValue {
+  id                  Int                 @id @default(autoincrement())
+  technologyId        Int
+  technology          Technology          @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+  parameterId         Int
+  parameter           TechnologyParameter @relation(fields: [parameterId], references: [id])
+  projectTechnologyId Int?
+  projectTechnology   ProjectTechnology?  @relation(fields: [projectTechnologyId], references: [id], onDelete: Cascade)
+  scopeKey            String              @default("MASTER") @db.VarChar(191)
+  value               String? @db.LongText
+  valueJson           String? @db.LongText
+  version             Int                 @default(1)
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+
+  @@unique([technologyId, parameterId, scopeKey])
+  @@index([projectTechnologyId])
+}
+
+model TechnologySOPStatus {
+  id                Int        @id @default(autoincrement())
+  technologyId      Int
+  technology        Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+  sopStageId        Int
+  sopStage          SopStage   @relation(fields: [sopStageId], references: [id])
+  status            String     @default("NOT_STARTED") @db.LongText
+  completionPercent Int        @default(0)
+  missingItems      String? @db.LongText
+  validatedAt       DateTime?
+  validatedById     Int?
+  updatedAt         DateTime   @updatedAt
+
+  @@unique([technologyId, sopStageId])
+  @@index([status(length: 191),  updatedAt])
+}
+
+model Report {
+  id              Int                @id @default(autoincrement())
+  reportType      String @db.VarChar(191)
+  title           String @db.LongText
+  periodLabel     String @db.VarChar(191)
+  periodStart     DateTime
+  periodEnd       DateTime
+  dueDate         DateTime
+  projectId       Int?
+  project         Project?           @relation(fields: [projectId], references: [id])
+  status          String             @default("OPEN") @db.LongText
+  responsibleUnit String @db.LongText
+  accountableUnit String @db.LongText
+  consultedUnits  String? @db.LongText
+  informedUnits   String? @db.LongText
+  submissions     ReportSubmission[]
+  queries         Query[]
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  @@unique([reportType, periodLabel, projectId])
+  @@index([reportType,  dueDate, status(length: 191)])
+}
+
+model ReportSubmission {
+  id            Int       @id @default(autoincrement())
+  reportId      Int
+  report        Report    @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  labId         Int
+  lab           Lab       @relation(fields: [labId], references: [id])
+  status        String    @default("PENDING") @db.LongText
+  dataJson      String? @db.LongText
+  submittedAt   DateTime?
+  reviewedAt    DateTime?
+  reviewedById  Int?
+  reviewedBy    User?     @relation("ReportReviewedBy", fields: [reviewedById], references: [id])
+  reviewRemarks String? @db.LongText
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([reportId, labId])
+  @@index([labId, status(length: 191)])
+}
+
+model Query {
+  id           Int             @id @default(autoincrement())
+  queryType    String @db.LongText
+  title        String @db.LongText
+  description  String @db.LongText
+  priority     String          @default("MEDIUM") @db.LongText
+  status       String          @default("OPEN") @db.LongText
+  targetLabId  Int?
+  targetLab    Lab?            @relation(fields: [targetLabId], references: [id])
+  projectId    Int?
+  project      Project?        @relation(fields: [projectId], references: [id])
+  technologyId Int?
+  technology   Technology?     @relation(fields: [technologyId], references: [id])
+  reportId     Int?
+  report       Report?         @relation(fields: [reportId], references: [id])
+  sopStageId   Int?
+  sopStage     SopStage?       @relation(fields: [sopStageId], references: [id])
+  createdById  Int
+  createdBy    User            @relation("QueryCreatedBy", fields: [createdById], references: [id])
+  dueAt        DateTime?
+  resolvedAt   DateTime?
+  responses    QueryResponse[]
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  @@index([targetLabId, status(length: 191),  createdAt])
+  @@index([queryType(length: 191), status(length: 191)])
+}
+
+model QueryResponse {
+  id                Int      @id @default(autoincrement())
+  queryId           Int
+  query             Query    @relation(fields: [queryId], references: [id], onDelete: Cascade)
+  response          String @db.LongText
+  respondedByUserId Int?
+  respondedByUser   User?    @relation(fields: [respondedByUserId], references: [id])
+  respondedByLabId  Int?
+  respondedByLab    Lab?     @relation(fields: [respondedByLabId], references: [id])
+  evidenceRef       String? @db.LongText
+  createdAt         DateTime @default(now())
+
+  @@index([queryId,  createdAt])
+}
+
+model Note {
+  id          Int      @id @default(autoincrement())
+  noteType    String @db.LongText
+  title       String @db.LongText
+  body        String @db.LongText
+  targetLabId Int?
+  targetLab   Lab?     @relation(fields: [targetLabId], references: [id])
+  entityType  String? @db.LongText
+  entityId    Int?
+  createdById Int
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([targetLabId,  active,  createdAt])
+}
+
+model Evidence {
+  id                  Int         @id @default(autoincrement())
+  evidenceType        String @db.LongText
+  title               String @db.LongText
+  description         String? @db.LongText
+  entityType          String @db.LongText
+  entityId            Int
+  technologyId        Int?
+  technology          Technology? @relation(fields: [technologyId], references: [id])
+  projectId           Int?
+  project             Project?    @relation(fields: [projectId], references: [id])
+  labId               Int?
+  lab                 Lab?        @relation(fields: [labId], references: [id])
+  fileName            String? @db.LongText
+  filePath            String? @db.LongText
+  certifiedBy         String? @db.LongText
+  certificationStatus String      @default("PENDING") @db.LongText
+  uploadedById        Int?
+  uploadedBy          User?       @relation(fields: [uploadedById], references: [id])
+  createdAt           DateTime    @default(now())
+
+  @@index([entityType(length: 191),  entityId])
+  @@index([technologyId])
+  @@index([projectId])
+}
+
+model RaciAssignment {
+  id              Int     @id @default(autoincrement())
+  activityKey     String  @unique @db.VarChar(191)
+  activity        String @db.LongText
+  responsibleUnit String @db.LongText
+  accountableUnit String @db.LongText
+  consultedUnits  String? @db.LongText
+  informedUnits   String? @db.LongText
+  source          String  @default("SOP_V1") @db.LongText
+  active          Boolean @default(true)
+  displayOrder    Int     @default(0)
+}
+
+model ExcelTemplate {
+  id            Int      @id @default(autoincrement())
+  name          String @db.VarChar(191)
+  version       String @db.VarChar(191)
+  fileName      String @db.LongText
+  filePath      String @db.LongText
+  active        Boolean  @default(true)
+  effectiveFrom DateTime @default(now())
+  notes         String? @db.LongText
+  createdAt     DateTime @default(now())
+
+  @@unique([name, version])
+  @@index([active,  effectiveFrom])
+}
+
+model SopDataRecord {
+  id                  Int                @id @default(autoincrement())
+  recordType          String @db.LongText
+  labId               Int
+  lab                 Lab                @relation(fields: [labId], references: [id])
+  technologyId        Int?
+  technology          Technology?        @relation(fields: [technologyId], references: [id])
+  projectId           Int?
+  project             Project?           @relation(fields: [projectId], references: [id])
+  projectTechnologyId Int?
+  projectTechnology   ProjectTechnology? @relation(fields: [projectTechnologyId], references: [id])
+  periodLabel         String? @db.LongText
+  dataJson            String @db.LongText
+  status              String             @default("DRAFT") @db.LongText
+  createdByType       String @db.LongText
+  createdById         Int?
+  sourceRecordId      Int?
+  revision            Int                @default(1)
+  submittedAt         DateTime?
+  histories           SopRecordHistory[]
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+
+  @@index([recordType(length: 191),  labId, status(length: 191)])
+  @@index([projectId,  technologyId])
+}
+
+model SopRecordHistory {
+  id              Int           @id @default(autoincrement())
+  sopDataRecordId Int
+  sopDataRecord   SopDataRecord @relation(fields: [sopDataRecordId], references: [id], onDelete: Cascade)
+  action          String @db.LongText
+  previousData    String? @db.LongText
+  revisedData     String @db.LongText
+  reason          String? @db.LongText
+  actorType       String @db.LongText
+  actorUserId     Int?
+  actorLabId      Int?
+  createdAt       DateTime      @default(now())
+
+  @@index([sopDataRecordId,  createdAt])
+}
+
+model DocumentAnalysis {
+  id                Int       @id @default(autoincrement())
+  documentId        Int
+  document          Document  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  status            String    @default("PENDING") @db.LongText
+  provider          String    @default("LOCAL_RULES") @db.LongText
+  model             String? @db.LongText
+  detectedType      String? @db.LongText
+  summary           String? @db.LongText
+  localExtractJson  String? @db.LongText
+  resultJson        String? @db.LongText
+  confidence        Float?
+  error             String? @db.LongText
+  requestedByUserId Int?
+  requestedByUser   User?     @relation("AnalysisRequestedBy", fields: [requestedByUserId], references: [id])
+  startedAt         DateTime?
+  completedAt       DateTime?
+  createdAt         DateTime  @default(now())
+
+  @@index([documentId,  createdAt])
+  @@index([status(length: 191),  createdAt])
+}
+
+model WorkflowPacket {
+  id                Int                @id @default(autoincrement())
+  referenceNo       String             @unique @db.VarChar(191)
+  title             String @db.LongText
+  packetType        String @db.LongText
+  status            String             @default("ANALYZING") @db.LongText
+  priority          String             @default("NORMAL") @db.LongText
+  currentUnit       String? @db.LongText
+  labId             Int
+  lab               Lab                @relation(fields: [labId], references: [id])
+  technologyId      Int?
+  technology        Technology?        @relation(fields: [technologyId], references: [id])
+  sopStageId        Int?
+  sopStage          SopStage?          @relation(fields: [sopStageId], references: [id])
+  submittedByType   String @db.LongText
+  submittedByUserId Int?
+  submittedByUser   User?              @relation("WorkflowSubmittedBy", fields: [submittedByUserId], references: [id])
+  submittedByLabId  Int?
+  aiSummary         String? @db.LongText
+  analysisJson      String? @db.LongText
+  routeReason       String? @db.LongText
+  dueAt             DateTime?
+  completedAt       DateTime?
+  documents         WorkflowDocument[]
+  steps             WorkflowStep[]
+  events            WorkflowEvent[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  @@index([labId, status(length: 191),  createdAt])
+  @@index([currentUnit(length: 191), status(length: 191),  updatedAt])
+  @@index([technologyId])
+}
+
+model WorkflowDocument {
+  packetId   Int
+  packet     WorkflowPacket @relation(fields: [packetId], references: [id], onDelete: Cascade)
+  documentId Int
+  document   Document       @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@id([packetId, documentId])
+  @@index([documentId])
+}
+
+model WorkflowStep {
+  id             Int            @id @default(autoincrement())
+  packetId       Int
+  packet         WorkflowPacket @relation(fields: [packetId], references: [id], onDelete: Cascade)
+  sequence       Int
+  unitRole       String @db.LongText
+  raciType       String         @default("RESPONSIBLE") @db.LongText
+  status         String         @default("QUEUED") @db.LongText
+  instructions   String? @db.LongText
+  assignedUserId Int?
+  assignedUser   User?          @relation("WorkflowStepAssignee", fields: [assignedUserId], references: [id])
+  receivedAt     DateTime?
+  completedAt    DateTime?
+  decision       String? @db.LongText
+  comments       String? @db.LongText
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@unique([packetId, sequence])
+  @@index([unitRole(length: 191), status(length: 191),  updatedAt])
+}
+
+model WorkflowEvent {
+  id           Int            @id @default(autoincrement())
+  packetId     Int
+  packet       WorkflowPacket @relation(fields: [packetId], references: [id], onDelete: Cascade)
+  action       String @db.LongText
+  fromUnit     String? @db.LongText
+  toUnit       String? @db.LongText
+  comments     String? @db.LongText
+  actorType    String @db.LongText
+  actorUserId  Int?
+  actorUser    User?          @relation("WorkflowEventActor", fields: [actorUserId], references: [id])
+  actorLabId   Int?
+  metadataJson String? @db.LongText
+  createdAt    DateTime       @default(now())
+
+  @@index([packetId,  createdAt])
+}
+
+model TechnologyRevisionRequest {
+  id                  Int        @id @default(autoincrement())
+  technologyId        Int
+  technology          Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+  labId               Int
+  lab                 Lab        @relation(fields: [labId], references: [id])
+  requestedById       Int
+  requestedBy         User       @relation("RevisionRequestedBy", fields: [requestedById], references: [id])
+  instructions        String @db.LongText
+  requestedFieldsJson String? @db.LongText
+  status              String     @default("OPEN") @db.LongText
+  labResponse         String? @db.LongText
+  dueAt               DateTime?
+  submittedAt         DateTime?
+  closedAt            DateTime?
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+
+  @@index([labId, status(length: 191),  createdAt])
+  @@index([technologyId, status(length: 191)])
+}

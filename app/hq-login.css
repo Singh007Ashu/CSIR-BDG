@@ -1,0 +1,24 @@
+.public-layout > main.hq-login-background {
+  background: linear-gradient(90deg, rgba(9,29,47,.12), rgba(9,29,47,.38)), url('/csir-headquarters.png') center 38% / cover no-repeat;
+  min-height: calc(100svh - 120px); padding: 40px clamp(18px,5vw,90px); box-sizing: border-box;
+}
+.hq-login-background .hq-governance-page { max-width: 580px; margin: 0 0 0 auto; padding: 0; background: transparent; }
+.hq-login-background .hq-governance-page > section { background: rgba(255,255,255,.97); box-shadow: 0 16px 50px #061e3538; }
+.hq-login-background .hq-governance-page > p { color: #fff; text-shadow: 0 1px 4px #102c42; }
+.hq-login-background .hq-lab-panel { max-width: 500px !important; margin: 0 0 0 auto; padding: 32px; background: rgba(255,255,255,.97); border: 1px solid #e0e6eb; border-radius: 20px; box-shadow: 0 16px 50px #061e3538; }
+.hq-login-background .hq-lab-panel > .card { border: 0; box-shadow: none; padding: 0; margin-bottom: 0; background: transparent; }
+.hq-login-background .hq-lab-panel .section-title { font-size: 30px; line-height: 1.25; }
+.hq-login-background .v2-login-page { padding: 0; margin: 0 auto; }
+.hq-login-background .v2-login-intro { padding: 24px; border-radius: 16px; background: rgba(12,32,49,.87); }
+.hq-login-background .v2-login-intro h2 { font-size: 32px; line-height: 1.2; margin: 10px 0; }
+.hq-login-background .v2-login-intro p { color: #e0e7ee; }
+.hq-login-background .v2-portal-choices > a { background: rgba(255,255,255,.97); }
+.hq-login-background .v2-industry-login { background: rgba(255,255,255,.96); border-radius: 16px; padding: 24px; }
+@media(min-width:1100px) { .public-layout > main.hq-login-background { background-position: center 40%; } }
+@media(max-width:700px) {
+  .public-layout > main.hq-login-background { padding: 100px 16px 24px; background-position: 42% top; }
+  .hq-login-background .hq-governance-page, .hq-login-background .hq-lab-panel { width: 100%; margin: 0 auto; }
+  .hq-login-background .hq-lab-panel { padding: 24px; }
+  .hq-login-background .v2-login-intro { padding: 20px; }
+  .hq-login-background .v2-login-intro h2 { font-size: 28px; }
+}

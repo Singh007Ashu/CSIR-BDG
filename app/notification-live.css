@@ -1,0 +1,4 @@
+.notification-count{display:inline-block;margin-left:6px;background:#b33e32;color:white;border-radius:12px;padding:2px 6px;font-size:11px;line-height:1.4;}
+.notification-toast{position:fixed;right:24px;bottom:24px;z-index:2000;width:min(380px,calc(100vw - 32px));background:white;color:#20394f;border:1px solid #c9d8e5;border-left:4px solid #276387;border-radius:12px;padding:20px;box-shadow:0 12px 40px #142b4533;box-sizing:border-box;}
+.notification-toast>button{float:right;border:0;background:none;font-size:22px;cursor:pointer;}.notification-toast p{font-size:13px;line-height:1.5;}.notification-toast a{font-size:13px;font-weight:600;}
+@media(max-width:700px){.topbar-actions>.notification-link{display:inline-flex;font-size:11px;align-items:center;padding:4px;}.notification-toast{right:16px;bottom:16px;}}

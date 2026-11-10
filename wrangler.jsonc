@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "csir-bdg-ashish-2026",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-08-24",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "FILES"
+    }
+  ],
+  "vars": {
+    "NEXTJS_ENV": "production",
+    "OPENAI_ANALYSIS_MODEL": "gpt-5-mini"
+  }
+}

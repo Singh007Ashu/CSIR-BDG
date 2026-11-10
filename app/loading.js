@@ -1,0 +1,1 @@
+export default function Loading(){return <div className="loading-shell" role="status" aria-live="polite"><div className="loading-card"><strong>Loading workspace</strong><p className="meta">Retrieving the latest records and access permissions…</p><div className="loading-line" aria-hidden="true"/></div></div>}

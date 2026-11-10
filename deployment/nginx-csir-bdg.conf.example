@@ -1,0 +1,41 @@
+# Include limit_req_zone in nginx's http{} block, not inside server{}.
+limit_req_zone $binary_remote_addr zone=csir_auth:10m rate=10r/m;
+limit_req_zone $binary_remote_addr zone=csir_api:10m rate=10r/s;
+server {
+    listen 443 ssl default_server;
+    server_name _;
+    ssl_certificate /etc/ssl/csir-bdg/fullchain.pem;
+    ssl_certificate_key /etc/ssl/csir-bdg/privkey.pem;
+    return 444;
+}
+server {
+    listen 443 ssl;
+    server_name bdg.csir.res.in;
+    ssl_certificate /etc/ssl/csir-bdg/fullchain.pem;
+    ssl_certificate_key /etc/ssl/csir-bdg/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    client_max_body_size 55m;
+    location ~ ^/(backups|storage|prisma|\.git|\.env)(/|$|\.) { return 404; }
+    location ~ ^/api/(auth|lab-auth)/(login|register|forgot-password|reset-password)$ {
+        limit_req zone=csir_auth burst=5 nodelay;
+        limit_req_status 429;
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Forwarded-Host $host;
+    }
+    location / {
+        limit_req zone=csir_api burst=40 nodelay;
+        limit_req_status 429;
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_read_timeout 120s;
+    }
+}
+server { listen 80 default_server; server_name _; return 444; }
+server { listen 80; server_name bdg.csir.res.in; return 301 https://bdg.csir.res.in$request_uri; }

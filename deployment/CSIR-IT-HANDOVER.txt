@@ -1,0 +1,94 @@
+CSIR BDG deployment and acceptance runbook - 6 November 2026
+
+STATUS
+Application fixes and automated tests are evidence, not CSIR production approval.
+The user confirmed that no MySQL test server is currently available. Do not mark
+the MySQL rehearsal, production installation or restore drill as completed.
+
+ARCHITECTURE
+Keep the existing CSIR Java applications. Run this application as a separate
+Node.js service behind the existing HTTPS proxy/load balancer. This is not a
+WAR/JAR deployment. Node 24 was used for these Windows tests; validate your
+approved Node version on CSIR's operating system before rollout.
+
+DATA AND LOGIN PRESERVATION
+Never run npm run setup, db:seed, or replacement seed commands on an existing
+installation. They are not upgrade commands. Back up SQLite using the SQLite
+backup API while writes are paused, and back up storage/FICCI separately.
+Retain the existing database, storage directories and credential hashes/salts.
+Do not put .env, live backups, passwords, or private documents in a public repo.
+Session-secret rotation logs users out but does not change their passwords.
+
+NODE INSTALLATION (staging first)
+1. Install dependencies with npm ci. postinstall generates SQLite, D1 and the
+   separate MySQL Prisma clients; it does NOT push schemas or seed records.
+2. Set SESSION_SECRET, APP_ORIGINS and database/storage settings using an
+   EnvironmentFile/approved secret manager. See csir.env.example.
+3. npm run build. For standalone deployment, copy public and .next/static to
+   .next/standalone/public and .next/standalone/.next/static respectively.
+4. Run node .next/standalone/server.js as an unprivileged service account.
+   Adapt csir-bdg.service to approved installation/data paths. Restrict source,
+   environment files and data directory permissions; bind to loopback.
+5. Configure HTTPS on the existing proxy. nginx-csir-bdg.conf.example includes
+   per-IP limits and forwarding-header replacement. Validate nginx -t and
+   certificate/domain ownership; examples have NOT been tested on CSIR's proxy.
+6. Verify all three login portals, representative lab entry -> Head review,
+   documents, notifications, reports, workflow routing and backup restore.
+
+ANTIVIRUS
+Windows testing host: MALWARE_SCAN_MODE=defender uses Microsoft Defender.
+Service must be enabled and signatures no older than seven days. Clean-file
+acceptance and harmless EICAR rejection were tested on this host.
+Linux CSIR server: install the approved ClamAV daemon and freshclam updater.
+Set CLAMD_HOST/CLAMD_PORT and MALWARE_SCAN_MODE=required. Configure StreamMaxLength
+above 5 MB. Keep the unauthenticated clamd port on loopback/private network only.
+Set archive recursion/scan-size/time limits and AlertExceedsMax when supported;
+monitor definition freshness and alerts. Verify clean/EICAR samples on that
+actual server before accepting uploads. Scanner errors fail closed.
+Testing bypass requires BOTH MALWARE_SCAN_MODE=disabled and CSIR_TESTING_MODE=1;
+never use either setting to bypass scanning in production.
+Signature/content validation plus AV is not a guarantee against zero-day files.
+Old stored uploads were NOT bulk-scanned by this change. Scan the repository
+offline, quarantine suspect files and reconcile references before production.
+
+MYSQL REHEARSAL - NOT YET EXECUTED
+1. IT provides an EMPTY dedicated MySQL 8 testing database named
+   csir_migration_test_<suffix>, using utf8mb4_bin (case-sensitive) collation,
+   and a restricted test account. Confirm the actual CSIR MySQL version.
+2. Supply MYSQL_DATABASE_URL securely. Run:
+     node scripts/prepare-mysql.cjs
+     npx prisma validate --schema prisma/mysql/schema.prisma
+     npx prisma db push --schema prisma/mysql/schema.prisma
+   The db push command is ONLY for that empty rehearsal database; never point
+   it at the existing production database or use --accept-data-loss.
+3. Set SQLITE_MIGRATION_SOURCE to a consistent, independent SQLite snapshot.
+   Run node scripts/mysql-migration-check.cjs. It is read-only and records no
+   credential values. Long text remains LongText, with non-unique prefix indexes;
+   unique keys retain bounded length. No record values are truncated.
+4. Set CONFIRM_MYSQL_REHEARSAL=EMPTY_TEST_DATABASE_ONLY and run
+   node scripts/migrate-mysql-test.cjs. It refuses a non-empty target, checks
+   source foreign keys, imports within a transaction, compares every scalar
+   field and count (including credential hashes), and checks source checksum.
+   This utility is syntax-checked, but requires real MySQL integration testing.
+5. Run a separate app instance with DB_PROVIDER=mysql and MYSQL_DATABASE_URL.
+   Repeat the role/API/browser suite and business UAT against MySQL; verify
+   casing, dates, foreign keys, transactions, imports, duplicate keys and indexes.
+6. Restore a MySQL backup into another empty database and reconcile it. Only
+   after IT acceptance plan a separately approved production migration.
+   Keep SQLite rollback backup and uploads intact; do not erase either.
+
+RELEASE GATES STILL REQUIRING PEOPLE/INFRASTRUCTURE
+- Actual MySQL import, application regression and restore drill.
+- CSIR OS/proxy/domain/TLS/service setup and production AV verification.
+- Full successful business-workflow UAT with each role; API negative/empty-input
+  matrix is not a substitute for complete user journeys.
+- Independent security review/penetration test, load/accessibility testing,
+  backup retention/RPO/RTO and audit-log retention/monitoring approval.
+- Decide whether inline style CSP compatibility is acceptable or requires a
+  separate UI migration. Script CSP is nonce-based without unsafe-inline/eval.
+- OpenNext/Cloudflare build tooling was dependency-patched; only the Node/Next
+  production build was verified. Do not infer Workers deployment certification.
+
+References:
+https://docs.clamav.net/manual/Usage/ClamdProtocol.html
+https://docs.prisma.io/docs/orm/prisma-schema/data-model/indexes

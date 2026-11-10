@@ -1,0 +1,7 @@
+{
+  "name": "csir-document-parser",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": { "exceljs": "4.4.0", "jszip": "3.10.1" },
+  "overrides": { "uuid": "11.1.1" }
+}

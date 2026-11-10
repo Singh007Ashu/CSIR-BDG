@@ -1,0 +1,19 @@
+import Link from "next/link";
+
+const tracks = [
+  { no:"01", tone:"flow-blue", title:"Ready-to-Transfer Technology", owner:"Labs → TMD / IPU → BDG", steps:["Lab identifies and profiles technology","TMD validates TRL / CRL","IPU verifies IP and licensing status","AI maps sector, industry and applications","BDG evaluates pricing, transfer and deployment"], links:[["/master-technologies","Technology register"],["/commercial-engagements","Pricing & transfer"]]},
+  { no:"02", tone:"flow-purple", title:"Sponsored Research & Problem Solving", owner:"Industry → BDG → Expert units → Lab", steps:["Industry submits problem, budget and outcome","AI classifies domain and suggests labs","BDG screens strategic fit and feasibility","Expert committee and selected lab review","Proposal, costing, approval and delivery"], links:[["/module2","Sponsored research"],["/commercial-engagements","CNP / TSP / SSP costing"]]},
+  { no:"03", tone:"flow-green", title:"Co-Development & Partnership", owner:"ICM / URDIP → BDG → Labs / Industry", steps:["Capture consultation and industry challenge","Map trends, gaps and CSIR capabilities","Build joint proposal, IP and resource plan","Approve and register MoU / agreement","Execute, commercialize and monitor impact"], links:[["/module3","Industry partnerships"],["/co-development","Co-development"],["/mou-repository","MOU repository"]]},
+  { no:"04", tone:"flow-gold", title:"Data Repository & CRM", owner:"BDG stewardship · all tracks feed here", steps:["One partner profile across all engagements","Agreements, documents and renewal alerts","ECF, royalty, ROI and business-value ledger","Deployment and impact metrics","Unified reporting, audit and risk alerts"], links:[["/workflow-tracker","File tracker"],["/reports","Reports & analytics"]]},
+];
+
+const roles=[
+  ["Labs","Enter factual source data, execute work and certify evidence"],["TMD","Validate technology pipeline, TRL and CRL"],["IPU","Validate IP, patents, licensing and royalty"],["URDIP","Assess market, valuation, competition and business value"],["ICM","Own industry connect, outreach and feedback"],["CPD","Align plans, targets and performance"],["IMD","Validate social, economic and environmental impact"],["BDG","Coordinate, decide, reconcile and own the unified dashboard"],
+];
+
+export default function PlatformFlowPage(){return <div className="container wide-container flow-page">
+  <section className="flow-hero"><div><span className="eyebrow">Platform Operating Model</span><h2>Process Overview</h2><p>Every record has one origin, one current owner and a visible next action. The laboratory enters source data; governing bodies validate only their assigned mandate.</p></div><div className="flow-hero-rule"><strong>LAB</strong><span>Data entry & evidence</span><b>→</b><strong>GOVERNANCE</strong><span>Validation & decisions</span><b>→</b><strong>BDG</strong><span>Outcome & monitoring</span></div></section>
+  <section className="flow-track-grid">{tracks.map((track)=><article className={`flow-track ${track.tone}`} key={track.no}><header><span>{track.no}</span><div><h3>{track.title}</h3><p>{track.owner}</p></div></header><ol>{track.steps.map((step)=><li key={step}>{step}</li>)}</ol><footer>{track.links.map(([href,label])=><Link href={href} key={href}>{label} →</Link>)}</footer></article>)}</section>
+  <section className="flow-role-section"><div className="section-row"><div><span className="eyebrow">No duplicated responsibility</span><h3>Who does what</h3></div></div><div className="flow-role-grid">{roles.map(([role,duty])=><article key={role}><strong>{role}</strong><p>{duty}</p></article>)}</div></section>
+  <section className="flow-note"><strong>Laboratory users:</strong><span>Your portal intentionally contains only Data Entry, My Submissions, Workflow Tracker, Queries and Notifications. Pricing approvals, IP verification, TRL/CRL validation and market assessment are never assigned to the laboratory login.</span></section>
+</div>}

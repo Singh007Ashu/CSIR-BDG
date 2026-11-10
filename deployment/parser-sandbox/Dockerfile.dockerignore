@@ -1,0 +1,8 @@
+**
+!deployment/
+!deployment/parser-sandbox/
+!deployment/parser-sandbox/package.json
+!deployment/parser-sandbox/package-lock.json
+!scripts/
+!scripts/document-extract-worker.cjs
+!scripts/legacy-office.cjs

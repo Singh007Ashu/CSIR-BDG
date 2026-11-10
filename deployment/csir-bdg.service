@@ -1,0 +1,22 @@
+[Unit]
+Description=CSIR BDG Node application
+After=network.target
+
+[Service]
+Type=simple
+User=csir-bdg
+Group=csir-bdg
+WorkingDirectory=/opt/csir-bdg
+EnvironmentFile=/etc/csir-bdg/application.env
+ExecStart=/usr/bin/node /opt/csir-bdg/.next/standalone/server.js
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/csir-bdg
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

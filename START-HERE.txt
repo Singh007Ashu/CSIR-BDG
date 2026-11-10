@@ -1,0 +1,86 @@
+CSIR BDG PLATFORM — SUBMISSION CANDIDATE
+9 November 2026
+
+STATUS: READY FOR TECHNICAL HANDOVER / CONTROLLED ACCEPTANCE REVIEW.
+NOT a production security certificate or a claim that all possible bugs are absent.
+This summary supersedes earlier delivery-status statements; historical test reports
+remain dated evidence, not separate unresolved bug counts.
+
+DELIVERABLE
+Current frontend, backend, Prisma schemas, Python analysis source, deployment
+configuration examples, parser sandbox definitions, selected test harnesses and
+test evidence. Source files are packaged fresh, not overlaid onto an old ZIP.
+The archive is re-read and every included file checked against its SHA-256 manifest.
+
+LATEST LOCAL VERIFICATION
+- Production candidate .next-five-review built successfully.
+- Fresh role matrix: 4,067 checks across 16 roles, no recorded failures.
+- Fresh business UAT: 12 workflow groups passed, including laboratory entry,
+  HEAD review/change request, industry assignment, monthly/quarterly reporting,
+  progress updates, clarification replies and notification delivery.
+- Automated accessibility evidence includes manual-review/incomplete findings;
+  automated success alone is not a WCAG conformance claim.
+- Expanded Chrome/Edge high-contrast, reduced-motion and narrow-screen checks
+  passed after fixing the washed-out banner text contrast.
+- Expanded security integration: 23 groups passed, including 100 sampled
+  injection probes, stored HTML handling and unsafe notification-link rejection.
+- Local load: 2,000 synthetic technologies, 1,956 requests, zero recorded errors,
+  p95 1,392 ms. This is not a production SLA or distributed load certification.
+- Legacy DOC/XLS/PPT: separate locked-down conversion image implemented;
+  six direct test groups and 20 API integration groups passed. Unsupported,
+  encrypted or unsafe documents may be rejected. External AI was disabled in
+  these tests; deterministic extraction/routing was tested, not AI quality.
+- Read-only preservation comparison: all 55 SQLite tables unchanged; stored
+  credentials for 14 users and 39 laboratories unchanged.
+
+KEY RECENT FIXES
+Production nonce-based style CSP; safe internal notification destinations at API
+and UI boundaries; forced-colors readability; sandboxed legacy Office extraction
+with bounded resource use, disabled macros and no network; parser capacity checks.
+See FIVE-AREA-UPDATE-2026-11-09.txt and LOCAL-CLOSURE-UPDATE-2026-11-09.txt for
+precise scope, limitations and individual evidence filenames.
+
+DATA / LOGIN SAFETY
+Real databases, password files, .env secrets, stored uploads, FICCI document data,
+generated clients, node_modules and build outputs are deliberately NOT in this ZIP.
+They remain in the existing installation. This is a source handover/update, not
+a standalone copy of the operational database. Transfer data separately through
+an approved encrypted channel if CSIR IT needs it; do not publish it on GitHub.
+
+UPDATE PROCEDURE FOR THE RESPONSIBLE TECHNICAL OPERATOR
+1. Back up the current source, database, .env and all upload/document storage.
+2. Extract to a separate candidate directory; do not delete the working system.
+3. Preserve existing secrets and data-path configuration. First point candidate
+   tests at a protected COPY of the database/storage, never a newly seeded DB.
+4. Run npm.cmd ci, then npm.cmd run build. Linux uses npm instead of npm.cmd.
+5. DO NOT run npm run setup, db:seed, db:push or replacement import commands
+   against the operational database as part of this update.
+6. Review deployment/CSIR-IT-HANDOVER.txt and deployment/csir.env.example.
+   Use correct exact HTTPS origin, secure cookies and trusted-proxy settings.
+7. Optional legacy parsing requires the dedicated image and container runtime;
+   see deployment/parser-sandbox/LEGACY-OFFICE.txt. Do not enable a host fallback.
+8. Start the candidate on a separate port; verify existing account login, lab
+   entry/update, HEAD visibility, notifications and stored document access.
+9. Only after acceptance, switch the reverse proxy/service to the candidate;
+   retain the prior service/build and data backup for rollback.
+
+DEPLOYMENT STATUS
+This submission does NOT restart or replace the currently running public site.
+The verified candidate must be applied using the controlled procedure above.
+Node.js service behind a reverse proxy is required; a Java-only servlet deployment
+is not equivalent. MySQL schema/tooling is provided, but actual CSIR migration
+and data reconciliation remain unverified without the target server.
+
+REMAINING RELEASE GATES AND OWNERS
+Developer + independent security reviewer: wider source-to-sink/hostile-document
+assessment, OS/container package vulnerability review and independent retest.
+Accessibility specialist + representative users: actual NVDA/JAWS/VoiceOver
+spoken-output review and unresolved automated manual-review checks.
+CSIR IT + developer: target MySQL migration/reconciliation, service/proxy/TLS,
+secrets, scanner and sandbox provisioning; production-scale soak/capacity tests;
+backup restoration, monitoring, patching and incident-response readiness.
+HEAD BDG/business owners: representative real-work acceptance and final approval.
+These cannot be marked complete by local tests or assigned entirely to IT alone.
+
+Submission wording: Application candidate with local remediation and regression
+evidence, submitted for CSIR technical validation and business acceptance.

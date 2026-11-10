@@ -1,0 +1,55 @@
+{
+  "name": "csir-bdg-ashish-2026",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "cf:patch-windows": "node scripts/patch-opennext-windows.mjs",
+    "cf:build": "npm run cf:patch-windows && node scripts/run-opennext.mjs build",
+    "cf:preview": "npm run cf:build && opennextjs-cloudflare preview",
+    "cf:deploy": "npm run cf:build && opennextjs-cloudflare deploy",
+    "cf:prepare-data": "prisma generate && node scripts/write-d1-client-package.mjs && prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script --output prisma/d1/schema.sql && node scripts/export-d1-seed.mjs",
+    "cf:db:remote": "wrangler d1 execute DB --remote --file prisma/d1/schema.sql --yes && wrangler d1 execute DB --remote --file prisma/d1/seed.sql --yes",
+    "cf:files:remote": "node scripts/upload-files-to-kv.mjs",
+    "postinstall": "prisma generate && node scripts/write-d1-client-package.mjs && node scripts/generate-mysql-client.cjs",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "db:seed": "node prisma/seed.js",
+    "db:migrate-lab-bd": "node prisma/migrate-lab-bd-owner.js",
+    "db:seed-ficci": "node prisma/seed-ficci.js --replace",
+    "setup": "prisma db push && node prisma/seed.js && node prisma/seed-governance.js && node prisma/seed-governing-accounts.js && node prisma/seed-ficci.js --replace && node prisma/seed-master-technologies.js && node prisma/seed-admin.js",
+    "db:seed-admin": "node prisma/seed-admin.js",
+    "db:seed-master": "node prisma/seed-master-technologies.js",
+    "db:seed-governance": "node prisma/seed-governance.js && node prisma/seed-governing-accounts.js",
+    "db:seed-roles": "node prisma/seed-governing-accounts.js"
+  },
+  "dependencies": {
+    "@prisma/adapter-d1": "^6.19.3",
+    "@prisma/client": "^6.19.3",
+    "bcryptjs": "^2.4.3",
+    "effect": "^3.22.1",
+    "exceljs": "^4.4.0",
+    "fast-check": "^3.23.2",
+    "jszip": "^3.10.1",
+    "next": "^16.3.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260823.1",
+    "@opennextjs/cloudflare": "^1.20.2",
+    "axe-core": "4.14.0",
+    "esbuild": "^0.27.0",
+    "prisma": "^6.19.3",
+    "wrangler": "^4.125.0"
+  },
+  "overrides": {
+    "uuid": "11.1.1",
+    "deepmerge-ts": "8.0.2",
+    "glob": "14.0.4",
+    "minimatch": "11.0.5"
+  }
+}

@@ -1,0 +1,38 @@
+/* Presentation-only refinements. Workflow and role rules remain unchanged. */
+:root { --shell-sidebar: 280px; }
+.shell-sidebar { background: #f7f8fa; border-right: 1px solid #e1e6ed; }
+.shell-brand { background: #fff; }
+.shell-brand strong { font-family: "Segoe UI", Arial, sans-serif; letter-spacing: .025em; }
+.shell-brand small { color: #637185; font-size: 11px; }
+.shell-navigation { padding: 14px 12px 24px; }
+.shell-nav-group { margin-bottom: 22px; }
+.shell-nav-group h2 { font-family: "Segoe UI", Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .1em; color: #68788b; margin: 0 10px 8px; line-height: 1.5; }
+.shell-nav-item { min-height: 43px; border-radius: 8px; padding: 9px 10px; gap: 10px; color: #33465b; margin-bottom: 3px; }
+.shell-nav-item:hover { background: #eaf0f5; color: #173e62; }
+.shell-nav-item.current { background: #e4edf5; color: #153d61; box-shadow: inset 3px 0 #275d88; font-weight: 650; }
+.shell-nav-label { white-space: normal; overflow: visible; text-overflow: clip; font-size: 13px; line-height: 1.4; }
+.shell-nav-mark { flex: 0 0 26px; width: 26px; height: 26px; border: 1px solid #dde5ed; border-radius: 6px; background: #fff; color: #536c84; font: 600 9px/1 "Segoe UI", Arial, sans-serif; }
+.shell-nav-item.current .shell-nav-mark { background: #fff; color: #153d61; border-color: #ccdce9; }
+.shell-topbar h1 { font-family: "Segoe UI", Arial, sans-serif; font-weight: 650; font-size: 17px; letter-spacing: -.01em; }
+.breadcrumbs { font-family: "Segoe UI", Arial, sans-serif; line-height: 1.5; }
+.shell-main .section-title, .shell-main .page-heading h2, .shell-main .workspace-hero h2, .shell-main .module-hero h2, .shell-main .governance-hero h2, .shell-main .head-command-banner h2 { font-family: "Segoe UI", Arial, sans-serif; font-weight: 650; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.22; letter-spacing: -.025em; }
+.shell-main .card h3 { font-family: "Segoe UI", Arial, sans-serif; font-size: 18px; font-weight: 600; line-height: 1.4; }
+.shell-main .section-sub, .shell-main .page-heading p { line-height: 1.65; color: #5d6c7c; max-width: 90ch; }
+.shell-main .card { border-radius: 12px; }
+.shell-main .btn { border-radius: 8px; font-weight: 600; line-height: 1.4; }
+.shell-main input, .shell-main select, .shell-main textarea { border-radius: 7px; }
+.shell-main table th { font-family: "Segoe UI", Arial, sans-serif; font-weight: 650; line-height: 1.5; }
+.shell-nav-item:focus-visible, .sidebar-collapse:focus-visible, .mobile-menu:focus-visible { outline: 2px solid #275d88; outline-offset: 2px; }
+.site-footer { color: #526173; line-height: 1.6; }
+@media (max-width: 1024px) {
+  .app-shell.is-collapsed .shell-sidebar .shell-nav-label, .app-shell.is-collapsed .shell-sidebar .shell-brand span, .app-shell.is-collapsed .shell-sidebar .shell-nav-group h2 { display: block; }
+  .app-shell.is-collapsed .shell-sidebar .shell-nav-item { justify-content: flex-start; }
+}
+@media (max-width: 600px) {
+  .shell-topbar h1 { font-size: 15px; }
+  .shell-main .section-title, .shell-main .page-heading h2 { font-size: 24px; }
+}
+
+.shell-main .v2-head-banner, .shell-main .v2-command-hero { border-radius: 14px; padding: 28px; }
+.shell-main .v2-head-banner h2, .shell-main .v2-command-hero h2, .shell-main .project-hub-hero h2, .shell-main .editorial-hero h2, .shell-main .flow-hero h2 { font-family: "Segoe UI", Arial, sans-serif; font-weight: 650; font-size: clamp(25px, 2.5vw, 36px); line-height: 1.25; letter-spacing: -.025em; }
+.shell-main .v2-mini-tracks strong, .shell-main .v2-badge, .shell-main .eyebrow { font-family: "Segoe UI", Arial, sans-serif; }

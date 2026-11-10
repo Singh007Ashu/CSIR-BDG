@@ -1,0 +1,2 @@
+const cp=require('child_process');require('./prepare-mysql.cjs');
+const result=cp.spawnSync(process.execPath,['node_modules/prisma/build/index.js','generate','--schema','prisma/mysql/schema.prisma'],{stdio:'inherit',windowsHide:true,env:{...process.env,MYSQL_DATABASE_URL:process.env.MYSQL_DATABASE_URL||'mysql://schema:only@127.0.0.1:3306/csir_schema_generation_only'}});process.exitCode=result.status||0;

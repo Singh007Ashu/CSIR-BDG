@@ -1,0 +1,36 @@
+Legacy Office extraction — controlled deployment
+
+Build a separate image (do not replace the running modern parser):
+docker build -f deployment/parser-sandbox/Dockerfile.legacy -t csir-legacy-parser:review .
+
+For a staging application service only, configure:
+DOCUMENT_PARSER_MODE=container
+LEGACY_PARSER_IMAGE=csir-legacy-parser:review
+Keep DOCUMENT_PARSER_IMAGE at the tested modern-parser image.
+No database migration or account/password change is required.
+Use a reviewed immutable image digest for production deployment.
+
+DOC/XLS/PPT conversion happens inside a generated, per-job container: non-root,
+network disabled, read-only root, no host mounts, dropped capabilities, no-new-
+privileges, 512 MB memory/swap cap, 64 PIDs, 1 CPU and 64 MB noexec temporary
+filesystem. Two parser jobs maximum per Node service, shared with modern parsing.
+Legacy job timeout 30 seconds; conversion subprocess timeout 22 seconds.
+Original file remains unchanged. Temporary conversion directory and container
+are removed on completion/failure. New uploads must still pass antivirus.
+
+LibreOffice profile sets MacroSecurityLevel=3 and DisableMacrosExecution=true.
+Converted documents are checked for expanded size, embedded/macro content and
+external resources before text extraction. Encrypted/password-protected,
+embedded-object and unsupported documents may be rejected. Do not relax the
+sandbox, macro controls or scanning to make a rejected document succeed.
+Missing configuration/image/engine fails closed; no host LibreOffice fallback.
+
+Tests: node scripts/test-legacy-sandbox.cjs (Windows review harness).
+Production Linux paths/engine/scanner and the actual workload still require IT
+validation. Keep vendor security updates current; this image adds OS packages
+that are NOT covered by npm audit. The sampled document tests are not exhaustive
+compatibility or an independent vulnerability assessment.
+
+Official references consulted:
+https://help.libreoffice.org/latest/en-US/text/shared/guide/start_parameters.html
+https://help.libreoffice.org/latest/en-GB/text/shared/optionen/macrosecurity_sl.html

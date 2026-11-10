@@ -1,0 +1,36 @@
+
+.skip-link { position: fixed; top: 8px; left: 12px; z-index: 10000; transform: translateY(-160%); padding: 12px 18px; background: #fff; color: #163b5d; border: 2px solid #163b5d; border-radius: 6px; }
+.skip-link:focus { transform: translateY(0); }
+.modal-backdrop { z-index: 200; }
+.lab-data-form fieldset, .lab-entry-page > *, .lab-entry-layout > * { min-width: 0; }
+.service-picker label { position: relative; }
+.service-picker input { width: 1px; height: 1px; padding: 0; margin: 0; clip-path: inset(50%); overflow: hidden; }
+.service-picker input:focus-visible + span { outline: 3px solid #245e92; outline-offset: 3px; }
+.shell-main .lab-entry-hero .eyebrow { color: #ffd478; }
+@media(max-width: 400px) {
+  .shell-topbar { gap: 8px; padding-inline: 10px; }
+  .topbar-context { gap: 5px; }
+  .topbar-actions { gap: 4px; }
+  .notification-link { padding-inline: 3px; font-size: 11px; }
+  .lab-data-form > header, .lab-data-form fieldset { padding: 18px 16px; }
+}
+/* Readable metadata without changing the existing layout or role workflows. */
+.shell-nav-group h2, .breadcrumbs, .breadcrumbs a,
+.tech-facts small, .stage-number { color: #526173; }
+.shell-main header small { color: #565656; }
+.shell-main .eyebrow { color: #705000; }
+.shell-main .project-hub-hero .eyebrow { color: #f6d48b; }
+.badge.warning { color: #705300; }
+.notification.read { opacity: 1; border-left-color: #d5dce4; }
+.ai-state small { color: #534b46; }
+.site-footer { color: #526173; }
+:focus-visible { outline: 3px solid #245e92; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+@media (forced-colors: active) {
+  /* Opacity still washes out system colors even when author colors are replaced. */
+  .v2-head-banner p, .lab-entry-hero p, .project-hub-hero p { opacity: 1; color: CanvasText; }
+  .card, .treemap-block, .btn, .shell-nav-item.current { border: 1px solid CanvasText; }
+  :focus-visible { outline-color: Highlight; }
+}
