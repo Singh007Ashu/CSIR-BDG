@@ -1,0 +1,1428 @@
+{
+  "date": "2026-11-16T09:56:30.188Z",
+  "tables": [
+    {
+      "table": "Role",
+      "rows": 16
+    },
+    {
+      "table": "Permission",
+      "rows": 26
+    },
+    {
+      "table": "RolePermission",
+      "rows": 165
+    },
+    {
+      "table": "User",
+      "rows": 14
+    },
+    {
+      "table": "Lab",
+      "rows": 39
+    },
+    {
+      "table": "DatasetCategory",
+      "rows": 1
+    },
+    {
+      "table": "DatasetImport",
+      "rows": 3
+    },
+    {
+      "table": "Technology",
+      "rows": 1962
+    },
+    {
+      "table": "TechnologyFinancialYear",
+      "rows": 3
+    },
+    {
+      "table": "ChangeRequest",
+      "rows": 0
+    },
+    {
+      "table": "ApprovalHistory",
+      "rows": 0
+    },
+    {
+      "table": "Document",
+      "rows": 229
+    },
+    {
+      "table": "Notification",
+      "rows": 122
+    },
+    {
+      "table": "AuditLog",
+      "rows": 218
+    },
+    {
+      "table": "LoginHistory",
+      "rows": 242
+    },
+    {
+      "table": "Organization",
+      "rows": 2
+    },
+    {
+      "table": "TechnologyRequest",
+      "rows": 0
+    },
+    {
+      "table": "ProblemStatement",
+      "rows": 1
+    },
+    {
+      "table": "Proposal",
+      "rows": 0
+    },
+    {
+      "table": "Partnership",
+      "rows": 0
+    },
+    {
+      "table": "Company",
+      "rows": 0
+    },
+    {
+      "table": "CoDevelopmentProject",
+      "rows": 0
+    },
+    {
+      "table": "CommercializationDetail",
+      "rows": 0
+    },
+    {
+      "table": "CommercialEngagement",
+      "rows": 0
+    },
+    {
+      "table": "CommercialManDay",
+      "rows": 0
+    },
+    {
+      "table": "ProjectDeliverable",
+      "rows": 0
+    },
+    {
+      "table": "Mou",
+      "rows": 0
+    },
+    {
+      "table": "Project",
+      "rows": 2
+    },
+    {
+      "table": "IndustryNeedCase",
+      "rows": 5
+    },
+    {
+      "table": "ProjectTechnology",
+      "rows": 225
+    },
+    {
+      "table": "ReferenceList",
+      "rows": 9
+    },
+    {
+      "table": "ReferenceOption",
+      "rows": 67
+    },
+    {
+      "table": "Sop",
+      "rows": 1
+    },
+    {
+      "table": "SopStage",
+      "rows": 10
+    },
+    {
+      "table": "TechnologyParameter",
+      "rows": 15
+    },
+    {
+      "table": "ParameterOption",
+      "rows": 0
+    },
+    {
+      "table": "TechnologyParameterValue",
+      "rows": 0
+    },
+    {
+      "table": "TechnologySOPStatus",
+      "rows": 300
+    },
+    {
+      "table": "Report",
+      "rows": 2
+    },
+    {
+      "table": "ReportSubmission",
+      "rows": 74
+    },
+    {
+      "table": "Query",
+      "rows": 1
+    },
+    {
+      "table": "QueryResponse",
+      "rows": 1
+    },
+    {
+      "table": "Note",
+      "rows": 0
+    },
+    {
+      "table": "Evidence",
+      "rows": 0
+    },
+    {
+      "table": "RaciAssignment",
+      "rows": 14
+    },
+    {
+      "table": "ExcelTemplate",
+      "rows": 1
+    },
+    {
+      "table": "SopDataRecord",
+      "rows": 0
+    },
+    {
+      "table": "SopRecordHistory",
+      "rows": 0
+    },
+    {
+      "table": "DocumentAnalysis",
+      "rows": 2
+    },
+    {
+      "table": "WorkflowPacket",
+      "rows": 2
+    },
+    {
+      "table": "WorkflowDocument",
+      "rows": 2
+    },
+    {
+      "table": "WorkflowStep",
+      "rows": 6
+    },
+    {
+      "table": "WorkflowEvent",
+      "rows": 5
+    },
+    {
+      "table": "TechnologyRevisionRequest",
+      "rows": 1
+    }
+  ],
+  "files": [
+    {
+      "path": "database/csir-bdg.sql",
+      "bytes": 2046924,
+      "sha256": "aef9bb26fabada522815fcb2e4f11deeba996896dbc5f515826b96dfaba2f71b"
+    },
+    {
+      "path": "storage/source/FICCI.zip",
+      "bytes": 256886654,
+      "sha256": "7bff83e4ff6b91b90a4825f37921f4488cbd8638cc5b8c90b7c6ba0b5bf4df2b"
+    },
+    {
+      "path": "storage/templates/CSIR_ECF_Reconciliation_Value_Impact_Templates_Lab_BD_v1.xlsx",
+      "bytes": 82198,
+      "sha256": "3ae122c8081e9199e50e2f56457d1ce9ec06d1417802a5feea4f03dd42891ce1"
+    },
+    {
+      "path": "storage/templates/CSIR_ECF_Reconciliation_Value_Impact_Templates_v1.xlsx",
+      "bytes": 108339,
+      "sha256": "829eef551bd8b4ae732e8c3dc38c3f181588b541a87f6a0e3ca19be7369ebf71"
+    },
+    {
+      "path": "storage/templates/CSIR_SOP_ECF_Reconciliation_Value_Impact_Framework_v1.docx",
+      "bytes": 59237,
+      "sha256": "e29f59e22a5fcea6d5e35f55a85239cfe4a503220f7dbbc26d8c2334c061471f"
+    },
+    {
+      "path": "storage/uploads/industry_need/1/fbd5a060-9c53-44ae-aefe-4fc3a1c2f326.xlsx",
+      "bytes": 10111,
+      "sha256": "ccc9f2cbbee78eca5be4e4236ca751658ee0ff446ba7f42da3958283142950e9"
+    },
+    {
+      "path": "storage/uploads/industry_need/2/bda9f2e7-d789-4769-b3e2-8a3816140ca7.xlsx",
+      "bytes": 10111,
+      "sha256": "ccc9f2cbbee78eca5be4e4236ca751658ee0ff446ba7f42da3958283142950e9"
+    },
+    {
+      "path": "storage/uploads/industry_need/3/6481fa99-212a-44c4-a266-0506284def86.xlsx",
+      "bytes": 10111,
+      "sha256": "ccc9f2cbbee78eca5be4e4236ca751658ee0ff446ba7f42da3958283142950e9"
+    },
+    {
+      "path": "storage/uploads/industry_need/4/f3e718ff-9437-4dd3-a075-eddc21b3b554.xlsx",
+      "bytes": 10111,
+      "sha256": "ccc9f2cbbee78eca5be4e4236ca751658ee0ff446ba7f42da3958283142950e9"
+    },
+    {
+      "path": "storage/uploads/industry_need/5/51894322-7045-4801-bcdb-0ee32f4c6ad1.xlsx",
+      "bytes": 10591,
+      "sha256": "6c75622ee70853821b2fc4570cecd8914705755e34ecfdb9a28bdb1f882246a8"
+    },
+    {
+      "path": "storage/uploads/workflow_packet/1/86620078-c0ca-4ded-b3be-db3e6b260ce6.xlsx",
+      "bytes": 108339,
+      "sha256": "829eef551bd8b4ae732e8c3dc38c3f181588b541a87f6a0e3ca19be7369ebf71"
+    },
+    {
+      "path": "storage/uploads/workflow_packet/2/3c54f41b-4551-4d7e-adb5-dc0837126d43.docx",
+      "bytes": 59237,
+      "sha256": "e29f59e22a5fcea6d5e35f55a85239cfe4a503220f7dbbc26d8c2334c061471f"
+    },
+    {
+      "path": "FICCI/AMPRI/1.docx",
+      "bytes": 9596853,
+      "sha256": "e20d49928b88d1efbdc85f4b8e05bb552b4a6f166b3d729f995f930dd7d8fec2"
+    },
+    {
+      "path": "FICCI/AMPRI/10.pdf",
+      "bytes": 870179,
+      "sha256": "d7c7bfae9d58f9c160e09e475d5d05b638e58a05097951b76c14c592691bf793"
+    },
+    {
+      "path": "FICCI/AMPRI/11.pdf",
+      "bytes": 943305,
+      "sha256": "4c5a489ed38e423db9fe585aad966328ec216cbce343bbc5315ee341c7b48872"
+    },
+    {
+      "path": "FICCI/AMPRI/12.pdf",
+      "bytes": 875978,
+      "sha256": "658309b946bfa36ff034750ff011b3e4f737e05331110be3bfb39a7c949325a8"
+    },
+    {
+      "path": "FICCI/AMPRI/13.pdf",
+      "bytes": 950922,
+      "sha256": "3c14904ad850b6d2298a45107c3202515bd4fb9d49156bce3588f5d93c5590c1"
+    },
+    {
+      "path": "FICCI/AMPRI/14.pdf",
+      "bytes": 314692,
+      "sha256": "56a6dbfec06f2bda88939523659ee545257bafccdd2ff5c9a0472ee4bca6e5af"
+    },
+    {
+      "path": "FICCI/AMPRI/2.pdf",
+      "bytes": 2099969,
+      "sha256": "4c912368e5f1937bea6a470468769fe0e7ff2b268ba0fba5116c70624070ef0a"
+    },
+    {
+      "path": "FICCI/AMPRI/3.pdf",
+      "bytes": 999021,
+      "sha256": "a285200a362a50c7a7609aa462320c5eadc740de7a16ce0911606c2c6be3f579"
+    },
+    {
+      "path": "FICCI/AMPRI/4.pdf",
+      "bytes": 506052,
+      "sha256": "1649ea2a71729192dc823b88a58aa22fab4cff7e59a5536aeade7387b78eb1f2"
+    },
+    {
+      "path": "FICCI/AMPRI/5.pdf",
+      "bytes": 417990,
+      "sha256": "01962e4082069475fdafae65cb5e820fd9f396116364af1ba2cc8e27b42301d6"
+    },
+    {
+      "path": "FICCI/AMPRI/6.pdf",
+      "bytes": 2099969,
+      "sha256": "4c912368e5f1937bea6a470468769fe0e7ff2b268ba0fba5116c70624070ef0a"
+    },
+    {
+      "path": "FICCI/AMPRI/7.pdf",
+      "bytes": 327265,
+      "sha256": "65c7ce2208e93f3e7a5d5301f03999baea0accc93a4c3db99c14b7eaed49e488"
+    },
+    {
+      "path": "FICCI/AMPRI/8.pdf",
+      "bytes": 553438,
+      "sha256": "aef7a9d1b15c113d7d64e159e21e4d35281d9381e5aab155356a3be277e15760"
+    },
+    {
+      "path": "FICCI/AMPRI/9.pdf",
+      "bytes": 532483,
+      "sha256": "eb95b93215db96fd67f9386e96a261071a64ff51b63ca5af8a9461910de8c50e"
+    },
+    {
+      "path": "FICCI/CBRI/15.pdf",
+      "bytes": 185208,
+      "sha256": "7202c8789a7420157cee5b071363a44db519c006f2748455b102734075bc8918"
+    },
+    {
+      "path": "FICCI/CBRI/16.pdf",
+      "bytes": 659078,
+      "sha256": "162dec0c3573bec45697c615b26d92ef89ad326516c680dbde559cdd9426b56c"
+    },
+    {
+      "path": "FICCI/CBRI/17.pdf",
+      "bytes": 187231,
+      "sha256": "8cf2850df66710a76b2c1c4a28690355e6a8717ba0ef42b2d04067c0ff786bd5"
+    },
+    {
+      "path": "FICCI/CBRI/18.pdf",
+      "bytes": 566556,
+      "sha256": "afe2bc01473124813c2db0432bb7eb6f0888b9f060cdfbba9aa924cdf2d4458a"
+    },
+    {
+      "path": "FICCI/CBRI/19.pdf",
+      "bytes": 512692,
+      "sha256": "c0b11b8107fbaf3d147660358e750c2adb36245971e9371adc1c21284d6163bf"
+    },
+    {
+      "path": "FICCI/CBRI/20.pdf",
+      "bytes": 540906,
+      "sha256": "dadc44ba34cb81ac7df2f6ac07bad3116c25256339571699c59e84593a63ca14"
+    },
+    {
+      "path": "FICCI/CCMB/21.pdf",
+      "bytes": 267612,
+      "sha256": "d29541bbde7c705cf8a734c83dc62d4fa9c1a335035c09224a8b813f3c044be0"
+    },
+    {
+      "path": "FICCI/CCMB/22.pdf",
+      "bytes": 457654,
+      "sha256": "6d7a0efdbfbf50d196de088f4eed63de6b187d27460adb2a812d63d09283b0b0"
+    },
+    {
+      "path": "FICCI/CCMB/23.pdf",
+      "bytes": 276808,
+      "sha256": "08bce03c3c97518ca38e6553c75363f3429c1d10e982d605ecbd3de0a6ef70d9"
+    },
+    {
+      "path": "FICCI/CCMB/24.pdf",
+      "bytes": 384263,
+      "sha256": "2a064306f6dfbc6ab271aa76469a99f3dd7896bb53cd7fbce32ca3b83baaa6cd"
+    },
+    {
+      "path": "FICCI/CCMB/25.pdf",
+      "bytes": 320933,
+      "sha256": "66e8c3bd96db3f290a137a8c21e1b9308600a39acdd1289ae84a419bf02d887c"
+    },
+    {
+      "path": "FICCI/CCMB/26.pdf",
+      "bytes": 277764,
+      "sha256": "169829022c26efe022a7de6a3eafe64681dc147745a5436c7d57c4692747b2c3"
+    },
+    {
+      "path": "FICCI/CCMB/27.pdf",
+      "bytes": 2919390,
+      "sha256": "f6fadb7b6694be63e6b9922e357f3c8ceaf5ce9b4fbf20cb9566af4218f1b650"
+    },
+    {
+      "path": "FICCI/CCMB/28.pdf",
+      "bytes": 321443,
+      "sha256": "cfde1d9d5c983989f1eabab5d81f885fca9e423569bbeb78e1baa57cbbebf790"
+    },
+    {
+      "path": "FICCI/CCMB/29.pdf",
+      "bytes": 330943,
+      "sha256": "cfe26e0220c979a32524c23b77d5142c8ddc36a4dfd684df82ca128a244376a3"
+    },
+    {
+      "path": "FICCI/CDRI/30.docx",
+      "bytes": 109444,
+      "sha256": "d7638f3827a5c9fe68d9e02fee8d131b16d889253fa658bc3608b1d53f7136cb"
+    },
+    {
+      "path": "FICCI/CDRI/31.docx",
+      "bytes": 109960,
+      "sha256": "862be6a34af526c1feae9f2a69a8db05966d4da95ed5042d744fff6cb4a0d0ad"
+    },
+    {
+      "path": "FICCI/CDRI/32.docx",
+      "bytes": 109280,
+      "sha256": "73abcfcac30c8133930dd0b637cf03ba57e1ddfa4f737b3ccb3bba6dd2615a81"
+    },
+    {
+      "path": "FICCI/CECRI/33.pdf",
+      "bytes": 13607304,
+      "sha256": "1830999147f18390a544f593d520e85439b0b76fbb2e98ddb4ea861bbba8638a"
+    },
+    {
+      "path": "FICCI/CEERI/34.docx",
+      "bytes": 142859,
+      "sha256": "16c598ce6cd96a1bcac6789b3e4c92eb8b8ef8e27813671563d14d058853d8bb"
+    },
+    {
+      "path": "FICCI/CEERI/35.docx",
+      "bytes": 129620,
+      "sha256": "b1a5fc6b811c0d6fa82c9e94cbb0eb879ed4ce93b4c9d9d0477bd65711afdb72"
+    },
+    {
+      "path": "FICCI/CEERI/36.docx",
+      "bytes": 138935,
+      "sha256": "04d22d2c22e9c653e02ae6a66f357ec4c14a3f7fdb001c4a3852046f9f6d6c97"
+    },
+    {
+      "path": "FICCI/CEERI/37.docx",
+      "bytes": 130242,
+      "sha256": "befed0f384644fa94355c4826104985d48626c5c48f45e2a4e2acd7311138785"
+    },
+    {
+      "path": "FICCI/CEERI/38.docx",
+      "bytes": 118358,
+      "sha256": "7d8b1ce9a6af177e147ab0fa1d6f3d1c33c07fbf2a52fc8ed367b1d3d27eeff8"
+    },
+    {
+      "path": "FICCI/CEERI/39.docx",
+      "bytes": 125279,
+      "sha256": "7cc8d3fc6c8a02e81c5768c096f8a8a57e5c4fdd5414bb47bce97c9bb7ae4fb4"
+    },
+    {
+      "path": "FICCI/CEERI/40.docx",
+      "bytes": 143793,
+      "sha256": "645ca60cf544bcf2b9712239e12439a8ac02259e163d401f600f85766efe6ba2"
+    },
+    {
+      "path": "FICCI/CEERI/41.docx",
+      "bytes": 138607,
+      "sha256": "88382149e8ce656b2eeb2b24292ae7873cef737206ace4163df4ed73cd68d22e"
+    },
+    {
+      "path": "FICCI/CEERI/42.docx",
+      "bytes": 142395,
+      "sha256": "3872cb98bcec759c5021572f139e40a18eddc328a32e48170bfd7d6fd8496157"
+    },
+    {
+      "path": "FICCI/CEERI/43.docx",
+      "bytes": 138677,
+      "sha256": "e3a9dc41b2fd8cf6e65f8015cfed9ab9c5cda13196d93c246d956dfdb2877be2"
+    },
+    {
+      "path": "FICCI/CFTRI/44.pdf",
+      "bytes": 3912117,
+      "sha256": "a9cf4fa496de49cde8c0c0bac5f0675959ff31529b048f80a3f4812916c5cc89"
+    },
+    {
+      "path": "FICCI/CGCRI/45.pdf",
+      "bytes": 612068,
+      "sha256": "63fb328796b76446da4240d84306ead61d7c8deb0e56932706111c5bbe6428fa"
+    },
+    {
+      "path": "FICCI/CGCRI/46.pdf",
+      "bytes": 459213,
+      "sha256": "52f1a421974a92e939a9d63fe181e9e23c2a5ab59703c636ffd0c62c9c2fd57f"
+    },
+    {
+      "path": "FICCI/CGCRI/47.pdf",
+      "bytes": 344557,
+      "sha256": "e8b508ad29e52e07fa136bec006802f589c5864102fa8c9f60950efde941ae95"
+    },
+    {
+      "path": "FICCI/CGCRI/48.pdf",
+      "bytes": 657040,
+      "sha256": "dd111600b37471a401899ea91bd0e84df7b7c6df10ae42bc37059f732ab73684"
+    },
+    {
+      "path": "FICCI/CGCRI/49.pdf",
+      "bytes": 1276913,
+      "sha256": "f536257c71654648ad6f5e77615b47f494e632e48623458dfdbab156ad298533"
+    },
+    {
+      "path": "FICCI/CGCRI/50.pdf",
+      "bytes": 1303420,
+      "sha256": "6b4d3e638364bd020125744e6a61411472f3a5ba23e16d3067ec0e21dd7c8671"
+    },
+    {
+      "path": "FICCI/CGCRI/51.pdf",
+      "bytes": 750408,
+      "sha256": "c73957100915d5cd705c06623dee644ad4fb86aeda62d3e9960953acad3bc70a"
+    },
+    {
+      "path": "FICCI/CGCRI/52.pdf",
+      "bytes": 860401,
+      "sha256": "0c848d8264c7f45aaf4bd60a726d0bfab7bbf17ecae5bd73153221a08214eced"
+    },
+    {
+      "path": "FICCI/CGCRI/53.pdf",
+      "bytes": 467219,
+      "sha256": "17a826641e7e65a553bd97fd3ce4cbf53486c287b7a738014eb8858c7c284d43"
+    },
+    {
+      "path": "FICCI/CGCRI/54.pdf",
+      "bytes": 406646,
+      "sha256": "dfd6467a902c34fb5aa73d2441df0415339423662a4ef9c805dd2217ef56d1f2"
+    },
+    {
+      "path": "FICCI/CIMAP/55.pdf",
+      "bytes": 472438,
+      "sha256": "91cada34797e56ee67138853148469063c4f6f6ba65dc7fc0fa6916458d512a3"
+    },
+    {
+      "path": "FICCI/CIMAP/56.pdf",
+      "bytes": 552317,
+      "sha256": "3c115db4bd6c108de8afe64bc1a1c10a3af48f430925c475756c0f96742f4d34"
+    },
+    {
+      "path": "FICCI/CIMAP/57.pdf",
+      "bytes": 603326,
+      "sha256": "14028b577750b69960dc8e3f2ae7a4e3010a7260fbfec29b1de22a469df0a8b3"
+    },
+    {
+      "path": "FICCI/CIMAP/58.pdf",
+      "bytes": 597782,
+      "sha256": "8241295326b7945d997a2e79b4e027ab854e8767b2986158f671c3d7db1990d1"
+    },
+    {
+      "path": "FICCI/CIMAP/59.pdf",
+      "bytes": 458858,
+      "sha256": "98f56ce6e7ec7136263eb0eff7d2afbc1084872bc3bde420f1e40283d8cdcff0"
+    },
+    {
+      "path": "FICCI/CIMAP/60.pdf",
+      "bytes": 423602,
+      "sha256": "38583fa8446e23e14cf803e9e9f1b46ff050acec9d9a9e0f5498a6ce80b2f328"
+    },
+    {
+      "path": "FICCI/CIMAP/61.pdf",
+      "bytes": 510033,
+      "sha256": "22f8a30b6624d90ab2f8820d609789f3f470d18946cba8bcf7f00b16e682eb06"
+    },
+    {
+      "path": "FICCI/CIMAP/62.pdf",
+      "bytes": 1112723,
+      "sha256": "a14fbddc651d29b181c471abb18e28a825b8c980b45c3d96c5e1c5f9920361cd"
+    },
+    {
+      "path": "FICCI/CIMAP/63.pdf",
+      "bytes": 435842,
+      "sha256": "951683b6b7e6cde3770a810df2b2f041f606864b7ded543942fb5fd47ebc5dcd"
+    },
+    {
+      "path": "FICCI/CIMFR/64.pdf",
+      "bytes": 282006,
+      "sha256": "78d23fe1f368fdae771838892ff8d99ee31a93561a1272f4e6528c581152ae51"
+    },
+    {
+      "path": "FICCI/CIMFR/65.pdf",
+      "bytes": 380151,
+      "sha256": "80656564054e5d23326628116c81eeb48e95f53a952c47f4ff2d771807ce421d"
+    },
+    {
+      "path": "FICCI/CIMFR/66.pdf",
+      "bytes": 381586,
+      "sha256": "4a641034ceab51dcf77ac8168727de27f5947d8b98a2cf4add62ed9e0f113ac6"
+    },
+    {
+      "path": "FICCI/CIMFR/67.pdf",
+      "bytes": 382258,
+      "sha256": "59a77a0479db864959ab32a6d40287210675cb6a663d28514eca3a51d46db517"
+    },
+    {
+      "path": "FICCI/CIMFR/68.pdf",
+      "bytes": 283530,
+      "sha256": "224c651cdd121edd7dee50ecd6a74e2d5724b5ed0a4aeaf57da6e33d13de84d1"
+    },
+    {
+      "path": "FICCI/CIMFR/69.pdf",
+      "bytes": 166612,
+      "sha256": "38963913848fc19300afcdfa075b17709c04a1639fc5e946235b218e087a618f"
+    },
+    {
+      "path": "FICCI/CIMFR/70.pdf",
+      "bytes": 343097,
+      "sha256": "3f62705ddd1a4c5f1a993a4a2b6b2b7255952a433335896111f8ef1fd8d3a9a6"
+    },
+    {
+      "path": "FICCI/CIMFR/71.pdf",
+      "bytes": 325296,
+      "sha256": "e95c69bdf81c44cce7a961e5b4c01d4605bf2cdf9955c51f43e7ebf92b56be25"
+    },
+    {
+      "path": "FICCI/CIMFR/72.pdf",
+      "bytes": 212853,
+      "sha256": "83ac85a9796b816dfe77ec5c18ec6f2ceb39ed74753fa4c0f8e1547dc1eda10c"
+    },
+    {
+      "path": "FICCI/CIMFR/73.pdf",
+      "bytes": 380109,
+      "sha256": "b218deacc6f12ef55028cf6760cb9aeca1e1c44cd3da3d40cd96c6bdc8151d08"
+    },
+    {
+      "path": "FICCI/CIMFR/74.pdf",
+      "bytes": 381027,
+      "sha256": "cbb722203b12d2b1b1384f6f3a0adaff1d1c2c3cd3fa00c9ed8038f1a52406a1"
+    },
+    {
+      "path": "FICCI/CIMFR/75.pdf",
+      "bytes": 380307,
+      "sha256": "3735250c00b274ee78da471dd5d38ab5127aed60418bc7a7e05ffd6e866c1db6"
+    },
+    {
+      "path": "FICCI/CIMFR/76.docx",
+      "bytes": 14435,
+      "sha256": "eb126192ae3f24527b90236c9287db37e7fdd7339b4e78c676affd1741f37bca"
+    },
+    {
+      "path": "FICCI/CLRI/77.pdf",
+      "bytes": 200453,
+      "sha256": "342fc4ec0534ba78b5c49e7a63df251eabfa52aed6b77c205a3127cfa03a6808"
+    },
+    {
+      "path": "FICCI/CLRI/78.pdf",
+      "bytes": 294668,
+      "sha256": "92bec3c926bd09ef809e341d908df30cba76aee0cdff701a653c43a622bdaa62"
+    },
+    {
+      "path": "FICCI/CLRI/79.pdf",
+      "bytes": 198375,
+      "sha256": "7a1fe609d10acf70785c97352048ed73d92c63826ddaca96d289e79bb64f1ded"
+    },
+    {
+      "path": "FICCI/CLRI/80.pdf",
+      "bytes": 229912,
+      "sha256": "c655fe2408f2165916b27b3553ee0276c9f5d3d63bee6827009d0e8d2e20daad"
+    },
+    {
+      "path": "FICCI/CLRI/81.pdf",
+      "bytes": 213659,
+      "sha256": "96506d4696b58865a76abc993e60cd2bf3d1908a4b195e7f024f9944a9091634"
+    },
+    {
+      "path": "FICCI/CLRI/82.pdf",
+      "bytes": 200603,
+      "sha256": "e95100558bcdef53b252bb3502af185b44e235b3f15626d93c1b034f5da31f66"
+    },
+    {
+      "path": "FICCI/CLRI/83.pdf",
+      "bytes": 200603,
+      "sha256": "e95100558bcdef53b252bb3502af185b44e235b3f15626d93c1b034f5da31f66"
+    },
+    {
+      "path": "FICCI/CLRI/84.pdf",
+      "bytes": 202763,
+      "sha256": "4b081216039532e02aa58f1aa8441c377b22e4c91db0123b1e3128eb115c8deb"
+    },
+    {
+      "path": "FICCI/CLRI/85.pdf",
+      "bytes": 224952,
+      "sha256": "a09196a161e3361d13624a70657a86f47ee1b39e0a679b370e57cdf26b367940"
+    },
+    {
+      "path": "FICCI/CLRI/86.pdf",
+      "bytes": 214297,
+      "sha256": "c4a65bf3297723458540d6b3b63cbe1db0a8b5191018dc82f34d72802bbe43fe"
+    },
+    {
+      "path": "FICCI/CLRI/87.pdf",
+      "bytes": 172078,
+      "sha256": "74aa8954bced4f22d180f670557892c1d55fc58d495c22b05d9128da42b5cce8"
+    },
+    {
+      "path": "FICCI/CMERI/88.pdf",
+      "bytes": 246590,
+      "sha256": "96e6815dd26b16fb84ee95f9063d37b0a74ea32028d5586d3b9f523cbd2c2d40"
+    },
+    {
+      "path": "FICCI/CMERI/89.pdf",
+      "bytes": 236925,
+      "sha256": "6b1d4bcd11e98784f67e91569b96a852c59dd7d854a3361724733cd21a5b4357"
+    },
+    {
+      "path": "FICCI/CMERI/90.pdf",
+      "bytes": 257611,
+      "sha256": "1ba478cf5723db6e6d275bf9e23a26599e8c49e9e631fab81e3128f4b97ca781"
+    },
+    {
+      "path": "FICCI/CMERI/91.pdf",
+      "bytes": 317669,
+      "sha256": "5f3ac6e8473a510be9362a5cd01a7e7f4dd0cf051ab41411290191c0fb89946d"
+    },
+    {
+      "path": "FICCI/CMERI/92.pdf",
+      "bytes": 255988,
+      "sha256": "cf13cfcb412c978789edb7764d7b68d6c2339be8dc1513a6b83c89a9ee91a5b9"
+    },
+    {
+      "path": "FICCI/CMERI/93.pdf",
+      "bytes": 252290,
+      "sha256": "31e0c716360c9a6ea5f21a838d7d41706bd6774b9403baeecedb09743c724e68"
+    },
+    {
+      "path": "FICCI/CMERI/94.pdf",
+      "bytes": 376344,
+      "sha256": "b5444ac2dc6b6d28b874364873960d24567625906ac57758af07317d01b7c14e"
+    },
+    {
+      "path": "FICCI/CMERI/95.pdf",
+      "bytes": 321471,
+      "sha256": "c434538c90c0b935989ed7ba7bddaad5dc3d8d9d7211f6a237b88d867de9b187"
+    },
+    {
+      "path": "FICCI/CMERI/96.pdf",
+      "bytes": 224473,
+      "sha256": "e8c0e0c2b54ade26c1f007f0998422886b07eef47acbf6a7c9312c2cf942bdfa"
+    },
+    {
+      "path": "FICCI/CMERI/97.pdf",
+      "bytes": 227329,
+      "sha256": "3e0422152def0b745fa31a9a621ef7c6b8c81eaf2d13ac4fd406e05422b37ff1"
+    },
+    {
+      "path": "FICCI/CSIO/98.pdf",
+      "bytes": 1870737,
+      "sha256": "ebf8bdb4ad805778360d6bc4f7bd2fd6a2fc84c57c78f195273b959bdee7301a"
+    },
+    {
+      "path": "FICCI/CSMCRI/100.pdf",
+      "bytes": 3688762,
+      "sha256": "995351c7793d500e2ba6b39d926e709d431cb730d016ba33265a0d3c85fad5e3"
+    },
+    {
+      "path": "FICCI/CSMCRI/101.pdf",
+      "bytes": 618237,
+      "sha256": "35d4b5db4fa5ed09537e1064fa7405cd7e42d4eac3d6c1c77fdc49b91f6a84a3"
+    },
+    {
+      "path": "FICCI/CSMCRI/102.pdf",
+      "bytes": 4588801,
+      "sha256": "5da489c9a1db5cfab1ac9fcefc9de7e61cef6cd3e5d27cea483089a345f0271f"
+    },
+    {
+      "path": "FICCI/CSMCRI/103.pdf",
+      "bytes": 736171,
+      "sha256": "8aa860d69a2534516ce2bfa0dbfc1786ff1de622f393a24be41b5abbc6b88a67"
+    },
+    {
+      "path": "FICCI/CSMCRI/104.pdf",
+      "bytes": 1019756,
+      "sha256": "fad5988f54802a40fddceedc3099330db4fa941208cb580e934b70acabeecb13"
+    },
+    {
+      "path": "FICCI/CSMCRI/105.pdf",
+      "bytes": 1074138,
+      "sha256": "67b60973b2f9d4446434d8d5cf43754b10c2bcdb49b468997252b66f0a809c0d"
+    },
+    {
+      "path": "FICCI/CSMCRI/106.pdf",
+      "bytes": 797300,
+      "sha256": "233c23becf0795811fdbbf84447dc11e1125c16d57b2a61ebf39300d6caeaa54"
+    },
+    {
+      "path": "FICCI/CSMCRI/107.pdf",
+      "bytes": 635099,
+      "sha256": "f22193b03a85ba4ba2019f7bc4b4267de33dbf759dc5b0e62bf58ab8e62d6951"
+    },
+    {
+      "path": "FICCI/CSMCRI/108.pdf",
+      "bytes": 367810,
+      "sha256": "1243b384765053b4ba74214193b9093d481a85a8a2046b37414779c7f3945495"
+    },
+    {
+      "path": "FICCI/CSMCRI/109.pdf",
+      "bytes": 757683,
+      "sha256": "04c288d89c1ec4af80ca672ba3922ef0c0a8ccbce989479b64bfcaba45e39a3d"
+    },
+    {
+      "path": "FICCI/CSMCRI/99.pdf",
+      "bytes": 618908,
+      "sha256": "12d2d3e45f30c5981ea83f98d1b99961bfa5c056522c4b882fd4366b4f3d9d11"
+    },
+    {
+      "path": "FICCI/IGIB/110.pdf",
+      "bytes": 286951,
+      "sha256": "64d19faa43ee46f5ff882ffe70ec031a850a0eaee930b14abef0715d77b6e0b2"
+    },
+    {
+      "path": "FICCI/IGIB/111.pdf",
+      "bytes": 392770,
+      "sha256": "ad26e2af93bef20ded8fabf7223cb3fee0b6fe710d387edd8580c98efb486e76"
+    },
+    {
+      "path": "FICCI/IGIB/112.pdf",
+      "bytes": 289957,
+      "sha256": "6abe6242473d0fb8937b5f38c9cdaca954198ffcd447626cd2db517952bf7ee3"
+    },
+    {
+      "path": "FICCI/IHBT/113.docx",
+      "bytes": 99253,
+      "sha256": "8b26bbe63a04c5b1b6058f1fc21715128266c66be982e5e8993df61d52902585"
+    },
+    {
+      "path": "FICCI/IICB/114.pdf",
+      "bytes": 143390,
+      "sha256": "5727108676ed14211627361101989d15de2cadb45f484424e74ea81b3bf1aa4a"
+    },
+    {
+      "path": "FICCI/IICB/115.pdf",
+      "bytes": 2385652,
+      "sha256": "0da80f213a3fab3f8882cf2dfd8ff6a033ea5f38421a2d65fd2660cc01751b4c"
+    },
+    {
+      "path": "FICCI/IICB/116.pdf",
+      "bytes": 651392,
+      "sha256": "bb4585225cb9291959cb351ed72fc3be08744a2735254bbfa579f3aeb6bc7653"
+    },
+    {
+      "path": "FICCI/IICB/117.pdf",
+      "bytes": 249590,
+      "sha256": "54f3ef1dcb057740d6dad3c0c00aadd95d01395646c1a74d5a9c4f5c2ba64abe"
+    },
+    {
+      "path": "FICCI/IICT/118.pdf",
+      "bytes": 57985,
+      "sha256": "a17633e385879934fffc5a27395c6b5db19fe0133c9c3ee32a6306d1b1601f85"
+    },
+    {
+      "path": "FICCI/IICT/119.pdf",
+      "bytes": 177042,
+      "sha256": "0493eb6d107aa91d138723caa4c583c5130327fe7024377b1e375e87a0e8e0b9"
+    },
+    {
+      "path": "FICCI/IICT/120.pdf",
+      "bytes": 55271,
+      "sha256": "31d3643f54271cf6a4a70440c81ab7402bd5856c27672d3b2e22c4d19bc1488d"
+    },
+    {
+      "path": "FICCI/IICT/121.pdf",
+      "bytes": 173253,
+      "sha256": "01e0a25dfaf76ddc58fa054331a1ea951ba868e855f38334fe8f127c92c83fea"
+    },
+    {
+      "path": "FICCI/IICT/122.pdf",
+      "bytes": 174923,
+      "sha256": "9fc243135bf269adbd530ef945583a3112e666f4356bace98b25850cd43b8e5b"
+    },
+    {
+      "path": "FICCI/IICT/123.pdf",
+      "bytes": 175825,
+      "sha256": "3dfb34fa0c685efe8a49b4ca2cdc00f6e26e9ee2c940c7562ae4aa1cd9c9db15"
+    },
+    {
+      "path": "FICCI/IICT/124.pdf",
+      "bytes": 59851,
+      "sha256": "b10672153b05b271f7a0c39020dae6950658002296e7e0bb1d2308df856ce89c"
+    },
+    {
+      "path": "FICCI/IICT/125.pdf",
+      "bytes": 61660,
+      "sha256": "323ca64a15cae2ab4dd035cb2187eb53ad4f695cb45d098db0397ba3903c1e7a"
+    },
+    {
+      "path": "FICCI/IICT/126.pdf",
+      "bytes": 170132,
+      "sha256": "4797b2fecc0835976d68dddd425234be90a1c0746c1bc5eaca4570347ac6a1e0"
+    },
+    {
+      "path": "FICCI/IICT/127.pdf",
+      "bytes": 208833,
+      "sha256": "7b8d3a83fe31267bbc26cce64a912a4b35e269c18a4bc25f1abb71c11760b926"
+    },
+    {
+      "path": "FICCI/IIIM/128.docx",
+      "bytes": 915502,
+      "sha256": "7cdacbb37241d0b50f9a138851dadf2da6374c0ec79d17395cdf30ee7f398a5c"
+    },
+    {
+      "path": "FICCI/IIP/146.pdf",
+      "bytes": 4638765,
+      "sha256": "ca11403f0af02ae7c897770383951401e9186700edef98d0cc80b784f80d787d"
+    },
+    {
+      "path": "FICCI/IIP/147.pdf",
+      "bytes": 71557,
+      "sha256": "547ee90a97ac45592f4de9e77f59612b4fe7ab9afbce312c9fb473c16069a410"
+    },
+    {
+      "path": "FICCI/IIP/148.pdf",
+      "bytes": 695264,
+      "sha256": "2e8a54d1ab5b976a5a752dcf6e32c7b8065d2d333150045b54f42e00c0f03d3a"
+    },
+    {
+      "path": "FICCI/IIP/149.pdf",
+      "bytes": 1048922,
+      "sha256": "78c0ec167bfd62001170bd3e96fe3607a5df31212fe02f884bb1be436a645bd6"
+    },
+    {
+      "path": "FICCI/IIP/150.pdf",
+      "bytes": 3392976,
+      "sha256": "c2bdf0afe5942d019b6580c059d728af413e40bde74fa56632da29fa2e6d4981"
+    },
+    {
+      "path": "FICCI/IIP/151.pdf",
+      "bytes": 1638377,
+      "sha256": "213a55539d2058882f81ef38dadd79003f45452fdd191a035a5c0eca491cf948"
+    },
+    {
+      "path": "FICCI/IIP/152.pdf",
+      "bytes": 4668844,
+      "sha256": "e9aa71ea076e33c7d87969fcc74414424339ddca3a4326fc08869bdcabdecf40"
+    },
+    {
+      "path": "FICCI/IIP/153.pdf",
+      "bytes": 4692830,
+      "sha256": "2e3aceab5d3e94e9534f5d2b12b2800a6a987b51ad241333dbfd55a803200a73"
+    },
+    {
+      "path": "FICCI/IIP/154.pdf",
+      "bytes": 5650820,
+      "sha256": "06a5faee9bb1a3271575780ed01148c8b4342d8760e9cb8821fe97efb3fe153b"
+    },
+    {
+      "path": "FICCI/IIP/155.pdf",
+      "bytes": 637230,
+      "sha256": "b0254cf6e15b1d277ce6b8b7e74affb4f39a6e3afc25b81cfc92b57fd91a5de5"
+    },
+    {
+      "path": "FICCI/IIP/156.pdf",
+      "bytes": 672631,
+      "sha256": "4b99c1299556ac985d2efaf6a8a4eb3aa5e55d90224922e0f0ddb8cd91e6ccd9"
+    },
+    {
+      "path": "FICCI/IIP/157.pdf",
+      "bytes": 1156440,
+      "sha256": "7b732f2290f0b1172b1cccce844fce96d7a7d4e0ab989374fdec95db802cef75"
+    },
+    {
+      "path": "FICCI/IITR/158.zip",
+      "bytes": 6110607,
+      "sha256": "5b68743943b8ba0827366ef041b6a3fe5933a601de8b86b892888a70db80e518"
+    },
+    {
+      "path": "FICCI/IMMT/129.pdf",
+      "bytes": 294611,
+      "sha256": "2fc9397e3ed2f1692e295b892624507f211b8b5bf7bd2cb92185eea859a46bdb"
+    },
+    {
+      "path": "FICCI/IMMT/130.pdf",
+      "bytes": 224368,
+      "sha256": "ef82152b59108c8cbddfacfc6dd6d079476de91e536b02737ac72bd74e981f2b"
+    },
+    {
+      "path": "FICCI/IMMT/131.pdf",
+      "bytes": 291977,
+      "sha256": "2accab29e0749ccfd171ae3a9895955bed55ae233410304d11d129701b2076cb"
+    },
+    {
+      "path": "FICCI/IMMT/132.pdf",
+      "bytes": 369440,
+      "sha256": "23751029a09dd89ba6bf422d8c314608592679dcf09b1ec479c8a0c990bda39d"
+    },
+    {
+      "path": "FICCI/IMMT/133.pdf",
+      "bytes": 221100,
+      "sha256": "9563241171a5f6be26141ed1ba99d013e7996a63f0e7d0b95fdf7d5a9f378556"
+    },
+    {
+      "path": "FICCI/IMMT/134.pdf",
+      "bytes": 252976,
+      "sha256": "cf9610885915501517a8796eba0db72bd9321c998e72727644cb87989cba1825"
+    },
+    {
+      "path": "FICCI/IMMT/135.pdf",
+      "bytes": 212765,
+      "sha256": "ac31f30af2552ab03df718c2ff949f53cd58f6d11e89e0634054bdce7c210775"
+    },
+    {
+      "path": "FICCI/IMMT/136.pdf",
+      "bytes": 201852,
+      "sha256": "0e7a3841c9ac860815a2de04228d784d77b1c63ea2a77aaa1c537ee8246e6fd5"
+    },
+    {
+      "path": "FICCI/IMMT/137.pdf",
+      "bytes": 218052,
+      "sha256": "f248e84a6c66499250dfa41e3e8550de9fd300a15369885f6dc680807f4e6924"
+    },
+    {
+      "path": "FICCI/IMMT/138.pdf",
+      "bytes": 304962,
+      "sha256": "d99ed23da218e19dd6e5fcc7af32c27cd082f820ed6840f53a0048010996ea60"
+    },
+    {
+      "path": "FICCI/IMMT/139.pdf",
+      "bytes": 261153,
+      "sha256": "993fbf9237b083cfa33b319a104cc9c491379dfb74a1ec77ef49f29caa6fcb7b"
+    },
+    {
+      "path": "FICCI/IMMT/140.pdf",
+      "bytes": 194324,
+      "sha256": "f913352bd5f34d1694c956ffa8f852c2c056bce982dbc9bfcde239d86b26e883"
+    },
+    {
+      "path": "FICCI/IMMT/141.pdf",
+      "bytes": 237485,
+      "sha256": "b16c6b6def9db9c17e730d878cc3d3679930119e6d0839cad5bc9880aa6a1cc9"
+    },
+    {
+      "path": "FICCI/IMMT/142.pdf",
+      "bytes": 286882,
+      "sha256": "2e1f25b07bcec2adc9298acd27beeb2e54607516e1792ad3b4d652dcf324e420"
+    },
+    {
+      "path": "FICCI/IMMT/143.pdf",
+      "bytes": 283524,
+      "sha256": "b909df7e5b0eba814e599019c33dec9d5ed9d388db2474e83f999924c4151f56"
+    },
+    {
+      "path": "FICCI/IMMT/144.pdf",
+      "bytes": 232673,
+      "sha256": "1985f1d970eb4cb42d11f526559c6b5591aed8c2e2fc98f1a48fa095105d5e5f"
+    },
+    {
+      "path": "FICCI/IMMT/145.pdf",
+      "bytes": 200800,
+      "sha256": "62a847fec82c45370f968d9e829c86a1567ecd955ec7ed17bf8d8de8a257a27c"
+    },
+    {
+      "path": "FICCI/IMTECH/159.zip",
+      "bytes": 10833635,
+      "sha256": "d4be290ef28e5675a293edf76851ec7ed9a7e0c4df736097dd7abc5b7c76b6bc"
+    },
+    {
+      "path": "FICCI/manifest.json",
+      "bytes": 115069,
+      "sha256": "8243f2fe84c8a1651a29e707dac8e1289e92a6fb271d9a10080e788d59ee6206"
+    },
+    {
+      "path": "FICCI/NAL/160.pdf",
+      "bytes": 21699078,
+      "sha256": "9ca131b27a0db94f22a1f8d2b976bf149d46d3dcdc6c30514029ae2002194e93"
+    },
+    {
+      "path": "FICCI/NBRI/161.png",
+      "bytes": 1898638,
+      "sha256": "c2704f8e4b54d34a4e6c5dbd16d92ea85d4532448ac5c669c3f451b81aaf15b8"
+    },
+    {
+      "path": "FICCI/NBRI/162.docx",
+      "bytes": 39716,
+      "sha256": "19fff9ca8173b0d998e25dd405035a3bd8c525a2b969ff2bef8084ef0d0925f5"
+    },
+    {
+      "path": "FICCI/NBRI/163.docx",
+      "bytes": 42611,
+      "sha256": "e2dde293c50161ec8b4753d7aae9fcd4aba57d8c56adc9ee7ea590b99c7c2e94"
+    },
+    {
+      "path": "FICCI/NBRI/164.jpg",
+      "bytes": 106021,
+      "sha256": "7ef247cb8aec3bb5b98dc0446e2fcdaa420949757c13391cc77dac9c13545a5c"
+    },
+    {
+      "path": "FICCI/NBRI/165.png",
+      "bytes": 2408025,
+      "sha256": "d5c56e41ac7fc51c246ca824e9788065a385cfa833060ff3f728f8ae9859f1c8"
+    },
+    {
+      "path": "FICCI/NBRI/166.docx",
+      "bytes": 40220,
+      "sha256": "e069670aa52d77fec8c1dc6fb6a04c5c79836877f855fedd0d93b89842e5fd80"
+    },
+    {
+      "path": "FICCI/NBRI/167.jpg",
+      "bytes": 892395,
+      "sha256": "59ef4ecf9eab536bc2dd08c0fabe9700cda266ec41cf43ff3fc97e3b9913978a"
+    },
+    {
+      "path": "FICCI/NBRI/168.docx",
+      "bytes": 41419,
+      "sha256": "29b0c5a1715af806ee18d9520e006b26c52fa268aae1c65a67aebdf664669e45"
+    },
+    {
+      "path": "FICCI/NBRI/169.docx",
+      "bytes": 42988,
+      "sha256": "fd81c57277b477316db3f06c938b03eb0b465eecfead4d607b5d8b11245dd655"
+    },
+    {
+      "path": "FICCI/NBRI/170.jpg",
+      "bytes": 566445,
+      "sha256": "ef2b475696314179f072e508d414c8c186f04354857b6e4da5b7908d6e617d67"
+    },
+    {
+      "path": "FICCI/NBRI/171.png",
+      "bytes": 1509094,
+      "sha256": "55d6761070816c499de04d1b7f16afa94bafb1b669babc141fd8ec3e52ce4af4"
+    },
+    {
+      "path": "FICCI/NBRI/172.docx",
+      "bytes": 40452,
+      "sha256": "97373f0202df0845a6b536c7edd3f06c6f1d4e4c7f039bf0daaedebc2036b715"
+    },
+    {
+      "path": "FICCI/NBRI/173.docx",
+      "bytes": 42259,
+      "sha256": "ddf47b76ad4bf8b4078d1e9c84d74275a6324f5ac60679cf449244e7238882ac"
+    },
+    {
+      "path": "FICCI/NBRI/174.png",
+      "bytes": 1031990,
+      "sha256": "510d50de66e412c2d20251b38806d10dbbbae6c8e9f22e11f6e485b93d774794"
+    },
+    {
+      "path": "FICCI/NBRI/175.docx",
+      "bytes": 42190,
+      "sha256": "8bba4814d135e8799511e78dd526fd29d70da62eaf42f48eee38919b7cdc93b8"
+    },
+    {
+      "path": "FICCI/NBRI/176.jpg",
+      "bytes": 382057,
+      "sha256": "aa9e003cdd83cb8aa50a13343c081ad1b561384cb459021f80291fa21c0c3e25"
+    },
+    {
+      "path": "FICCI/NBRI/177.docx",
+      "bytes": 41422,
+      "sha256": "954d8e45a692b95efc2f45df581ec35ceaa44db46dcf82081274257d1a7aefd0"
+    },
+    {
+      "path": "FICCI/NBRI/178.png",
+      "bytes": 1841161,
+      "sha256": "6155b159659c870479b023b079297170dd6932a25e83ed666095cee3b72d922b"
+    },
+    {
+      "path": "FICCI/NBRI/179.docx",
+      "bytes": 40649,
+      "sha256": "a5669e320dc41e544bcd0b4e1ea7893cb6e400de4a99dde55fe2de5270d62a18"
+    },
+    {
+      "path": "FICCI/NCL/180.pdf",
+      "bytes": 634311,
+      "sha256": "313ec8b97d0df6594d4c0e39668cd8ad1a9c1e0c69c1a58cee3c912980a99bb1"
+    },
+    {
+      "path": "FICCI/NCL/181.pdf",
+      "bytes": 612216,
+      "sha256": "eccd5b62d1bad6e03aa654ab73869fa12271a4cdb0fc70cf5db2ecc31dfd41b9"
+    },
+    {
+      "path": "FICCI/NCL/182.pdf",
+      "bytes": 627463,
+      "sha256": "f0d1aa9a8b5a4ac455dbedb3b2b19e3daf94d7c4929497573892600897c20618"
+    },
+    {
+      "path": "FICCI/NCL/183.pdf",
+      "bytes": 619865,
+      "sha256": "8c516a9f9301bedd240aa2513de7597f7ca12dd174db1417a36d4d628dce8ded"
+    },
+    {
+      "path": "FICCI/NCL/184.pdf",
+      "bytes": 816033,
+      "sha256": "4e1fceaa1fe0ccec45d3a85db139678fb0881cd727d53bae99cdffe6eaa481cd"
+    },
+    {
+      "path": "FICCI/NEERI/185.pdf",
+      "bytes": 796083,
+      "sha256": "7fb67ecd504f1977e0ac6d09b80dec5f6e8cd9a1ec020a5648d9214d4adb0967"
+    },
+    {
+      "path": "FICCI/NEERI/186.pdf",
+      "bytes": 887808,
+      "sha256": "a5d4ff3aa26ded70cae242c0604e815362c9899d5c7a2e0db0da212c320dcb25"
+    },
+    {
+      "path": "FICCI/NEERI/187.pdf",
+      "bytes": 658022,
+      "sha256": "2dab4e27fc1e90be4ff488fbc5e83240bff89b4f5ab01eba174cfdd4bf2115d7"
+    },
+    {
+      "path": "FICCI/NEERI/188.pdf",
+      "bytes": 660193,
+      "sha256": "8ecb4383b726d00f7f2a1bcc82462d0be09eaf5763327d6df1b20a6486824cde"
+    },
+    {
+      "path": "FICCI/NEERI/189.pdf",
+      "bytes": 840400,
+      "sha256": "090e02b11bd93e6f58c003bbedd76906afa8ab0b69a1658bcfc52166f85f57ef"
+    },
+    {
+      "path": "FICCI/NEERI/190.pdf",
+      "bytes": 471005,
+      "sha256": "cd0ac39ea6035bb9be4163a636acc7e9205d4e591196d560c1b4d71df436e5f3"
+    },
+    {
+      "path": "FICCI/NEIST/191.zip",
+      "bytes": 385497,
+      "sha256": "5e869286bf054675dd239597c363fb7b0ad1b12badfeabd105fbaf98284c86c7"
+    },
+    {
+      "path": "FICCI/NEIST/192.zip",
+      "bytes": 6899964,
+      "sha256": "0c0293fc8ffd820b07a848a1167e70079de6e11138f02f1130f147542f88a0c2"
+    },
+    {
+      "path": "FICCI/NEIST/193.docx",
+      "bytes": 101580,
+      "sha256": "0f5354a2835212daa78a34506e4c084a2a33278a503fb717c08c5eb2fe297805"
+    },
+    {
+      "path": "FICCI/NGRI/194.pdf",
+      "bytes": 223136,
+      "sha256": "ec56f4e05e1d943683fb0cd4233726a0b74b55172dfbd8f6046d2a79da567b34"
+    },
+    {
+      "path": "FICCI/NGRI/195.pdf",
+      "bytes": 1968347,
+      "sha256": "477036470924cb58ea7596838108d6a13d36b477b963ea0a7f180ccecfd6d8e2"
+    },
+    {
+      "path": "FICCI/NGRI/196.pdf",
+      "bytes": 188839,
+      "sha256": "95e57c95f5c10f6167c4b2912a30248499c388283d11876844d0e9971dbdee45"
+    },
+    {
+      "path": "FICCI/NGRI/197.pdf",
+      "bytes": 25158655,
+      "sha256": "e00cbebffd48f6c89157e35804a5579fb60a4a574654ca4e9c0f107e45bd6359"
+    },
+    {
+      "path": "FICCI/NIIST/198.pdf",
+      "bytes": 415816,
+      "sha256": "20525220e15bc4bd5e2c637831b36072cbda6aec19e8804eab6a7ab6bd899db8"
+    },
+    {
+      "path": "FICCI/NIIST/199.pdf",
+      "bytes": 1131997,
+      "sha256": "07da3c3d45262b008f256b8bc8fb334c40de20ff034caf8efe981f629e5f79e5"
+    },
+    {
+      "path": "FICCI/NIIST/200.pdf",
+      "bytes": 842936,
+      "sha256": "93493fc24f5cabff4220e027ee28a4460495c2a1aae0c6e485994ac97187614b"
+    },
+    {
+      "path": "FICCI/NIIST/201.pdf",
+      "bytes": 826492,
+      "sha256": "ec80487421c09f02e7a14e45b3dc300a28af66c85da2c4d38a41058c579a5add"
+    },
+    {
+      "path": "FICCI/NIIST/202.pdf",
+      "bytes": 1141106,
+      "sha256": "5bce71cd65cde245982cc978ca9412cd16f0639d5a845a17a98af6f59d753cb1"
+    },
+    {
+      "path": "FICCI/NIIST/203.pdf",
+      "bytes": 865574,
+      "sha256": "fe93444a082a2ca84dac5fcb43057466b3427999749a5991ff0e729b2da615ae"
+    },
+    {
+      "path": "FICCI/NIIST/204.pdf",
+      "bytes": 1050126,
+      "sha256": "4517e4c822af36e144c21fb1ae605c77e13d6087e32c78365a44001735478580"
+    },
+    {
+      "path": "FICCI/NIIST/205.pdf",
+      "bytes": 1143811,
+      "sha256": "6bd2830fe4d1d6717f17cc13c26bedd7a8df15025c709ee95e24c0e34e82f984"
+    },
+    {
+      "path": "FICCI/NIIST/206.pdf",
+      "bytes": 427969,
+      "sha256": "963e1e6b9bf305b3bf10abf6cbfb6011844f433f54d49bd10719744d4bb39e09"
+    },
+    {
+      "path": "FICCI/NIIST/207.pdf",
+      "bytes": 631998,
+      "sha256": "e9ecf4d342b161fb698c61d7b1fe76639a0f5722a3ab8a4dff25fe571a393610"
+    },
+    {
+      "path": "FICCI/NIIST/208.pdf",
+      "bytes": 2602430,
+      "sha256": "af0cf9687faec03990d8984e73c0e3cf4d85e09bdfd3dec901a1310fb21a33a2"
+    },
+    {
+      "path": "FICCI/NIIST/209.pdf",
+      "bytes": 383865,
+      "sha256": "ed144f208387bd18ae75209caca925db884f8d46c6199e0660fedf1a09b2437c"
+    },
+    {
+      "path": "FICCI/NIIST/210.pdf",
+      "bytes": 769765,
+      "sha256": "efd493620667afcbb46613d65f0dbfdee38d335ddf8be068e12a5100c1f1e062"
+    },
+    {
+      "path": "FICCI/NIIST/211.pdf",
+      "bytes": 947694,
+      "sha256": "f3d5e0f3b55b691d8bc98127b33b61f22474e17f3ac90d6e8e57f66e28afec3b"
+    },
+    {
+      "path": "FICCI/NIIST/212.pdf",
+      "bytes": 1182143,
+      "sha256": "09bd629a7f8ec15cbe5fa0a6bd8593021f17f46cea3fc3dd0d34b0878ae3962f"
+    },
+    {
+      "path": "FICCI/NML/213.pdf",
+      "bytes": 3591140,
+      "sha256": "3c15763e775cf4ad65d8f70cd33ab3a28c89026e58f0c9676942ba0dc43a8951"
+    },
+    {
+      "path": "FICCI/NPL/214.pdf",
+      "bytes": 1912482,
+      "sha256": "28261d101cf506b8b2457b96bd419d73b5da49398150dd1d070cb9d5bd3662b9"
+    },
+    {
+      "path": "FICCI/NPL/215.pdf",
+      "bytes": 1642863,
+      "sha256": "c116eb0df0279c8ce49852ceab8c369191da3219370edfc16d805c6c6cd3032c"
+    },
+    {
+      "path": "FICCI/NPL/216.pdf",
+      "bytes": 1912970,
+      "sha256": "f54b8768f214350a6a894e97919ff0c3f8e2cdc8e346eda2b4a336b53d5df72d"
+    },
+    {
+      "path": "FICCI/NPL/217.pdf",
+      "bytes": 1941925,
+      "sha256": "9d319af6f1b3bc619026b046bb9dbaabff0234286b528768204d1af89f6e4e2d"
+    },
+    {
+      "path": "FICCI/NPL/218.pdf",
+      "bytes": 1408960,
+      "sha256": "e60257f202c57bd69abab184e282f3aa0cae728e47381448624db50ef9c69f54"
+    },
+    {
+      "path": "FICCI/NPL/219.pdf",
+      "bytes": 2299964,
+      "sha256": "3d68f772034a4dadecc0c5ea2a63a89068803c1a68feb8924615750d501c06fb"
+    },
+    {
+      "path": "FICCI/NPL/220.pdf",
+      "bytes": 1741604,
+      "sha256": "10c1271bca2ee02839478a4ee35f6c11c0576cc2281b482edddab51c49a1f9be"
+    },
+    {
+      "path": "FICCI/NPL/221.pdf",
+      "bytes": 1303660,
+      "sha256": "52260b1784a53cf8e9a9b626d4a3ffaf59fed35d7d63ce615a00f10b43aafea8"
+    },
+    {
+      "path": "FICCI/NPL/222.pdf",
+      "bytes": 1284185,
+      "sha256": "b54e7a64470a307b28455dec39eaf5f0d24b9712e627077c37b79203ac3d5a40"
+    },
+    {
+      "path": "FICCI/NPL/223.pdf",
+      "bytes": 1636432,
+      "sha256": "ab7b39a76b0b05ad37c812b8bf4592adcb27171a765975de734fe2f9b5bdc586"
+    },
+    {
+      "path": "FICCI/README-FIRST.txt",
+      "bytes": 674,
+      "sha256": "3a6ea55fa57fdd3860addf70b98476242a22498ecb1f2a523917cc691a465e3f"
+    },
+    {
+      "path": "FICCI/SERC/224.pdf",
+      "bytes": 6033889,
+      "sha256": "931edd70733b6d87e06ad886672a65542dd7c6f9d92b5d7c885c91d5f1548466"
+    },
+    {
+      "path": "FICCI/SERC/225.pdf",
+      "bytes": 7163984,
+      "sha256": "67b4c1188d22b48159a4fac51a7ff2e6781216bc9f94cce731aed982ea854be2"
+    },
+    {
+      "path": "FICCI/SERC/226.pdf",
+      "bytes": 6321817,
+      "sha256": "eea36ebe1ac1431c1ad3811142a58507672bf5d9a39f22dae25f5d851b244c7b"
+    },
+    {
+      "path": "FICCI/SERC/227.pdf",
+      "bytes": 9664005,
+      "sha256": "f7abaccc317b73808ba3f368b1b0c9802276ea047eec4e90bdbd92e8167ab060"
+    }
+  ]
+}

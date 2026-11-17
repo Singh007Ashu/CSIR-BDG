@@ -1,0 +1,35 @@
+PRIVATE CSIR BDG FULL HANDOVER - 16 November 2026
+
+Includes current code, a fresh MySQL application database export and the
+configured uploads/templates/source documents plus FICCI folder.
+This supersedes source-only notes elsewhere in this archive.
+
+SENSITIVE: real lab/industry records, password hashes and private documents.
+Do not publish this ZIP or extracted data in a PUBLIC repository or link.
+This ZIP is not encrypted. Use an approved secure channel and restricted access.
+No MySQL root/app password, session secret, .env or raw MySQL data directory
+is included. Existing WEBSITE password hashes/salts are retained in the SQL.
+
+RESTORE ON ANOTHER MACHINE
+1. Extract to a short path such as C:/CSIR/BDG to avoid long Windows paths.
+2. Install Node and MySQL. Create a NEW EMPTY database using utf8mb4_bin.
+3. In MySQL Workbench, import database/csir-bdg.sql into that empty database.
+   Do not import into an existing operational database; the dump contains DDL.
+4. Create a restricted database application user. Copy .env.mysql.example to
+   .env; set DB_PROVIDER=mysql, CSIR_LOCAL_MYSQL=0 and MYSQL_DATABASE_URL.
+   Choose a new strong SESSION_SECRET and correct APP_ORIGINS.
+5. Set UPLOAD_ROOT to the extracted storage folder and FICCI_ROOT to the
+   extracted FICCI folder. Keep the complete relative folder structure.
+6. Run npm ci, npm run build, npm run start (Windows: npm.cmd).
+   DO NOT run setup, db:seed or replacement data imports.
+7. Verify logins, record counts, document access and workflows before use.
+
+The old website passwords remain valid because their hashes are preserved.
+Server database passwords are separate and must be configured on the new PC.
+OS scanner and optional document-parser containers must be configured separately.
+Current machine and original databases have not been replaced by packaging.
+
+MANIFESTS
+SHA256-MANIFEST.json covers source files. PRIVATE-DATA-MANIFEST.json covers
+the SQL snapshot and document files. PACKAGE-VERIFICATION.json is outside the
+ZIP. Large data files may need private storage rather than normal Git commits.
