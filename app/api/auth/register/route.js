@@ -9,7 +9,7 @@ import { cleanText, optionalText } from "../../../../lib/request";
 
 async function POSTHandler(req) {
   const body = await req.json();
-  const throttled = await loginThrottle("registration", body.email, req); if (throttled) return throttled;
+  const throttled = await loginThrottle("registration", body.email); if (throttled) return throttled;
   const email = cleanText(body.email, 254).toLowerCase();
   if (!cleanText(body.name, 150) || !email || !cleanText(body.orgName, 200) || !cleanText(body.orgType, 50)) {
     return NextResponse.json({ error: "Name, email, organization name and type are required." }, { status: 400 });

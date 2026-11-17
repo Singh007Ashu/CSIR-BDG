@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-16T09:34:35.723Z",
+  "server": {
+    "version": "8.4.9",
+    "db": "csir_migration_test_bdg_20261116"
+  },
+  "restrictedApplicationUserWorks": true,
+  "transactionRollbackPassed": true,
+  "sqlBackup": {
+    "file": "C:\\Users\\FOX-TROT\\Documents\\Website\\storage\\mysql-local\\CSIR-BDG-MySQL-2026-11-16.sql",
+    "bytes": 2045869,
+    "sha256": "81fc4c1145eff0043a4838392c6574854fde4cfd689a4cec2e1e1a8a948a78a6"
+  }
+}

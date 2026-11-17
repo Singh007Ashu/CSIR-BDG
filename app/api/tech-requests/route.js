@@ -1,11 +1,9 @@
 import { withApiBoundary } from "../../../lib/apiBoundary";
 import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/db";
-import { requireRole, requireUser } from "../../../lib/session";
+import { requireUser } from "../../../lib/session";
 
 async function GETHandler() {
-  const { error } = await requireRole(["HEAD_ADMIN", "HEAD_BDG", "ADMIN"]);
-  if (error) return error;
   const requests = await prisma.technologyRequest.findMany({
     include: { technology: true, organization: true },
     orderBy: { createdAt: "desc" },

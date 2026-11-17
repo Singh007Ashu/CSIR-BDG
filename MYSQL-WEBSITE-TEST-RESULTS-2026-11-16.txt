@@ -1,0 +1,72 @@
+CSIR BDG WEBSITE CONNECTED TO MYSQL
+16 November 2026
+
+Local website: http://localhost:3000
+HEAD: /governance-login   Laboratory: /lab-login   Industry: /login
+Provider: MySQL 8.4.9, 127.0.0.1:3307
+Database: csir_migration_test_bdg_20261116
+Build: .next-mysql
+
+CHANGES
+- Switched this workspace configuration to the existing migrated MySQL copy.
+- npm start/dev/build use a launch helper. MySQL credentials and the persistent
+  session-signing secret are stored privately, not in frontend code or Git.
+- Preserved the original document storage and FICCI paths.
+- Added production-build exclusions for private storage, databases, test
+  fixtures and backups. Removed the generated storage copy that the first
+  build had copied. The real storage/database was not deleted or changed.
+- Added MySQL-specific workflow and role regression harnesses.
+
+TESTS
+- Browser HEAD and laboratory login with synthetic accounts on isolated MySQL.
+- Industry registration, logout and fresh login.
+- Laboratory technology entry, updates and HEAD notifications.
+- HEAD read-only details, correction request, laboratory response and review.
+- Industry request assignment to the correct lab and lab technical proposal.
+- Monthly and quarterly draft/submit/return/resubmit/review workflows.
+- Research progress updates, partnership response and HEAD clarification reply.
+- Annual FY entry in 2025-26 format, then two successive FY edits; zero/decimal
+  values retained; HEAD editing denied and other-lab data isolated.
+- HEAD project creation, assigned laboratory technology/data linking.
+- Co-development entry, HEAD visibility and notifications.
+Total: 15 workflow groups passed against the final build.
+- Role/access matrix evidence: security-review/mysql-role-matrix-results.json.
+- Running real-data website: 13 HEAD/lab/industry read API checks passed.
+- Build succeeded. Representative private files are absent from standalone output.
+
+PRESERVATION
+54 application tables / 3,781 rows reconciled field by field after the switch.
+All credential hashes/salts match the original snapshot. Original SQLite checksum
+is unchanged. 1,962 technologies, 39 labs and 14 users are retained.
+No existing passwords were reset. Test records exist only in separate csir_uat_*
+databases. They were not inserted into the operational MySQL copy.
+
+TEST LIMITS
+Browser password-entry tests used synthetic accounts, not unknown plaintext
+passwords for existing people. Existing-account compatibility was checked by
+exact credential preservation and authenticated read checks. The complete
+upload/scanner/AI and all possible browser combinations were not retested in this
+MySQL switch. This is local testing, not CSIR production/security approval.
+The build still reports a dynamic parser tracing warning; explicit private-path
+exclusions are in place. No database or source archive was publicly uploaded.
+
+RUN AFTER RESTART
+cd C:\Users\FOX-TROT\Documents\Website
+npm.cmd run start
+Use npm.cmd run build first if source code changes. The launcher binds the site
+to loopback, so other devices cannot access it without separate hosting setup.
+
+ROLLBACK
+Do not delete or reseed any database. Stop the MySQL website process first.
+For a controlled rollback, use the original SQLite snapshot at
+.tmp/security-preview-2026-11-06.sqlite with DB_PROVIDER=sqlite and its matching
+storage directory; preserve the session secret and approved local origins.
+Reconcile any NEW MySQL entries made after this switch before rolling back,
+otherwise those later entries would not be present in the older SQLite copy.
+Keep storage/mysql-local intact: it contains the live MySQL data and SQL backup.
+
+EVIDENCE
+security-review/mysql-business-uat-results.json
+security-review/mysql-role-matrix-results.json
+security-review/mysql-app-read-smoke-2026-11-16.json
+security-review/mysql-final-verification-2026-11-16.json

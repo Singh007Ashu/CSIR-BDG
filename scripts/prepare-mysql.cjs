@@ -5,7 +5,9 @@ let schema=source.replace(/generator client\s*\{[^}]*\}/,'generator client {\n p
 schema=schema.replace(/model (\w+)\s*\{([\s\S]*?)\n\}/g,(whole,name,body)=>{
  const unique=new Set(),longStrings=new Set();
  for(const match of body.matchAll(/@@(?:unique|id)\(\[([^\]]+)\]/g))for(const item of match[1].split(','))unique.add(item.trim().split(/[ (]/)[0]);
- body=body.split('\n').map(line=>{const m=line.match(/^\s*(\w+)\s+String\??\s*(.*)$/);if(!m)return line;if(unique.has(m[1])||/@unique|@id/.test(m[2]))return line+' @db.VarChar(191)';longStrings.add(m[1]);return line+' @db.LongText';}).join('\n');
+ // MySQL cannot use Prisma's literal defaults on TEXT columns. Defaulted
+ // strings are short status/role codes; preflight validates every existing value.
+ body=body.split('\n').map(line=>{const m=line.match(/^\s*(\w+)\s+String\??\s*(.*)$/);if(!m)return line;if(unique.has(m[1])||/@unique|@id|@default/.test(m[2]))return line+' @db.VarChar(191)';longStrings.add(m[1]);return line+' @db.LongText';}).join('\n');
  body=body.replace(/@@index\(\[([^\]]+)\]/g,(all,fields)=>'@@index(['+fields.split(',').map(field=>longStrings.has(field.trim())?field.trim()+'(length: 191)':field).join(', ')+']');
  return `model ${name} {${body}\n}`;
 });

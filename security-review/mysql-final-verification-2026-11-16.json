@@ -1,0 +1,279 @@
+{
+  "date": "2026-11-16T09:45:34.991Z",
+  "sourceUnchanged": true,
+  "allFieldsAndCredentialHashesMatch": true,
+  "tables": 54,
+  "rows": 3781,
+  "results": [
+    {
+      "table": "Role",
+      "rows": 16,
+      "exactMatch": true
+    },
+    {
+      "table": "Permission",
+      "rows": 26,
+      "exactMatch": true
+    },
+    {
+      "table": "RolePermission",
+      "rows": 165,
+      "exactMatch": true
+    },
+    {
+      "table": "User",
+      "rows": 14,
+      "exactMatch": true
+    },
+    {
+      "table": "Lab",
+      "rows": 39,
+      "exactMatch": true
+    },
+    {
+      "table": "DatasetCategory",
+      "rows": 1,
+      "exactMatch": true
+    },
+    {
+      "table": "DatasetImport",
+      "rows": 3,
+      "exactMatch": true
+    },
+    {
+      "table": "Technology",
+      "rows": 1962,
+      "exactMatch": true
+    },
+    {
+      "table": "TechnologyFinancialYear",
+      "rows": 3,
+      "exactMatch": true
+    },
+    {
+      "table": "ChangeRequest",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "ApprovalHistory",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "Document",
+      "rows": 229,
+      "exactMatch": true
+    },
+    {
+      "table": "Notification",
+      "rows": 122,
+      "exactMatch": true
+    },
+    {
+      "table": "AuditLog",
+      "rows": 212,
+      "exactMatch": true
+    },
+    {
+      "table": "LoginHistory",
+      "rows": 241,
+      "exactMatch": true
+    },
+    {
+      "table": "Organization",
+      "rows": 2,
+      "exactMatch": true
+    },
+    {
+      "table": "TechnologyRequest",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "ProblemStatement",
+      "rows": 1,
+      "exactMatch": true
+    },
+    {
+      "table": "Proposal",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "Partnership",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "Company",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "CoDevelopmentProject",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "CommercializationDetail",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "CommercialEngagement",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "CommercialManDay",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "ProjectDeliverable",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "Mou",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "Project",
+      "rows": 2,
+      "exactMatch": true
+    },
+    {
+      "table": "IndustryNeedCase",
+      "rows": 5,
+      "exactMatch": true
+    },
+    {
+      "table": "ProjectTechnology",
+      "rows": 225,
+      "exactMatch": true
+    },
+    {
+      "table": "ReferenceList",
+      "rows": 9,
+      "exactMatch": true
+    },
+    {
+      "table": "ReferenceOption",
+      "rows": 67,
+      "exactMatch": true
+    },
+    {
+      "table": "Sop",
+      "rows": 1,
+      "exactMatch": true
+    },
+    {
+      "table": "SopStage",
+      "rows": 10,
+      "exactMatch": true
+    },
+    {
+      "table": "TechnologyParameter",
+      "rows": 15,
+      "exactMatch": true
+    },
+    {
+      "table": "ParameterOption",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "TechnologyParameterValue",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "TechnologySOPStatus",
+      "rows": 300,
+      "exactMatch": true
+    },
+    {
+      "table": "Report",
+      "rows": 2,
+      "exactMatch": true
+    },
+    {
+      "table": "ReportSubmission",
+      "rows": 74,
+      "exactMatch": true
+    },
+    {
+      "table": "Query",
+      "rows": 1,
+      "exactMatch": true
+    },
+    {
+      "table": "QueryResponse",
+      "rows": 1,
+      "exactMatch": true
+    },
+    {
+      "table": "Note",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "Evidence",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "RaciAssignment",
+      "rows": 14,
+      "exactMatch": true
+    },
+    {
+      "table": "ExcelTemplate",
+      "rows": 1,
+      "exactMatch": true
+    },
+    {
+      "table": "SopDataRecord",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "SopRecordHistory",
+      "rows": 0,
+      "exactMatch": true
+    },
+    {
+      "table": "DocumentAnalysis",
+      "rows": 2,
+      "exactMatch": true
+    },
+    {
+      "table": "WorkflowPacket",
+      "rows": 2,
+      "exactMatch": true
+    },
+    {
+      "table": "WorkflowDocument",
+      "rows": 2,
+      "exactMatch": true
+    },
+    {
+      "table": "WorkflowStep",
+      "rows": 6,
+      "exactMatch": true
+    },
+    {
+      "table": "WorkflowEvent",
+      "rows": 5,
+      "exactMatch": true
+    },
+    {
+      "table": "TechnologyRevisionRequest",
+      "rows": 1,
+      "exactMatch": true
+    }
+  ]
+}

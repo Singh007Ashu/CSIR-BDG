@@ -10,7 +10,7 @@ import { requestMeta } from "../../../../lib/request";
 
 async function POSTHandler(req) {
   const body = await req.json();
-  const throttled = await loginThrottle("lab", body.labId, req); if (throttled) return throttled;
+  const throttled = await loginThrottle("lab", body.labId); if (throttled) return throttled;
   const labId = String(body.labId || "").trim().toUpperCase();
   const lab = labId ? await prisma.lab.findUnique({ where: { labId } }) : null;
   const success = Boolean(lab && lab.accountStatus === "ACTIVE" && await verifyPassword(body.password, lab.passwordHash, lab.passwordSalt));

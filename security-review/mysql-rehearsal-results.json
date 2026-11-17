@@ -1,0 +1,278 @@
+{
+  "date": "2026-11-16T09:33:35.555Z",
+  "sourceUnchanged": true,
+  "reconciliation": [
+    {
+      "model": "Role",
+      "count": 16,
+      "exactMatch": true
+    },
+    {
+      "model": "Permission",
+      "count": 26,
+      "exactMatch": true
+    },
+    {
+      "model": "RolePermission",
+      "count": 165,
+      "exactMatch": true
+    },
+    {
+      "model": "User",
+      "count": 14,
+      "exactMatch": true
+    },
+    {
+      "model": "Lab",
+      "count": 39,
+      "exactMatch": true
+    },
+    {
+      "model": "DatasetCategory",
+      "count": 1,
+      "exactMatch": true
+    },
+    {
+      "model": "DatasetImport",
+      "count": 3,
+      "exactMatch": true
+    },
+    {
+      "model": "Technology",
+      "count": 1962,
+      "exactMatch": true
+    },
+    {
+      "model": "TechnologyFinancialYear",
+      "count": 3,
+      "exactMatch": true
+    },
+    {
+      "model": "ChangeRequest",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "ApprovalHistory",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "Document",
+      "count": 229,
+      "exactMatch": true
+    },
+    {
+      "model": "Notification",
+      "count": 122,
+      "exactMatch": true
+    },
+    {
+      "model": "AuditLog",
+      "count": 212,
+      "exactMatch": true
+    },
+    {
+      "model": "LoginHistory",
+      "count": 241,
+      "exactMatch": true
+    },
+    {
+      "model": "Organization",
+      "count": 2,
+      "exactMatch": true
+    },
+    {
+      "model": "TechnologyRequest",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "ProblemStatement",
+      "count": 1,
+      "exactMatch": true
+    },
+    {
+      "model": "Proposal",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "Partnership",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "Company",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "CoDevelopmentProject",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "CommercializationDetail",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "CommercialEngagement",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "CommercialManDay",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "ProjectDeliverable",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "Mou",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "Project",
+      "count": 2,
+      "exactMatch": true
+    },
+    {
+      "model": "IndustryNeedCase",
+      "count": 5,
+      "exactMatch": true
+    },
+    {
+      "model": "ProjectTechnology",
+      "count": 225,
+      "exactMatch": true
+    },
+    {
+      "model": "ReferenceList",
+      "count": 9,
+      "exactMatch": true
+    },
+    {
+      "model": "ReferenceOption",
+      "count": 67,
+      "exactMatch": true
+    },
+    {
+      "model": "Sop",
+      "count": 1,
+      "exactMatch": true
+    },
+    {
+      "model": "SopStage",
+      "count": 10,
+      "exactMatch": true
+    },
+    {
+      "model": "TechnologyParameter",
+      "count": 15,
+      "exactMatch": true
+    },
+    {
+      "model": "ParameterOption",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "TechnologyParameterValue",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "TechnologySOPStatus",
+      "count": 300,
+      "exactMatch": true
+    },
+    {
+      "model": "Report",
+      "count": 2,
+      "exactMatch": true
+    },
+    {
+      "model": "ReportSubmission",
+      "count": 74,
+      "exactMatch": true
+    },
+    {
+      "model": "Query",
+      "count": 1,
+      "exactMatch": true
+    },
+    {
+      "model": "QueryResponse",
+      "count": 1,
+      "exactMatch": true
+    },
+    {
+      "model": "Note",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "Evidence",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "RaciAssignment",
+      "count": 14,
+      "exactMatch": true
+    },
+    {
+      "model": "ExcelTemplate",
+      "count": 1,
+      "exactMatch": true
+    },
+    {
+      "model": "SopDataRecord",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "SopRecordHistory",
+      "count": 0,
+      "exactMatch": true
+    },
+    {
+      "model": "DocumentAnalysis",
+      "count": 2,
+      "exactMatch": true
+    },
+    {
+      "model": "WorkflowPacket",
+      "count": 2,
+      "exactMatch": true
+    },
+    {
+      "model": "WorkflowDocument",
+      "count": 2,
+      "exactMatch": true
+    },
+    {
+      "model": "WorkflowStep",
+      "count": 6,
+      "exactMatch": true
+    },
+    {
+      "model": "WorkflowEvent",
+      "count": 5,
+      "exactMatch": true
+    },
+    {
+      "model": "TechnologyRevisionRequest",
+      "count": 1,
+      "exactMatch": true
+    }
+  ],
+  "passwordHashesPreserved": true,
+  "note": "Exact scalar-field reconciliation includes credential hashes/salts; these values are never printed. Run application/UAT against the target separately."
+}

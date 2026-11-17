@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node scripts/run-website.cjs dev",
+    "build": "node scripts/run-website.cjs build",
+    "start": "node scripts/run-website.cjs start",
     "cf:patch-windows": "node scripts/patch-opennext-windows.mjs",
     "cf:build": "npm run cf:patch-windows && node scripts/run-opennext.mjs build",
     "cf:preview": "npm run cf:build && opennextjs-cloudflare preview",

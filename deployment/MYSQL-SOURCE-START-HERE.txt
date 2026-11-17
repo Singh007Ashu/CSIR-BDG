@@ -1,0 +1,55 @@
+CSIR BDG MYSQL SOURCE PACKAGE
+16 November 2026
+
+This archive contains the latest frontend, backend, MySQL Prisma schema,
+migration/setup scripts, deployment examples and test evidence.
+The current local website has already been switched to MySQL.
+
+Verified locally: 15 business workflow groups and 4,067 role/access checks passed.
+54 application tables / 3,781 rows match the original snapshot, including
+password hashes and salts. Existing website passwords were not reset.
+This is not final CSIR production approval.
+
+IMPORTANT DATA SEPARATION
+This CODE archive intentionally excludes the real database, uploaded documents,
+FICCI document data, .env, database passwords, node_modules and build outputs.
+It is not a standalone replacement for your existing operational installation.
+The private SQL export and document folders must be transferred separately if
+moving to another PC/server. Do not upload them to a public repository.
+
+ON THE CURRENT PC
+Keep the existing .env, storage/mysql-local, original document storage and
+FICCI directories. Do not extract over or delete these folders.
+Existing project: C:\Users\FOX-TROT\Documents\Website
+Run npm.cmd run start. The local launcher loads private settings and starts
+local MySQL if needed. Open http://localhost:3000.
+After changing source, stop the old website, run npm.cmd run build, then start.
+Do not run setup, db:seed, replacement imports or db:push on the existing data.
+
+ON A NEW PC OR CSIR SERVER
+1. Provision a supported MySQL server and an empty target database. Transfer
+   the private SQL export securely and import it into that empty database.
+   Do not rerun the SQLite migration if restoring an already-converted SQL dump.
+2. Provision a restricted application user with SELECT/INSERT/UPDATE/DELETE
+   privileges on this database. Use a separate administrative migration account.
+3. Copy .env.mysql.example to .env and fill actual values securely. Do not use
+   placeholder secrets. CSIR_LOCAL_MYSQL=0 is for an explicitly provided URL;
+   CSIR_LOCAL_MYSQL=1 is only for the configured local private-folder launcher.
+4. Set UPLOAD_ROOT and FICCI_ROOT to the separately transferred document folders.
+5. Run npm ci, then npm run build, then npm run start. On Windows use npm.cmd.
+   npm ci generates clients but does not import data. Do not run seed/setup.
+6. Check counts, password-hash preservation, logins, lab entry, HEAD review,
+   notifications and document access before accepting the move.
+7. Review deployment/CSIR-IT-HANDOVER.txt for server controls. Its earlier
+   MySQL-pending statements are historical; local MySQL evidence is now included.
+
+The local startup helper binds to 127.0.0.1 by default. Production hosting needs
+an approved reverse proxy, TLS, scanner, secret provisioning and service setup.
+Optional legacy Office extraction requires its separately built sandbox image.
+
+TEST EVIDENCE
+MYSQL-WEBSITE-TEST-RESULTS-2026-11-16.txt summarizes the tested scope.
+security-review/mysql-business-uat-results.json
+security-review/mysql-role-matrix-results.json
+security-review/mysql-final-verification-2026-11-16.json
+SHA256-MANIFEST.json lists the packaged files and checksums.

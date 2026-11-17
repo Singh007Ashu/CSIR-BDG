@@ -12,6 +12,7 @@ prisma/dev.db-journal
 prisma/d1/seed.sql
 ficci-source.bin
 storage/source/
+storage/mysql-local/
 .tmp/
 prisma/generated/
 prisma/d1/initial-credentials.json

@@ -30,7 +30,7 @@ async function main() {
   walk('prisma/mysql', p => /\.(prisma|sql|js|cjs|txt|md)$/.test(p));
   if (fs.existsSync(path.join(root, 'prisma/d1/schema.sql'))) add('prisma/d1/schema.sql');
   for (const file of ['package.json','package-lock.json','next.config.mjs','proxy.js',
-    'instrumentation.js','open-next.config.ts','wrangler.jsonc','.gitignore','.env.example']) add(file);
+    'instrumentation.js','open-next.config.ts','wrangler.jsonc','.gitignore','.env.example','.env.mysql.example']) add(file);
   // Only dated/status evidence, no operational data, screenshots or transient logs.
   for (const entry of fs.readdirSync(path.join(root, 'security-review'))) {
     if (/\.(json|txt)$/.test(entry)) add('security-review/' + entry);
@@ -40,27 +40,28 @@ async function main() {
     'five-accessibility.cjs','legacy-api-integration.cjs','security-parser-capacity.cjs']) {
     if (fs.existsSync(path.join(root, '.tmp', file))) add('.tmp/' + file);
   }
-  add('security-review/SUBMISSION-READINESS-2026-11-09.txt', 'START-HERE.txt');
+  add('deployment/MYSQL-SOURCE-START-HERE.txt', 'START-HERE.txt');
+  add('output/submission/MYSQL-WEBSITE-TEST-RESULTS-2026-11-16.txt', 'MYSQL-WEBSITE-TEST-RESULTS-2026-11-16.txt');
   zip.file(prefix + 'SHA256-MANIFEST.json', JSON.stringify(manifest, null, 2));
   const bytes = await zip.generateAsync({type:'nodebuffer', compression:'DEFLATE'});
   const check = await JSZip.loadAsync(bytes);
   for (const item of manifest) {
     const actual = await check.file(prefix + item.file).async('nodebuffer');
     if (hash(actual) !== item.sha256) throw Error('Hash mismatch: ' + item.file);
-    if (/(^|\/)(\.env|dev\.db|initial-credentials\.json)$|\.(sqlite|db|zip)$/i.test(item.file)) throw Error('Forbidden file: ' + item.file);
+    if (/(^|\/)(\.env|dev\.db|initial-credentials\.json|connection-private\.json|website-secret-private\.json)$|\.(sqlite|db|zip)$/i.test(item.file)) throw Error('Forbidden file: ' + item.file);
   }
   for (const required of ['app/layout.js','prisma/schema.prisma','package.json','START-HERE.txt',
-    'lib/parserRunner.js','scripts/legacy-office.cjs']) {
+    'lib/parserRunner.js','scripts/legacy-office.cjs','prisma/mysql/schema.prisma','scripts/run-website.cjs','.env.mysql.example']) {
     if (!check.file(prefix + required)) throw Error('Missing required source: ' + required);
   }
   const out = path.join(root, 'output', 'submission');
   fs.mkdirSync(out, {recursive:true});
-  const filename = 'CSIR-BDG-Submission-Candidate-2026-11-09.zip';
+  const filename = 'CSIR-BDG-MySQL-Source-2026-11-16.zip';
   fs.writeFileSync(path.join(out, filename), bytes);
   const result = {date:new Date().toISOString(), filename, files:manifest.length,
     bytes:bytes.length, sha256:hash(bytes), verified:true,
     excludes:'Operational database, credentials, .env, uploads, FICCI data, build outputs and dependencies'};
-  fs.writeFileSync(path.join(out, 'PACKAGE-VERIFICATION.json'), JSON.stringify(result,null,2));
+  fs.writeFileSync(path.join(out, 'MYSQL-PACKAGE-VERIFICATION-2026-11-16.json'), JSON.stringify(result,null,2));
   console.log(JSON.stringify(result,null,2));
 }
 main().catch(error => {console.error(error);process.exitCode=1;});

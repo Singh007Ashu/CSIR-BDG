@@ -9,7 +9,7 @@ import { requestMeta } from "../../../../lib/request";
 
 async function POSTHandler(req) {
   const body = await req.json();
-  const throttled = await loginThrottle("user", body.email, req); if (throttled) return throttled;
+  const throttled = await loginThrottle("user", body.email); if (throttled) return throttled;
   const email = String(body.email || "").toLowerCase().trim();
   const user = email ? await prisma.user.findUnique({ where: { email }, include: { organization: true, assignedLab: { select: { code: true, name: true } } } }) : null;
   const success = Boolean(user && user.accountStatus === "ACTIVE" && await verifyPassword(body.password, user.passwordHash, user.passwordSalt));

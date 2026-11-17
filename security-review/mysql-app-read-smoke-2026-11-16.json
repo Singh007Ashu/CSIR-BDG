@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-16T09:44:26.434Z",
+  "scope": "Read API checks with short-lived test sessions for existing accounts; no password reset or form submission",
+  "results": [
+    {
+      "role": "HEAD",
+      "route": "/api/technologies",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "role": "HEAD",
+      "route": "/api/projects",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "role": "HEAD",
+      "route": "/api/problem-statements",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "role": "HEAD",
+      "route": "/api/reports",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "role": "HEAD",
+      "route": "/api/notifications",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "role": "LAB",
+      "route": "/api/technologies",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "role": "LAB",
+      "route": "/api/projects",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "role": "LAB",
+      "route": "/api/problem-statements",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "role": "LAB",
+      "route": "/api/reports",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "role": "LAB",
+      "route": "/api/notifications",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "role": "INDUSTRY",
+      "route": "/api/industry-catalog",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "role": "INDUSTRY",
+      "route": "/api/problem-statements",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "role": "INDUSTRY",
+      "route": "/api/notifications",
+      "status": 200,
+      "passed": true
+    }
+  ]
+}

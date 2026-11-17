@@ -6,7 +6,7 @@ import { notifyHeadBdgAndAdmins } from "../../../../lib/labAuth";
 
 async function POSTHandler(req) {
   const body = await req.json();
-  const throttled = await loginThrottle("reset", body.officialEmail, req); if (throttled) return throttled;
+  const throttled = await loginThrottle("reset", body.officialEmail); if (throttled) return throttled;
   const officialEmail = String(body.officialEmail || "").toLowerCase().trim();
   const response = { ok: true, message: "If this email is registered, an administrator has been notified. Contact your administrator through your official channel to verify your identity and obtain a reset." };
   if (!officialEmail) return NextResponse.json({ error: "Official email is required." }, { status: 400 });

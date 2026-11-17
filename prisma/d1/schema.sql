@@ -30,8 +30,6 @@ CREATE TABLE "User" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "designation" TEXT,
-    "profilePhoto" TEXT,
     "passwordHash" TEXT NOT NULL,
     "passwordSalt" TEXT,
     "role" TEXT NOT NULL DEFAULT 'APPLICANT',
@@ -586,30 +584,11 @@ CREATE TABLE "Project" (
     "notes" TEXT,
     "folderPath" TEXT,
     "isSystem" BOOLEAN NOT NULL DEFAULT false,
-    "assignedLabIdsJson" TEXT,
     "createdById" INTEGER,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
     CONSTRAINT "Project_responsibleOfficerId_fkey" FOREIGN KEY ("responsibleOfficerId") REFERENCES "User" ("id") ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT "Project_createdById_fkey" FOREIGN KEY ("createdById") REFERENCES "User" ("id") ON DELETE SET NULL ON UPDATE CASCADE
-);
-
--- CreateTable
-CREATE TABLE "IndustryNeedCase" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "referenceNo" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
-    "description" TEXT,
-    "fileName" TEXT NOT NULL,
-    "fileType" TEXT NOT NULL,
-    "mimeType" TEXT,
-    "filePath" TEXT NOT NULL,
-    "fileSize" INTEGER NOT NULL,
-    "status" TEXT NOT NULL DEFAULT 'ANALYSED',
-    "analysisJson" TEXT,
-    "uploadedByUserId" INTEGER,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
 );
 
 -- CreateTable
@@ -1295,15 +1274,6 @@ CREATE UNIQUE INDEX "Project_name_key" ON "Project"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Project_slug_key" ON "Project"("slug");
-
--- CreateIndex
-CREATE UNIQUE INDEX "IndustryNeedCase_referenceNo_key" ON "IndustryNeedCase"("referenceNo");
-
--- CreateIndex
-CREATE INDEX "IndustryNeedCase_createdAt_idx" ON "IndustryNeedCase"("createdAt");
-
--- CreateIndex
-CREATE INDEX "IndustryNeedCase_status_idx" ON "IndustryNeedCase"("status");
 
 -- CreateIndex
 CREATE INDEX "Project_status_name_idx" ON "Project"("status", "name");

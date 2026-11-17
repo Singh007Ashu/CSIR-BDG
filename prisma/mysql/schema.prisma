@@ -46,10 +46,10 @@ model User {
   profilePhoto                  String? @db.LongText
   passwordHash                  String @db.LongText
   passwordSalt                  String? @db.LongText
-  role                          String                      @default("APPLICANT") @db.LongText
+  role                          String                      @default("APPLICANT") @db.VarChar(191)
   roleId                        Int?
   roleDefinition                Role?                       @relation(fields: [roleId], references: [id])
-  accountStatus                 String                      @default("ACTIVE") @db.LongText
+  accountStatus                 String                      @default("ACTIVE") @db.VarChar(191)
   organizationId                Int?
   organization                  Organization?               @relation(fields: [organizationId], references: [id])
   assignedLabId                 Int?
@@ -84,8 +84,8 @@ model User {
   createdAt                     DateTime                    @default(now())
   updatedAt                     DateTime                    @updatedAt
 
-  @@index([role(length: 191)])
-  @@index([accountStatus(length: 191)])
+  @@index([role])
+  @@index([accountStatus])
   @@index([assignedLabId])
 }
 
@@ -103,8 +103,8 @@ model Lab {
   mobileNumber               String? @db.LongText
   passwordHash               String? @db.LongText
   passwordSalt               String? @db.LongText
-  primaryRole                String                      @default("LAB_COORDINATOR") @db.LongText
-  accountStatus              String                      @default("UNREGISTERED") @db.LongText
+  primaryRole                String                      @default("LAB_COORDINATOR") @db.VarChar(191)
+  accountStatus              String                      @default("UNREGISTERED") @db.VarChar(191)
   registeredAt               DateTime?
   approvedAt                 DateTime?
   lastLoginAt                DateTime?
@@ -131,7 +131,7 @@ model Lab {
   commercialEngagements      CommercialEngagement[]
   updatedAt                  DateTime                    @updatedAt
 
-  @@index([accountStatus(length: 191)])
+  @@index([accountStatus])
   @@index([name])
 }
 
@@ -156,7 +156,7 @@ model DatasetImport {
   recordsTotal    Int             @default(0)
   recordsImported Int             @default(0)
   recordsFailed   Int             @default(0)
-  status          String          @default("PENDING") @db.LongText
+  status          String          @default("PENDING") @db.VarChar(191)
   errorLog        String? @db.LongText
   importedById    Int?
   importedBy      User?           @relation(fields: [importedById], references: [id])
@@ -164,7 +164,7 @@ model DatasetImport {
   completedAt     DateTime?
 
   @@index([categoryId,  createdAt])
-  @@index([status(length: 191)])
+  @@index([status])
 }
 
 model Technology {
@@ -180,8 +180,8 @@ model Technology {
   advantages               String? @db.LongText
   applications             String? @db.LongText
   keyFeatures              String? @db.LongText
-  classification           String                      @default("NON_IP") @db.LongText
-  ipStatus                 String                      @default("NON_IP") @db.LongText
+  classification           String                      @default("NON_IP") @db.VarChar(191)
+  ipStatus                 String                      @default("NON_IP") @db.VarChar(191)
   trl                      Int?
   crl                      Int?
   sector                   String? @db.LongText
@@ -189,8 +189,8 @@ model Technology {
   applicationMap           String? @db.LongText
   servicesOffered          String? @db.LongText
   sourceUrl                String? @db.LongText
-  status                   String                      @default("IDENTIFIED") @db.LongText
-  recordScope              String                      @default("MASTER") @db.LongText
+  status                   String                      @default("IDENTIFIED") @db.VarChar(191)
+  recordScope              String                      @default("MASTER") @db.VarChar(191)
   recordFinancialYear      Int?
   theme                    String? @db.LongText
   subSector                String? @db.LongText
@@ -203,7 +203,7 @@ model Technology {
   businessValueInformation String? @db.LongText
   impactInformation        String? @db.LongText
   evidenceReference        String? @db.LongText
-  approvalStatus           String                      @default("APPROVED") @db.LongText
+  approvalStatus           String                      @default("APPROVED") @db.VarChar(191)
   sopCompletion            Int                         @default(0)
   sopLegacyExempt          Boolean                     @default(false)
   submittedAt              DateTime?
@@ -227,10 +227,10 @@ model Technology {
   updatedAt                DateTime                    @updatedAt
 
   @@index([labId, name(length: 191)])
-  @@index([datasetCategoryId, status(length: 191)])
+  @@index([datasetCategoryId,  status])
   @@index([sector(length: 191)])
   @@index([piName(length: 191)])
-  @@index([recordScope(length: 191), approvalStatus(length: 191)])
+  @@index([recordScope,  approvalStatus])
   @@index([theme(length: 191)])
   @@index([commercialisationStage(length: 191)])
   @@index([recordFinancialYear])
@@ -268,7 +268,7 @@ model ChangeRequest {
   proposedData String @db.LongText
   currentData  String? @db.LongText
   reason       String? @db.LongText
-  status       String            @default("PENDING") @db.LongText
+  status       String            @default("PENDING") @db.VarChar(191)
   headRemarks  String? @db.LongText
   decidedById  Int?
   decidedBy    User?             @relation("ChangeRequestDecidedBy", fields: [decidedById], references: [id])
@@ -277,9 +277,9 @@ model ChangeRequest {
   createdAt    DateTime          @default(now())
   updatedAt    DateTime          @updatedAt
 
-  @@index([labId, status(length: 191)])
+  @@index([labId,  status])
   @@index([technologyId])
-  @@index([status(length: 191),  createdAt])
+  @@index([status,  createdAt])
 }
 
 model ApprovalHistory {
@@ -422,9 +422,9 @@ model TechnologyRequest {
   organization   Organization @relation(fields: [organizationId], references: [id])
   requestType    String @db.LongText
   notes          String? @db.LongText
-  status         String       @default("SUBMITTED") @db.LongText
+  status         String       @default("SUBMITTED") @db.VarChar(191)
   impactNotes    String? @db.LongText
-  headStatus     String       @default("PENDING") @db.LongText
+  headStatus     String       @default("PENDING") @db.VarChar(191)
   headRemarks    String? @db.LongText
   decidedById    Int?
   decidedBy      User?        @relation("TechRequestDecidedBy", fields: [decidedById], references: [id])
@@ -432,9 +432,9 @@ model TechnologyRequest {
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 
-  @@index([technologyId, status(length: 191)])
+  @@index([technologyId,  status])
   @@index([organizationId,  createdAt])
-  @@index([headStatus(length: 191),  createdAt])
+  @@index([headStatus,  createdAt])
 }
 
 model ProblemStatement {
@@ -450,9 +450,9 @@ model ProblemStatement {
   domain              String? @db.LongText
   labId               Int?
   lab                 Lab?         @relation(fields: [labId], references: [id])
-  status              String       @default("SUBMITTED") @db.LongText
+  status              String       @default("SUBMITTED") @db.VarChar(191)
   nonEngagementReason String? @db.LongText
-  headStatus          String       @default("PENDING") @db.LongText
+  headStatus          String       @default("PENDING") @db.VarChar(191)
   headRemarks         String? @db.LongText
   decidedById         Int?
   decidedBy           User?        @relation("ProblemDecidedBy", fields: [decidedById], references: [id])
@@ -462,8 +462,8 @@ model ProblemStatement {
   updatedAt           DateTime     @updatedAt
 
   @@index([organizationId,  createdAt])
-  @@index([labId, status(length: 191)])
-  @@index([headStatus(length: 191),  createdAt])
+  @@index([labId,  status])
+  @@index([headStatus,  createdAt])
 }
 
 model Proposal {
@@ -490,10 +490,10 @@ model Partnership {
   commercialPotential String? @db.LongText
   technologyGap       String? @db.LongText
   matchedApproach     String? @db.LongText
-  status              String       @default("CONSULTATION") @db.LongText
+  status              String       @default("CONSULTATION") @db.VarChar(191)
   mouSigned           Boolean      @default(false)
   royaltyNotes        String? @db.LongText
-  headStatus          String       @default("PENDING") @db.LongText
+  headStatus          String       @default("PENDING") @db.VarChar(191)
   headRemarks         String? @db.LongText
   decidedById         Int?
   decidedBy           User?        @relation("PartnershipDecidedBy", fields: [decidedById], references: [id])
@@ -502,8 +502,8 @@ model Partnership {
   updatedAt           DateTime     @updatedAt
 
   @@index([organizationId,  createdAt])
-  @@index([labId, status(length: 191)])
-  @@index([headStatus(length: 191),  createdAt])
+  @@index([labId,  status])
+  @@index([headStatus,  createdAt])
 }
 
 model Company {
@@ -545,7 +545,7 @@ model CoDevelopmentProject {
   industryContribution Float?
   fundingAgency        String? @db.LongText
   paymentStatus        String? @db.LongText
-  status               String                   @default("DRAFT") @db.LongText
+  status               String                   @default("DRAFT") @db.VarChar(191)
   createdByUserId      Int?
   createdByUser        User?                    @relation(fields: [createdByUserId], references: [id])
   commercialization    CommercializationDetail?
@@ -555,7 +555,7 @@ model CoDevelopmentProject {
   createdAt            DateTime                 @default(now())
   updatedAt            DateTime                 @updatedAt
 
-  @@index([labId, status(length: 191)])
+  @@index([labId,  status])
   @@index([companyId])
   @@index([technologyArea(length: 191)])
   @@index([startDate,  endDate])
@@ -589,7 +589,7 @@ model CommercialEngagement {
   id                              Int                @id @default(autoincrement())
   referenceNo                     String             @unique @db.VarChar(191)
   engagementType                  String @db.LongText
-  status                          String             @default("DRAFT") @db.LongText
+  status                          String             @default("DRAFT") @db.VarChar(191)
   labId                           Int
   lab                             Lab                @relation(fields: [labId], references: [id])
   technologyId                    Int
@@ -663,9 +663,9 @@ model CommercialEngagement {
   createdAt                       DateTime           @default(now())
   updatedAt                       DateTime           @updatedAt
 
-  @@index([labId, status(length: 191),  updatedAt])
+  @@index([labId,  status,  updatedAt])
   @@index([technologyId, engagementType(length: 191)])
-  @@index([engagementType(length: 191), status(length: 191)])
+  @@index([engagementType(length: 191),  status])
 }
 
 model CommercialManDay {
@@ -690,11 +690,11 @@ model ProjectDeliverable {
   title       String @db.LongText
   description String? @db.LongText
   dueDate     DateTime?
-  status      String               @default("PLANNED") @db.LongText
+  status      String               @default("PLANNED") @db.VarChar(191)
   completedAt DateTime?
   createdAt   DateTime             @default(now())
 
-  @@index([projectId, status(length: 191)])
+  @@index([projectId,  status])
   @@index([type(length: 191)])
 }
 
@@ -711,7 +711,7 @@ model Mou {
   piName              String? @db.LongText
   signedDate          DateTime?
   expiryDate          DateTime?
-  status              String                @default("DRAFT") @db.LongText
+  status              String                @default("DRAFT") @db.VarChar(191)
   renewalReminderDays Int                   @default(60)
   notes               String? @db.LongText
   createdByUserId     Int?
@@ -720,10 +720,10 @@ model Mou {
   createdAt           DateTime              @default(now())
   updatedAt           DateTime              @updatedAt
 
-  @@index([companyId, status(length: 191)])
-  @@index([labId, status(length: 191)])
+  @@index([companyId,  status])
+  @@index([labId,  status])
   @@index([projectId])
-  @@index([expiryDate, status(length: 191)])
+  @@index([expiryDate,  status])
 }
 
 model Project {
@@ -736,7 +736,7 @@ model Project {
   endDate              DateTime?
   responsibleOfficerId Int?
   responsibleOfficer   User?                 @relation("ProjectResponsibleOfficer", fields: [responsibleOfficerId], references: [id])
-  status               String                @default("ACTIVE") @db.LongText
+  status               String                @default("ACTIVE") @db.VarChar(191)
   notes                String? @db.LongText
   folderPath           String? @db.LongText
   isSystem             Boolean               @default(false)
@@ -753,7 +753,7 @@ model Project {
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
 
-  @@index([status(length: 191),  name])
+  @@index([status,  name])
   @@index([projectType(length: 191)])
 }
 
@@ -767,14 +767,14 @@ model IndustryNeedCase {
   mimeType         String? @db.LongText
   filePath         String @db.LongText
   fileSize         Int
-  status           String   @default("ANALYSED") @db.LongText
+  status           String   @default("ANALYSED") @db.VarChar(191)
   analysisJson     String? @db.LongText
   uploadedByUserId Int?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
   @@index([createdAt])
-  @@index([status(length: 191)])
+  @@index([status])
 }
 
 model ProjectTechnology {
@@ -783,8 +783,8 @@ model ProjectTechnology {
   project           Project                    @relation(fields: [projectId], references: [id], onDelete: Cascade)
   technologyId      Int
   technology        Technology                 @relation(fields: [technologyId], references: [id])
-  relationshipType  String                     @default("LINKED_MASTER") @db.LongText
-  projectStatus     String                     @default("ACTIVE") @db.LongText
+  relationshipType  String                     @default("LINKED_MASTER") @db.VarChar(191)
+  projectStatus     String                     @default("ACTIVE") @db.VarChar(191)
   projectStage      String? @db.LongText
   projectData       String? @db.LongText
   reportingRequired Boolean                    @default(true)
@@ -795,7 +795,7 @@ model ProjectTechnology {
 
   @@unique([projectId, technologyId])
   @@index([technologyId])
-  @@index([projectId, projectStatus(length: 191)])
+  @@index([projectId,  projectStatus])
 }
 
 model ReferenceList {
@@ -921,7 +921,7 @@ model TechnologySOPStatus {
   technology        Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
   sopStageId        Int
   sopStage          SopStage   @relation(fields: [sopStageId], references: [id])
-  status            String     @default("NOT_STARTED") @db.LongText
+  status            String     @default("NOT_STARTED") @db.VarChar(191)
   completionPercent Int        @default(0)
   missingItems      String? @db.LongText
   validatedAt       DateTime?
@@ -929,7 +929,7 @@ model TechnologySOPStatus {
   updatedAt         DateTime   @updatedAt
 
   @@unique([technologyId, sopStageId])
-  @@index([status(length: 191),  updatedAt])
+  @@index([status,  updatedAt])
 }
 
 model Report {
@@ -942,7 +942,7 @@ model Report {
   dueDate         DateTime
   projectId       Int?
   project         Project?           @relation(fields: [projectId], references: [id])
-  status          String             @default("OPEN") @db.LongText
+  status          String             @default("OPEN") @db.VarChar(191)
   responsibleUnit String @db.LongText
   accountableUnit String @db.LongText
   consultedUnits  String? @db.LongText
@@ -953,7 +953,7 @@ model Report {
   updatedAt       DateTime           @updatedAt
 
   @@unique([reportType, periodLabel, projectId])
-  @@index([reportType,  dueDate, status(length: 191)])
+  @@index([reportType,  dueDate,  status])
 }
 
 model ReportSubmission {
@@ -962,7 +962,7 @@ model ReportSubmission {
   report        Report    @relation(fields: [reportId], references: [id], onDelete: Cascade)
   labId         Int
   lab           Lab       @relation(fields: [labId], references: [id])
-  status        String    @default("PENDING") @db.LongText
+  status        String    @default("PENDING") @db.VarChar(191)
   dataJson      String? @db.LongText
   submittedAt   DateTime?
   reviewedAt    DateTime?
@@ -973,7 +973,7 @@ model ReportSubmission {
   updatedAt     DateTime  @updatedAt
 
   @@unique([reportId, labId])
-  @@index([labId, status(length: 191)])
+  @@index([labId,  status])
 }
 
 model Query {
@@ -981,8 +981,8 @@ model Query {
   queryType    String @db.LongText
   title        String @db.LongText
   description  String @db.LongText
-  priority     String          @default("MEDIUM") @db.LongText
-  status       String          @default("OPEN") @db.LongText
+  priority     String          @default("MEDIUM") @db.VarChar(191)
+  status       String          @default("OPEN") @db.VarChar(191)
   targetLabId  Int?
   targetLab    Lab?            @relation(fields: [targetLabId], references: [id])
   projectId    Int?
@@ -1001,8 +1001,8 @@ model Query {
   createdAt    DateTime        @default(now())
   updatedAt    DateTime        @updatedAt
 
-  @@index([targetLabId, status(length: 191),  createdAt])
-  @@index([queryType(length: 191), status(length: 191)])
+  @@index([targetLabId,  status,  createdAt])
+  @@index([queryType(length: 191),  status])
 }
 
 model QueryResponse {
@@ -1054,7 +1054,7 @@ model Evidence {
   fileName            String? @db.LongText
   filePath            String? @db.LongText
   certifiedBy         String? @db.LongText
-  certificationStatus String      @default("PENDING") @db.LongText
+  certificationStatus String      @default("PENDING") @db.VarChar(191)
   uploadedById        Int?
   uploadedBy          User?       @relation(fields: [uploadedById], references: [id])
   createdAt           DateTime    @default(now())
@@ -1072,7 +1072,7 @@ model RaciAssignment {
   accountableUnit String @db.LongText
   consultedUnits  String? @db.LongText
   informedUnits   String? @db.LongText
-  source          String  @default("SOP_V1") @db.LongText
+  source          String  @default("SOP_V1") @db.VarChar(191)
   active          Boolean @default(true)
   displayOrder    Int     @default(0)
 }
@@ -1105,7 +1105,7 @@ model SopDataRecord {
   projectTechnology   ProjectTechnology? @relation(fields: [projectTechnologyId], references: [id])
   periodLabel         String? @db.LongText
   dataJson            String @db.LongText
-  status              String             @default("DRAFT") @db.LongText
+  status              String             @default("DRAFT") @db.VarChar(191)
   createdByType       String @db.LongText
   createdById         Int?
   sourceRecordId      Int?
@@ -1115,7 +1115,7 @@ model SopDataRecord {
   createdAt           DateTime           @default(now())
   updatedAt           DateTime           @updatedAt
 
-  @@index([recordType(length: 191),  labId, status(length: 191)])
+  @@index([recordType(length: 191),  labId,  status])
   @@index([projectId,  technologyId])
 }
 
@@ -1139,8 +1139,8 @@ model DocumentAnalysis {
   id                Int       @id @default(autoincrement())
   documentId        Int
   document          Document  @relation(fields: [documentId], references: [id], onDelete: Cascade)
-  status            String    @default("PENDING") @db.LongText
-  provider          String    @default("LOCAL_RULES") @db.LongText
+  status            String    @default("PENDING") @db.VarChar(191)
+  provider          String    @default("LOCAL_RULES") @db.VarChar(191)
   model             String? @db.LongText
   detectedType      String? @db.LongText
   summary           String? @db.LongText
@@ -1155,7 +1155,7 @@ model DocumentAnalysis {
   createdAt         DateTime  @default(now())
 
   @@index([documentId,  createdAt])
-  @@index([status(length: 191),  createdAt])
+  @@index([status,  createdAt])
 }
 
 model WorkflowPacket {
@@ -1163,8 +1163,8 @@ model WorkflowPacket {
   referenceNo       String             @unique @db.VarChar(191)
   title             String @db.LongText
   packetType        String @db.LongText
-  status            String             @default("ANALYZING") @db.LongText
-  priority          String             @default("NORMAL") @db.LongText
+  status            String             @default("ANALYZING") @db.VarChar(191)
+  priority          String             @default("NORMAL") @db.VarChar(191)
   currentUnit       String? @db.LongText
   labId             Int
   lab               Lab                @relation(fields: [labId], references: [id])
@@ -1187,8 +1187,8 @@ model WorkflowPacket {
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
 
-  @@index([labId, status(length: 191),  createdAt])
-  @@index([currentUnit(length: 191), status(length: 191),  updatedAt])
+  @@index([labId,  status,  createdAt])
+  @@index([currentUnit(length: 191),  status,  updatedAt])
   @@index([technologyId])
 }
 
@@ -1208,8 +1208,8 @@ model WorkflowStep {
   packet         WorkflowPacket @relation(fields: [packetId], references: [id], onDelete: Cascade)
   sequence       Int
   unitRole       String @db.LongText
-  raciType       String         @default("RESPONSIBLE") @db.LongText
-  status         String         @default("QUEUED") @db.LongText
+  raciType       String         @default("RESPONSIBLE") @db.VarChar(191)
+  status         String         @default("QUEUED") @db.VarChar(191)
   instructions   String? @db.LongText
   assignedUserId Int?
   assignedUser   User?          @relation("WorkflowStepAssignee", fields: [assignedUserId], references: [id])
@@ -1221,7 +1221,7 @@ model WorkflowStep {
   updatedAt      DateTime       @updatedAt
 
   @@unique([packetId, sequence])
-  @@index([unitRole(length: 191), status(length: 191),  updatedAt])
+  @@index([unitRole(length: 191),  status,  updatedAt])
 }
 
 model WorkflowEvent {
@@ -1252,7 +1252,7 @@ model TechnologyRevisionRequest {
   requestedBy         User       @relation("RevisionRequestedBy", fields: [requestedById], references: [id])
   instructions        String @db.LongText
   requestedFieldsJson String? @db.LongText
-  status              String     @default("OPEN") @db.LongText
+  status              String     @default("OPEN") @db.VarChar(191)
   labResponse         String? @db.LongText
   dueAt               DateTime?
   submittedAt         DateTime?
@@ -1260,6 +1260,6 @@ model TechnologyRevisionRequest {
   createdAt           DateTime   @default(now())
   updatedAt           DateTime   @updatedAt
 
-  @@index([labId, status(length: 191),  createdAt])
-  @@index([technologyId, status(length: 191)])
+  @@index([labId,  status,  createdAt])
+  @@index([technologyId,  status])
 }

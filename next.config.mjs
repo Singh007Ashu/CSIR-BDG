@@ -6,6 +6,11 @@ const isCloudflareBuild = process.env.CSIR_CLOUDFLARE_BUILD === "1";
 const nextConfig = {
   distDir: process.env.CSIR_DIST_DIR || ".next",
   output: "standalone",
+  // Operational databases, credentials, documents and test fixtures are deployed
+  // separately. Never let dynamic parser tracing copy them into server artifacts.
+  outputFileTracingExcludes: {
+    "/*": ["./storage/**/*", "./.tmp/**/*", "./prisma/*.db*", "./output/**/*", "./FICCI/**/*", "./.git/**/*", "./*.zip"],
+  },
   allowedDevOrigins: ["ipaq-producing-enclosure-input.trycloudflare.com", "*.trycloudflare.com"],
   serverExternalPackages: ["@csir/d1-client", "@csir/mysql-client"],
   webpack(config, { webpack }) {

@@ -2,13 +2,6 @@
 limit_req_zone $binary_remote_addr zone=csir_auth:10m rate=10r/m;
 limit_req_zone $binary_remote_addr zone=csir_api:10m rate=10r/s;
 server {
-    listen 443 ssl default_server;
-    server_name _;
-    ssl_certificate /etc/ssl/csir-bdg/fullchain.pem;
-    ssl_certificate_key /etc/ssl/csir-bdg/privkey.pem;
-    return 444;
-}
-server {
     listen 443 ssl;
     server_name bdg.csir.res.in;
     ssl_certificate /etc/ssl/csir-bdg/fullchain.pem;
@@ -37,5 +30,4 @@ server {
         proxy_read_timeout 120s;
     }
 }
-server { listen 80 default_server; server_name _; return 444; }
-server { listen 80; server_name bdg.csir.res.in; return 301 https://bdg.csir.res.in$request_uri; }
+server { listen 80; server_name bdg.csir.res.in; return 301 https://$host$request_uri; }
